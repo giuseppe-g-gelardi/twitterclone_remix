@@ -9,7 +9,7 @@ export const loader: LoaderFunction = async () => {
   return { publicUsers }
 }
 
-export default function SearchTest() {
+export default function HomePage() {
   const { publicUsers } = useLoaderData()
   return (
     <div>

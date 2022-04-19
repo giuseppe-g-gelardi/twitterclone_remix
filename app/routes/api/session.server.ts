@@ -1,42 +1,39 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node'
 import { findUserById } from './user.server'
 import type { Session } from '@remix-run/node'
-import axios from 'axios'
+import type { User } from './models/user.models'
 
-// login
-// TODO: redo using fetch()
-export async function login({ 
-  email, password } : { 
+// login existing user
+export async function login({
+  email, password
+} : {
   email: string, password: string
-  }) {
-  const response = await axios.post(`http://localhost:8000/api/users/login`, {
-    email, password
+}): Promise<User> {
+  const response = await fetch(`http://localhost:8000/api/users/login`, {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-type': 'application/json'
+    }
   })
-  return response.data
+  return response.json()
 }
 
 // register new user
-export async function registerNewUser({ 
-  username, email, password }: {
+export async function register({ 
+    username, email, password 
+  } : {
     username: string, email: string, password: string
-  }) {
-  const response = await axios.post(`http://localhost:8000/api/users/new`, {
-    username, email, password
+  }): Promise<User> {
+  const response = await fetch(`http://localhost:8000/api/users/new`, {
+    method: 'POST',
+    body: JSON.stringify({ username, email, password }),
+    headers: {
+      'Content-type': 'application/json'
+    }
   })
-  return response.data
+  return response.json()
 }
-
-//
-// ! something like this ??
-//
-// const response = await fetch("/login", {
-//   method: "POST",
-//   body: JSON.stringify({ email, password })        
-// })
-//
-// return response.json()
-//
-
 
 // get session secret
 const sessionSecret = process.env.SESSION_SECRET
@@ -72,9 +69,7 @@ export function getUserSession(request: Request): Promise<Session> {
 }
 
 // get logged in user
-// TODO: define type User
-// * type will be Promise<User>
-export async function getUser(request: Request): Promise<any> {
+export async function getUser(request: Request): Promise<User | null> {
   const session = await getUserSession(request)
   const userid = session.get('userid')
 
