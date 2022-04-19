@@ -86,7 +86,7 @@ export async function getUser(request: Request): Promise<any> {
 // might need to force a refresh because
 // it destroys the session and redirects but
 // the button still says to log out once "logged out" until a refresh
-export async function logout(request: Request) {
+export async function logout(request: Request): Promise<Response> {
   const session = await storage.getSession(request.headers.get('Cookie'))
 
   return redirect('/logout', { 

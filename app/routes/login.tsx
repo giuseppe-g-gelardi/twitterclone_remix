@@ -1,6 +1,7 @@
 import { login, createUserSession } from "./api/session.server"
-import type { ActionFunction } from "@remix-run/node"
 import LoginForm from "./components/LoginForm"
+import type { ActionFunction } from "@remix-run/node"
+import type { User } from "./api/models/user.models"
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
@@ -9,7 +10,7 @@ export const action: ActionFunction = async ({ request }) => {
   const fields: {email: string, password: string } = { email, password }
 
   // logs in user
-  const user = await login(fields)
+  const user: User = await login(fields)
 
   // create user session and redirects to the home page
   return createUserSession(user._id, '/home')

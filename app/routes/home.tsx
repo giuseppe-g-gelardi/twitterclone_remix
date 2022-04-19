@@ -1,10 +1,10 @@
 import { Link, useLoaderData } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
-
 import { findPublicUsers } from "./api/user.server";
+import type { LoaderFunction } from "@remix-run/node";
+import type { User } from "./api/models/user.models";
 
 export const loader: LoaderFunction = async () => {
-  const publicUsers = await findPublicUsers()
+  const publicUsers: User[] = await findPublicUsers()
 
   return { publicUsers }
 }
