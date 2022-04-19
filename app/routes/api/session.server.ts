@@ -3,10 +3,6 @@ import { findUserById } from './user.server'
 import type { Session } from '@remix-run/node'
 import axios from 'axios'
 
-export async function register() {
-  return true
-}
-
 // login
 // TODO: redo using fetch()
 export async function login({ 
@@ -15,6 +11,17 @@ export async function login({
   }) {
   const response = await axios.post(`http://localhost:8000/api/users/login`, {
     email, password
+  })
+  return response.data
+}
+
+// register new user
+export async function registerNewUser({ 
+  username, email, password }: {
+    username: string, email: string, password: string
+  }) {
+  const response = await axios.post(`http://localhost:8000/api/users/new`, {
+    username, email, password
   })
   return response.data
 }
