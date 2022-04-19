@@ -1,4 +1,3 @@
-import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -11,7 +10,9 @@ import {
   Form,
 } from "@remix-run/react";
 
-import { getUser } from "./routes/models/session.server";
+import type { MetaFunction, LoaderFunction } from "@remix-run/node";
+
+import { getUser } from "./routes/api/session.server";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -45,13 +46,6 @@ export default function App() {
               <button>Login</button>
             </Link>
           )}
-        </>
-        <>
-          <button
-            onClick={() => console.log(user)}
-          >
-            root logger
-          </button>
         </>
         <Outlet />
         <ScrollRestoration />

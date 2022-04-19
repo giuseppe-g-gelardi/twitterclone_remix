@@ -1,4 +1,4 @@
-import { login, createUserSession } from "./models/session.server"
+import { login, createUserSession } from "./api/session.server"
 import type { ActionFunction } from "@remix-run/node"
 import LoginForm from "./components/LoginForm"
 
@@ -17,13 +17,13 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function LoginPage() {
   return (
-    <div className='auth-container'>
+    <>
       <div className='page-header'>
         <h1>Login Page</h1>
       </div>
       <div className='page-content'>
         <LoginForm />
       </div>
-    </div>
+    </>
   )
 }

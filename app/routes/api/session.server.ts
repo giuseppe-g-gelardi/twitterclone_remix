@@ -1,6 +1,6 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node'
-import type { Session } from '@remix-run/node'
 import { findUserById } from './user.server'
+import type { Session } from '@remix-run/node'
 import axios from 'axios'
 
 export async function register() {
@@ -8,6 +8,7 @@ export async function register() {
 }
 
 // login
+// TODO: redo using fetch()
 export async function login({ 
   email, password } : { 
   email: string, password: string
@@ -17,6 +18,18 @@ export async function login({
   })
   return response.data
 }
+
+//
+// ! something like this ??
+//
+// const response = await fetch("/login", {
+//   method: "POST",
+//   body: JSON.stringify({ email, password })        
+// })
+//
+// return response.json()
+//
+
 
 // get session secret
 const sessionSecret = process.env.SESSION_SECRET

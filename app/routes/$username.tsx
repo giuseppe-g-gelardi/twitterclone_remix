@@ -1,10 +1,10 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-import { getUserByUsername } from "./models/user.server";
+import { findByUsername } from "./api/user.server";
 
 export const loader: LoaderFunction = async ({ params }: any) => {
-  const user = await (await getUserByUsername(params)).data
+  const user = await findByUsername(params)
   
   return { user }
 }
