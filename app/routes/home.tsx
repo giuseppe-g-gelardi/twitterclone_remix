@@ -3,6 +3,8 @@ import { findPublicUsers } from "./api/user.server";
 import type { LoaderFunction } from "@remix-run/node";
 import type { User } from "./api/models/user.models";
 
+//TODO: rename file to Users so a 'home' page can be setup
+
 export const loader: LoaderFunction = async () => {
   const publicUsers: User[] = await findPublicUsers()
 
