@@ -24,9 +24,6 @@ export default function SuggestedUsers() {
 
   useEffect(() => {
     getThreeRandomPublicUsers(publicUsers, 3)
-  }, [publicUsers])
-
-  useEffect(() => {
     setInterval(getThreeRandomPublicUsers, 15000, publicUsers, 3)
 }, [publicUsers])
 
