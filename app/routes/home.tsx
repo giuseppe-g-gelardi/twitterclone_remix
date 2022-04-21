@@ -18,9 +18,9 @@ export default function HomePage() {
   const { loggedInUser }: { loggedInUser: User} = useLoaderData()
   return (
       <div className="p-16 font-sans">
-        <p>##################</p>
+        <p className="font-bold text-center">##################</p>
           <h1 className="text-5xl font-bold text-center">Welcome Home, {loggedInUser.username}!</h1>
-        <p>##################</p>
+        <p className="font-bold text-center">##################</p>
         <div>
           <SuggestedUsers />
         </div>
