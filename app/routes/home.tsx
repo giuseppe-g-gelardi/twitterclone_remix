@@ -17,9 +17,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function HomePage() {
   const { loggedInUser }: { loggedInUser: User} = useLoaderData()
   return (
-      <div>
+      <div className="p-16 font-sans">
         <p>##################</p>
-          <h1>Welcome Home, {loggedInUser.username}!</h1>
+          <h1 className="text-5xl font-bold text-center">Welcome Home, {loggedInUser.username}!</h1>
         <p>##################</p>
         <div>
           <SuggestedUsers />

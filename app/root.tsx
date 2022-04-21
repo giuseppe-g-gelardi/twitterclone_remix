@@ -17,7 +17,7 @@ import styles from './tailwind.css'
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Remix Twitter Clone",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles}]
+  return [{ rel: 'stylesheet', href: styles }]
 }
 
 export default function App() {
