@@ -1,17 +1,9 @@
-import { findPublicUsers } from "../api/user.server"
-import type { LoaderFunction } from "@remix-run/node"
-import type{ User } from "../api/models/user.models"
 import { Link, useLoaderData } from "@remix-run/react"
 import { useEffect, useState } from "react"
-
-export const loader: LoaderFunction = async () => {
-  const publicUsers: User[] = await findPublicUsers()
-
-  return { publicUsers }
-}
+import type { User } from "../api/models/user.models"
 
 export default function SuggestedUsers() {
-  const { publicUsers } = useLoaderData()
+  const { publicUsers }: { publicUsers: User[]} = useLoaderData()
   const [ suggested, setSuggested ] = useState<User[]>([])
 
   const getThreeRandomPublicUsers = async (arr: User[], n: number):Promise<void> => {
@@ -26,7 +18,7 @@ export default function SuggestedUsers() {
       result[n] = arr[x in taken ? taken[x] : x]
       taken[x] = --len in taken ? taken[len] : len
     }
-    console.log(result)
+    // console.log(result)
     setSuggested([...result])
   }
 
@@ -54,13 +46,3 @@ export default function SuggestedUsers() {
     </div>
   )
 }
-
-{/* <>
-<p>
-  <button
-    onClick={() => getThreeRandomPublicUsers(publicUsers, 3)}
-    >
-    SU logger
-  </button>
-</p>
-</> */}

@@ -1,43 +1,30 @@
-// import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+import SuggestedUsers from '~/routes/components/SuggestedUsers'
+import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
 import type { LoaderFunction } from "@remix-run/node";
 import type { User } from "./api/models/user.models";
-import SuggestedUsers from '~/routes/components/SuggestedUsers'
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
+  const user = await getUser(request)
+  const data = { user }
+  const loggedInUser = data.user
 
-  return { publicUsers }
+  return { publicUsers, data, loggedInUser }
 }
 
 export default function HomePage() {
-  // const { publicUsers } = useLoaderData()
+  const { loggedInUser }: { loggedInUser: User} = useLoaderData()
   return (
       <div>
-        <h1>Home page</h1>
-        <SuggestedUsers />
+        <p>##################</p>
+          <h1>Welcome Home, {loggedInUser.username}!</h1>
+        <p>##################</p>
+        <div>
+          <SuggestedUsers />
+        </div>
       </div>
   )
 }
 
-    // <div>
-    //   <h1>ayo</h1>
-    //   <button
-    //     onClick={() => console.log(publicUsers)}
-    //   >
-    //     logger
-    //   </button>
-    //   {publicUsers && (
-    //     <div>
-    //       <ul>
-    //         {publicUsers.map((user: any) => (
-    //           <li key={user._id}>
-    //             <Link to={`/${user.username}`}>
-    //               {user.username}
-    //             </Link>
-    //           </li>
-    //         ))}
-    //       </ul>
-    //     </div>
-    //   )}
-    // </div>
