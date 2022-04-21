@@ -31,21 +31,15 @@ export default function SuggestedUsers() {
   }
 
   useEffect(() => {
-      setTimeout(() => getThreeRandomPublicUsers(publicUsers, 3), 15000)
-  }, [publicUsers, suggested])
+    getThreeRandomPublicUsers(publicUsers, 3)
+  }, [publicUsers])
+
+  useEffect(() => {
+    setInterval(getThreeRandomPublicUsers, 15000, publicUsers, 3)
+}, [publicUsers])
 
   return (
     <div>
-      <>
-        <p>
-          <button
-            onClick={() => getThreeRandomPublicUsers(publicUsers, 3)}
-            >
-            SU logger
-          </button>
-        </p>
-      </>
-      <div>
         <p>############</p>
         <p>Suggested Users</p>
         <p>############</p>
@@ -57,8 +51,16 @@ export default function SuggestedUsers() {
                 </Link>
           </li>)}
         </ul>
-      </div>
     </div>
   )
 }
 
+{/* <>
+<p>
+  <button
+    onClick={() => getThreeRandomPublicUsers(publicUsers, 3)}
+    >
+    SU logger
+  </button>
+</p>
+</> */}
