@@ -18,7 +18,6 @@ export default function SuggestedUsers() {
       result[n] = arr[x in taken ? taken[x] : x]
       taken[x] = --len in taken ? taken[len] : len
     }
-    // console.log(result)
     setSuggested([...result])
   }
 
