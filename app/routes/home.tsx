@@ -5,34 +5,58 @@ import SuggestedUsers from '~/routes/components/SuggestedUsers'
 import UserProfileHeader from "./components/UserProfileHeader";
 import type { LoaderFunction } from "@remix-run/node";
 import type { User } from "./api/models/user.models";
+import { getUserPosts } from "./api/posts.server";
+import { useLoaderData } from "@remix-run/react";
+import PostCard from "./components/PostCard";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
   const user = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
+  const username = loggedInUser?.username
+  const posts = await getUserPosts(username)
 
-  return { publicUsers, data, loggedInUser }
+
+  return { publicUsers, data, loggedInUser, posts }
 }
 
 export default function HomePage() {
-  // const { loggedInUser }: { loggedInUser: User} = useLoaderData()
+  // const data = useLoaderData()
+  const { posts } = useLoaderData()
+
+
+  // const loggerbutton = (
+  //   <button
+  //   className="bg-violet-400 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-full"
+  //   onClick={() => console.log(posts)}
+  // >
+  //   home loader logger
+  // </button>
+  // )
+
   return (
       <div className="p-16 font-sans flex">
+
         <div>
           <SuggestedUsers />
         </div>
+
         <div>
           <UserProfileHeader />
+          {posts
+          // .sort((a: { createdAt: any; }, b: { createdAt: any; }) => new Date(b.createdAt) - new Date(a.createdAt))
+          .map((post: any) => (
+            <PostCard
+            key={post._id}
+            post={post}
+            />
+            ))}
         </div>
-          {/* <div>
-            <p className="font-bold text-center">##################</p>
-              <h1 className="text-5xl font-bold text-center">Welcome Home, {loggedInUser.username}!</h1>
-            <p className="font-bold text-center">##################</p>
-          </div> */}
-        {/* <div>
-          <SuggestedUsers />
-        </div> */}
+
+        <div>
+        </div>
+
       </div>
   )
 }

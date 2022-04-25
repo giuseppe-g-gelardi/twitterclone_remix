@@ -1,3 +1,5 @@
+import type { Post } from "./post.models";
+
 export interface User {
   _id: string,
   username: string,
@@ -14,7 +16,7 @@ export interface User {
   following: [],
   isAdmin: boolean,
   isVerified: boolean,
-  posts: [],
+  posts: Post[],
   notifications: [],
   theme: string, // will be boolean in future
   createdAt?: string,
