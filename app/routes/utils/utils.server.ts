@@ -11,7 +11,7 @@ async function uploadImage(fileStream: Stream) {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.v2.uploader.upload_stream(
       {
-        folder: "remix",
+        folder: "twitter_clone",
       },
       (error, result) => {
         if (error) {
