@@ -55,7 +55,7 @@ export default function PostCard({ post }: { post: Post }) {
 
       <div className="flex-1 p-2.5">
         <div className="">
-          <div className="text-base mb-1">
+          <div className="flex text-base mb-1">
             <h3 className="flex text-base mb-1">
               <p>
                 {loggedInUser.username}{' '}
@@ -63,9 +63,13 @@ export default function PostCard({ post }: { post: Post }) {
               <p>
                 {Icons.verified}{' '}
               </p>
-              <p className="grow">
+              <p>
                 {timestamp}{' '}
               </p>
+              {/* MAKE THIS MOVE ALL THE WAY TO THE RIGHT */}
+              <div className="mt-1 place-self-end">
+                {Icons.dotsHorizontal}
+              </div>
             </h3>
           </div>
           <div className="text-base mb-1">
