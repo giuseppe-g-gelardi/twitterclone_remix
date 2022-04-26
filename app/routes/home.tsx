@@ -45,7 +45,7 @@ export default function HomePage() {
         <div>
           <UserProfileHeader />
           {posts
-          // .sort((a: { createdAt: any; }, b: { createdAt: any; }) => new Date(b.createdAt) - new Date(a.createdAt))
+          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
           .map((post: any) => (
             <PostCard
             key={post._id}
@@ -55,6 +55,7 @@ export default function HomePage() {
         </div>
 
         <div>
+          3rd column
         </div>
 
       </div>
