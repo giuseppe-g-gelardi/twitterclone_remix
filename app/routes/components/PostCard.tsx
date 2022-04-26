@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react"
+import { Link, useLoaderData } from "@remix-run/react"
 import moment from 'moment'
 
 import type { Post } from "../api/models/post.models"
@@ -11,15 +11,20 @@ export default function PostCard({ post }: { post: Post }) {
   const timestamp = moment(createdAt).fromNow()
 
   const likeIcons = (
-    <button onClick={() => console.log('like button pressed')}>
-      {post.likes.length ? (
-        Icons.heartFilled
-      ) : (
-        Icons.heartOutline
-      )}
-
-      {post.likes.length ? post.likes.length : '0'}
-    </button>
+    <div className="flex">
+      <button onClick={() => console.log('like button pressed')}>
+        <div className="hover:bg-slate-400 rounded-full">
+          {post.likes.length ? (
+            Icons.heartFilled
+          ) : (
+            Icons.heartOutline
+          )}
+        </div>
+      </button>
+      <div>
+        {post.likes.length ? post.likes.length : '0'}
+      </div>
+    </div>
   )
 
   const settingsIcon = (
@@ -30,19 +35,27 @@ export default function PostCard({ post }: { post: Post }) {
 
   const shareIcon = (
     <button onClick={() => console.log('share icon clicked')}>
-      {Icons.shareOutline}
+      <div className="hover:bg-slate-400 rounded-full">
+        {Icons.shareOutline}
+      </div>
     </button>
   )
 
   const chatIcons = (
-    <button onClick={() => console.log('chat button pressed', post)} >
-      {post.comments.length ? (
-        Icons.chatFilled
-      ) : (
-        Icons.chatOutline
-      )}
-      {post.comments.length ? post.comments.length : '0'}
-    </button>
+    <div className="flex">
+      <button onClick={() => console.log('chat button pressed', post)} >
+        <div className="hover:bg-slate-400 rounded-full">
+          {post.comments.length ? (
+            Icons.chatFilled
+          ) : (
+            Icons.chatOutline
+          )}
+        </div>
+      </button>
+      <div>
+        {post.comments.length ? post.comments.length : '0'}
+      </div>
+    </div>
   )
 
   return (
@@ -69,16 +82,20 @@ export default function PostCard({ post }: { post: Post }) {
               <p className="grow">
                 {timestamp}{' '}
               </p>
-              <div className="mt-1">
+              <div className="hover:bg-slate-400 rounded-full h-5 w-5">
                 {settingsIcon}
               </div>
             </h3>
           </div>
           <div className="text-base mb-1">
-            <p>{post.body}</p>
+            <button>
+              <Link to={`../posts/${post._id}`}>
+                <p>{post.body}</p>
+              </Link>
+            </button>
           </div>
         </div>
-        <div className="flex justify-between mt-2">
+        <div className="flex justify-between mt-2 ">
           <div>
             {chatIcons}
           </div>

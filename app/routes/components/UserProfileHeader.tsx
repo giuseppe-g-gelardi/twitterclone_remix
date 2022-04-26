@@ -8,7 +8,7 @@ export default function UserProfileHeader() {
   const joinedDate = new Date(createdAt).toLocaleString('default', { month: 'long', year: 'numeric' })
 
   return (
-    // TODO: add banner
+    // TODO: add banner, use user profile picture
     <div className="flex flex-col max-h-full">
       <div className="shrink-0 w-full min-h-full relative">
         <img
