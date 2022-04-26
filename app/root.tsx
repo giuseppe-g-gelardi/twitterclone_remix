@@ -10,7 +10,11 @@ import {
   Form,
 } from "@remix-run/react";
 
-import type { MetaFunction, LoaderFunction, LinksFunction } from "@remix-run/node";
+import type { 
+  MetaFunction, 
+  LoaderFunction, 
+  LinksFunction 
+} from "@remix-run/node";
 
 import { getUser } from "./routes/api/session.server";
 import styles from './tailwind.css'

@@ -4,6 +4,7 @@ import { findPublicUsers } from "./api/user.server";
 import SuggestedUsers from '~/routes/components/SuggestedUsers'
 import UserProfileHeader from "./components/UserProfileHeader";
 import type { LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import type { User } from "./api/models/user.models";
 import { getUserPosts } from "./api/posts.server";
 import { useLoaderData } from "@remix-run/react";
@@ -17,6 +18,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const username = loggedInUser?.username
   const posts = await getUserPosts(username)
 
+  if (!user) return redirect('/')
 
   return { publicUsers, data, loggedInUser, posts }
 }
@@ -24,15 +26,17 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function HomePage() {
   const { posts } = useLoaderData()
 
-
   return (
+    // main container
       <div className="p-16 font-sans flex">
 
-        <div>
+    {/* this will be the nav/sidebar */}
+        <div className="col-span-2 ml-0">
           <SuggestedUsers />
         </div>
 
-        <div>
+    {/* main content. tweets, profile, etc */}
+        <div className="col-span-8">
           <UserProfileHeader />
           {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
@@ -43,8 +47,9 @@ export default function HomePage() {
             />
             ))}
         </div>
-
-        <div>
+          
+    {/* right sidebar. suggested users, first to disappear */}
+        <div className="col-span-2">
           3rd column
         </div>
 

@@ -54,6 +54,7 @@ export default function PostCard({ post }: { post: Post }) {
           src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/03/skyrim-patrick-bateman.jpg"
           alt=""
         />
+        {/* src={logggedInUser.profilePicture} is what it needs to be */}
       </div>
       <div className="flex-1 p-2.5">
         <div className="">

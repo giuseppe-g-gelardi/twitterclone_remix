@@ -514,8 +514,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 0.25rem;
 }
 
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.col-span-8 {
+  grid-column: span 8 / span 8;
+}
+
 .m-0 {
   margin: 0px;
+}
+
+.m-auto {
+  margin: auto;
 }
 
 .mx-2 {
@@ -730,6 +742,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-items: end;
 }
 
+.space-x-0 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0px * var(--tw-space-x-reverse));
+  margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .place-self-end {
   place-self: end;
 }
@@ -831,6 +849,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pb-2 {
   padding-bottom: 0.5rem;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .font-sans {
