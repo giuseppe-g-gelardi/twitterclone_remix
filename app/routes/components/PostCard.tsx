@@ -22,29 +22,32 @@ export default function PostCard({ post }: { post: Post }) {
     </button>
   )
 
-  // TODO: fix replies/comment
-  // when comments = 0 this will display a chatOutline
-  // when comments > 0 this will display chatFilled
-  // onClick will take you to the posts individual page
-  //
-  // const chatIcons = (
-  //   <button onClick={() => console.log('chat button pressed')} >
-  //     {post.comments.length ? (
-  //       <>
-  //       {Icons.chatFilled}
-  //       {post.comments.length}
-  //       </>
-  //     ) : (
-  //       <>
-  //         {Icons.chatOutline}
-  //         {'0'}
-  //       </>
-  //     )}
-  //   </button>
-  // )
+  const settingsIcon = (
+    <button onClick={() => console.log('Settings button clicked')}>
+      {Icons.dotsHorizontal}
+    </button>
+  )
+
+  const shareIcon = (
+    <button onClick={() => console.log('share icon clicked')}>
+      {Icons.shareOutline}
+    </button>
+  )
+
+  const chatIcons = (
+    <button onClick={() => console.log('chat button pressed', post)} >
+      {post.comments.length ? (
+        Icons.chatFilled
+      ) : (
+        Icons.chatOutline
+      )}
+      {post.comments.length ? post.comments.length : '0'}
+    </button>
+  )
 
   return (
-    <div className="flex items-start border-t-2 border-r-2 border-l-2 border-b-violet-200 pb-2.5">
+    // this had padding bottom ( pb-2.5 )
+    <div className="flex items-start border-t-2 border-r-2 border-l-2 border-b-violet-200">
       <div>
         <img
           className="inline object-cover w-12 h-12 mr-2 rounded-full border-2 mt-2 ml-2"
@@ -52,10 +55,9 @@ export default function PostCard({ post }: { post: Post }) {
           alt=""
         />
       </div>
-
       <div className="flex-1 p-2.5">
         <div className="">
-          <div className="flex text-base mb-1">
+          <div className="">
             <h3 className="flex text-base mb-1">
               <p>
                 {loggedInUser.username}{' '}
@@ -63,12 +65,11 @@ export default function PostCard({ post }: { post: Post }) {
               <p>
                 {Icons.verified}{' '}
               </p>
-              <p>
+              <p className="grow">
                 {timestamp}{' '}
               </p>
-              {/* MAKE THIS MOVE ALL THE WAY TO THE RIGHT */}
-              <div className="mt-1 place-self-end">
-                {Icons.dotsHorizontal}
+              <div className="mt-1">
+                {settingsIcon}
               </div>
             </h3>
           </div>
@@ -77,15 +78,17 @@ export default function PostCard({ post }: { post: Post }) {
           </div>
         </div>
         <div className="flex justify-between mt-2">
-          {/* display: 'flex',justifyContent: 'space-between',marginTop: '10px' */}
-          {/* here is where the icons will go */}
-          {Icons.chatOutline}
-          {likeIcons}
-          {Icons.shareOutline}
+          <div>
+            {chatIcons}
+          </div>
+          <div>
+            {likeIcons}
+          </div>
+          <div>
+            {shareIcon}
+          </div>
         </div>
-
       </div>
-
     </div>
   )
 }
