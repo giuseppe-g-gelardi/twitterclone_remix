@@ -9,6 +9,7 @@ import type { User } from "./api/models/user.models";
 import { getUserPosts } from "./api/posts.server";
 import { useLoaderData } from "@remix-run/react";
 import PostCard from "./components/PostCard";
+import Sidebar from "./components/Sidebar";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -30,13 +31,12 @@ export default function HomePage() {
     // main container
       <div className="p-16 font-sans flex">
 
-    {/* this will be the nav/sidebar */}
-        <div className="col-span-2 ml-0">
-          <SuggestedUsers />
+        <div className="col-span-3 ml-0">
+          <Sidebar />
         </div>
 
     {/* main content. tweets, profile, etc */}
-        <div className="col-span-8">
+        <div className="col-span-6">
           <UserProfileHeader />
           {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
@@ -49,8 +49,9 @@ export default function HomePage() {
         </div>
           
     {/* right sidebar. suggested users, first to disappear */}
-        <div className="col-span-2">
-          3rd column
+        <div className="col-span-3">
+        <SuggestedUsers />
+
         </div>
 
       </div>
