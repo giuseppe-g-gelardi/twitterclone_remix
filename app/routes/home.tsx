@@ -44,9 +44,9 @@ export default function HomePage() {
 
   return (
     // main container
-    <div className="p-16 font-sans flex">
+    <div className="p-16 font-sans flex place-content-center">
 
-      <div className="col-span-3 ml-0">
+      <div className="col-span-3">
         <Sidebar />
       </div>
 
@@ -65,7 +65,7 @@ export default function HomePage() {
       </div>
 
       {/* right sidebar. suggested users, first to disappear */}
-      <div className="col-span-3">
+      <div className="col-span-3 w-full place-content-center">
         <SuggestedUsers />
       </div>
 

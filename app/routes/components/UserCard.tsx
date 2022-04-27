@@ -4,28 +4,39 @@ import Icons from "./Icons"
 export default function UserCard({ user }: any) {
   return (
 
-    <div className="flex items-start pb-2.5">
+    <div className="flex items-start border-2 rounded-full">
       <div className="p-5">
-        <img src={user.profilePicture} 
-          alt='' 
-          className="inline object-cover w-5 h-5 rounded-full border-2" 
+        <img src={user.profilePicture}
+          alt=''
+          className="inline object-cover w-8 h-8 rounded-full"
         />
       </div>
       <div className="flex-1 p-2.5">
         <div className='post__header'>
           <div className="text-sm mb-1.5">
             <h3 className="text-base mb-1.5">
-              <Link to={`/${user.username}`}>{user.username}</Link>
-              <span
-                className="font-semibold text-xs text-gray-500">
+              <div className="flex">
+                <Link to={`/${user.username}`}>
+                  {user.username}
+                </Link>
                 {user.isVerified && (
                   Icons.verified
                 )}{' '}
+              </div>
+              <span
+                className="flex font-semibold text-xs text-gray-500">
                 @{user.username}
               </span>
             </h3>
           </div>
         </div>
+      </div>
+        <button
+          className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto my-auto mr-5"
+        >
+          follow
+        </button>
+      <div>
       </div>
     </div>
   )
