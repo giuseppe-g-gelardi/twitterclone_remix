@@ -518,6 +518,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 0px;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -605,6 +609,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mr-5 {
   margin-right: 1.25rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .inline-block {

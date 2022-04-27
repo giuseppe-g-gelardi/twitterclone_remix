@@ -32,6 +32,7 @@ export default function UserCard({ user }: any) {
         </div>
       </div>
         <button
+          
           className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto my-auto mr-5"
         >
           follow

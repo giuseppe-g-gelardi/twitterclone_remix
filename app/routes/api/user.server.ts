@@ -41,5 +41,7 @@ export async function uploadProfileImage(username: any, image: any) {
   return profilePicture
 }
 
-
+export async function followAndUnfollowUsers() {
+  return true
+}
 

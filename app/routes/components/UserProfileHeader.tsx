@@ -11,11 +11,18 @@ export default function UserProfileHeader() {
     // TODO: add banner, use user profile picture
     <div className="flex flex-col max-h-full">
       <div className="shrink-0 w-full min-h-full relative">
-        <img 
-          src={loggedInUser.profilePicture}
-          alt=''
-          className="inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-14"
-        />
+        <div className="flex">
+          <img 
+            src={loggedInUser.profilePicture}
+            alt=''
+            className="inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-14"
+            />
+            <button
+              className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto mr-5 mt-20"
+            >
+              follow
+            </button>
+        </div>
         <div className="flex flex-col relative px-16">
           <h1 className="font-bold text-lg flex">
             {loggedInUser.firstname ? loggedInUser.firstname : 'Firstname'}{' '}
