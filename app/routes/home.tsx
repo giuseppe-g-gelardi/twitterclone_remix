@@ -65,7 +65,7 @@ export default function HomePage() {
       </div>
 
       {/* right sidebar. suggested users, first to disappear */}
-      <div className="col-span-3 w-full place-content-center">
+      <div className="col-span-3 place-content-center">
         <SuggestedUsers />
       </div>
 

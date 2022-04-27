@@ -35,7 +35,7 @@ export default function Sidebar() {
         <SidebarOption text='Settings' />
       </NavLink>
       <NavLink
-        to='/login'
+        to='/logout'
         onClick={() =>
           `${localStorage.removeItem('token')}${window.location.reload()}`
         }
