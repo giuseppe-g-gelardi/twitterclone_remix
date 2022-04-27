@@ -30,12 +30,6 @@ export default function SuggestedUsers() {
   return (
     <div>
         <ul>
-          {/* {suggested?.map(user => 
-          <li key={user._id}>
-                <Link to={`/${user.username}`}>
-                  {user.username}
-                </Link>
-          </li>)} */}
           {suggested?.map(user => 
           <UserCard key={user._id} user={user} />)}
         </ul>
