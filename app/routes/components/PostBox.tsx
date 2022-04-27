@@ -1,15 +1,16 @@
-import { Form } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 
 export default function PostBox() {
+  const { loggedInUser } = useLoaderData()
+
   return (
     <div className="border rounded-full">
       <Form replace method="post">
         <div className="flex p-5">
-          {/* <img src={user.profilePicture} /> */}
           <img
-          className="inline object-cover w-10 h-10 rounded-full border-2"
-          src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/03/skyrim-patrick-bateman.jpg"
-          alt=""
+            className="inline object-cover w-10 h-10 rounded-full border-2"
+            src={loggedInUser.profilePicture}
+            alt=""
           />
           <input
             type='text'

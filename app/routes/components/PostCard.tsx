@@ -64,10 +64,9 @@ export default function PostCard({ post }: { post: Post }) {
       <div>
         <img
           className="inline object-cover w-12 h-12 mr-2 rounded-full border-2 mt-2 ml-2"
-          src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/03/skyrim-patrick-bateman.jpg"
+          src={loggedInUser.profilePicture}
           alt=""
         />
-        {/* src={logggedInUser.profilePicture} is what it needs to be */}
       </div>
       <div className="flex-1 p-2.5">
         <div className="">

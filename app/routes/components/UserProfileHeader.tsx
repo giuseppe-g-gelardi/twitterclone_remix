@@ -11,10 +11,10 @@ export default function UserProfileHeader() {
     // TODO: add banner, use user profile picture
     <div className="flex flex-col max-h-full">
       <div className="shrink-0 w-full min-h-full relative">
-        <img
+        <img 
+          src={loggedInUser.profilePicture}
+          alt=''
           className="inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-14"
-          src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/03/skyrim-patrick-bateman.jpg"
-          alt=""
         />
         <div className="flex flex-col relative px-16">
           <h1 className="font-bold text-lg flex">

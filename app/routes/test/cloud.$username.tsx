@@ -3,6 +3,7 @@ import { json, unstable_parseMultipartFormData } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
 import { uploadImage } from "~/routes/utils/utils.server"
+import { uploadProfileImage } from "../api/user.server";
 
 type ActionData = {
   errorMsg?: string;
@@ -10,13 +11,14 @@ type ActionData = {
   imgDesc?: string;
 };
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({ request, params }) => {
   const uploadHandler: UploadHandler = async ({ name, stream }) => {
     if (name !== "img") {
       stream.resume();
       return;
     }
-    const uploadedImage: any = await uploadImage(stream); // TODO: fix any type
+    const uploadedImage: any = await uploadImage(stream);
+
     return uploadedImage.secure_url;
   };
 
@@ -34,7 +36,9 @@ export const action: ActionFunction = async ({ request }) => {
   return json({
     imgSrc,
     imgDesc,
-  });
+  },
+    await uploadProfileImage(params.username, imgSrc.toString())
+  );
 };
 
 export default function Index() {

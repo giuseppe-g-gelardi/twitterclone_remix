@@ -17,6 +17,7 @@ async function uploadImage(fileStream: Stream) {
         if (error) {
           reject(error);
         }
+        // console.log('result: ', result?.url)
         resolve(result);
       }
     );
