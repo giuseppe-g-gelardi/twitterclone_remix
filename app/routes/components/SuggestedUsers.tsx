@@ -1,6 +1,7 @@
-import { Link, useLoaderData } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 import { useEffect, useState } from "react"
 import type { User } from "../api/models/user.models"
+import UserCard from "./UserCard"
 
 export default function SuggestedUsers() {
   const { publicUsers }: { publicUsers: User[]} = useLoaderData()
@@ -28,16 +29,15 @@ export default function SuggestedUsers() {
 
   return (
     <div>
-        <p>############</p>
-        <p>Suggested Users</p>
-        <p>############</p>
         <ul>
-          {suggested?.map(user => 
+          {/* {suggested?.map(user => 
           <li key={user._id}>
                 <Link to={`/${user.username}`}>
                   {user.username}
                 </Link>
-          </li>)}
+          </li>)} */}
+          {suggested?.map(user => 
+          <UserCard key={user._id} user={user} />)}
         </ul>
     </div>
   )
