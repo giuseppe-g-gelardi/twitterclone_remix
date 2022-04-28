@@ -1,5 +1,6 @@
 import { useLoaderData } from "@remix-run/react"
 import { useEffect, useState } from "react"
+
 import type { User } from "../api/models/user.models"
 import UserCard from "./UserCard"
 

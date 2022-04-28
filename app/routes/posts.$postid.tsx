@@ -1,5 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
+
 import { getSinglePost } from "./api/posts.server"
 
 export const loader: LoaderFunction = async ({ params }: any) => {

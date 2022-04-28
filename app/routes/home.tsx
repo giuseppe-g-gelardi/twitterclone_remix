@@ -1,17 +1,21 @@
-// import { useLoaderData } from "@remix-run/react";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { redirect } from "@remix-run/node";
+
+import type { User } from "./api/models/user.models";
+import type { Post } from "./api/models/post.models";
+import { 
+  createNewPost, 
+  getUserPosts 
+} from "./api/posts.server";
 import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
+
 import SuggestedUsers from '~/routes/components/SuggestedUsers'
 import UserProfileHeader from "./components/UserProfileHeader";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import type { User } from "./api/models/user.models";
-import { createNewPost, getUserPosts } from "./api/posts.server";
-import { useLoaderData } from "@remix-run/react";
 import PostCard from "./components/PostCard";
 import Sidebar from "./components/Sidebar";
 import PostBox from "./components/PostBox";
-import type { Post } from "./api/models/post.models";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()

@@ -1,7 +1,9 @@
-import RegisterForm from "./components/RegisterForm"
-import { createUserSession, register } from "./api/session.server"
 import type { ActionFunction } from "@remix-run/node"
+
 import type { User } from "./api/models/user.models"
+import { createUserSession, register } from "./api/session.server"
+
+import RegisterForm from "./components/RegisterForm"
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
