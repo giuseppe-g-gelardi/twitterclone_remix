@@ -705,6 +705,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: -4rem;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -767,6 +771,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-52 {
   height: 13rem;
+}
+
+.h-20 {
+  height: 5rem;
 }
 
 .max-h-full {
@@ -895,6 +903,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-width: 0px;
 }
 
+.border-4 {
+  border-width: 4px;
+}
+
 .border-t-2 {
   border-top-width: 2px;
 }
@@ -986,6 +998,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1021,6 +1038,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-10 {
   padding: 2.5rem;
+}
+
+.p-64 {
+  padding: 16rem;
+}
+
+.p-32 {
+  padding: 8rem;
+}
+
+.p-52 {
+  padding: 13rem;
 }
 
 .py-2 {

@@ -12,6 +12,7 @@ import ProfileHeader from "./components/ProfileHeader";
 import UserPostCard from './components/UserPostCard'
 import Sidebar from "./components/Sidebar";
 import SuggestedUsers from "./components/SuggestedUsers";
+import SearchBar from "./components/SearchBar";
 
 export const loader: LoaderFunction = async ({ params }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -24,12 +25,12 @@ export const loader: LoaderFunction = async ({ params }: any) => {
 export default function UserPage() {
   const { posts } = useLoaderData()
   return (
-    <div className="p-16 font-sans flex place-content-center">
+    <div className=" font-sans flex place-content-center">
       <div className="col-span-3">
         <Sidebar />
       </div>
 
-      <div className="col-span-6">
+      <div className="col-span-6 border-2 mt-12" >
       <ProfileHeader />
       {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
@@ -40,7 +41,8 @@ export default function UserPage() {
             />
             ))}
       </div>
-      <div className="col-span-3 w-full place-content-center">
+      <div className="col-span-3 place-content-center">
+        <SearchBar />
         <SuggestedUsers />
       </div>
     </div>

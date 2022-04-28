@@ -39,8 +39,10 @@ export default function ProfileHeader() {
           <h1 className="font-bold text-lg flex">
             {user.firstname ? user.firstname : 'Firstname'}{' '}
             {user.lastname ? user.lastname : 'Lastname'}{' '}
-            {!user.isVerified && (
-              Icons.verified
+            {user.isVerified && (
+              <p>
+                {Icons.verified}{' '}
+              </p>
             )}{' '}
           </h1>
           <h2 className="font-normal text-base text-gray-500">
@@ -50,14 +52,14 @@ export default function ProfileHeader() {
             {user.bio ? user.bio : 'This is my bio lulz'}
           </p>
           <div className="my-2.5 flex">
-            <span className="flex items-center text-base mx-1">
+            <span className="flex items-center text-base">
               <span>
                 {Icons.location}
               </span>
               
               {user.location ? user.location : 'the interwebs'}{' '}
             </span>
-            <span className="flex items-center text-base mx-1">
+            <span className="flex items-center text-base">
               <span>
                 {Icons.calendar}
               </span>
