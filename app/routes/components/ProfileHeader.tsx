@@ -12,19 +12,30 @@ export default function ProfileHeader() {
     // TODO: add banner, use user profile picture
     <div className="flex flex-col max-h-full">
       <div className="shrink-0 w-full min-h-full relative">
-        <div className="flex">
+        <div id='banner_test_' className="flex w-full h-52 relative bg-gray-500">
           <img 
-            src={user.profilePicture}
+            className="flex w-full h-auto overflow-hidden relative"
+            src='https://upload.wikimedia.org/wikipedia/commons/4/4c/San_Francisco_with_two_bridges_and_the_low_fog.jpg'
             alt=''
-            className="inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-14"
-            />
-            <button
-              className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto mr-5 mt-20"
-            >
-              follow
-            </button>
+          />
         </div>
-        <div className="flex flex-col relative px-16">
+          
+          <div className="flex z-10 -mt-16">
+            <img 
+              src={user.profilePicture}
+              alt=''
+              className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
+
+              />
+              <button
+                className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto mr-5 mt-20"
+                >
+                follow
+              </button>
+          </div>
+
+        </div>
+        <div className="flex flex-col relative px-4">
           <h1 className="font-bold text-lg flex">
             {user.firstname ? user.firstname : 'Firstname'}{' '}
             {user.lastname ? user.lastname : 'Lastname'}{' '}
@@ -66,7 +77,6 @@ export default function ProfileHeader() {
               </strong>
             </span>
           </div>
-        </div>
       </div>
     </div>
   )

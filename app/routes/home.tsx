@@ -57,9 +57,9 @@ export default function HomePage() {
       {/* main content. tweets, profile, etc */}
       <div className="col-span-6">
         
-          <UserProfileHeader />
-
-            {/* <PostBox /> */}
+          {/* <UserProfileHeader /> */}
+{/* create unique post box for home page */}
+            <PostBox />
             {posts
               .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
               .map((post: any) => (
