@@ -15,11 +15,8 @@ export default function LoginForm() {
           name='email'
           id='email'
           placeholder='Email'
-          // defaultValue={actionData?.fieldErrors?.email}
-        
-          //
         />
-        <div>
+        <div className="mb-5">
           {actionData?.fieldErrors?.email ? (
             <p
               className='text-red-700'
@@ -28,9 +25,13 @@ export default function LoginForm() {
             >
               {actionData?.fieldErrors?.email}
             </p>
-          ) : null}
+          ) : (
+            <div className="mb-5">
 
+            </div>
+          )}
         </div>
+        
         <input
           className="w-full p-2 rounded-md border border-gray-700"
           type='password'
@@ -39,7 +40,7 @@ export default function LoginForm() {
           id='password'
           // defaultValue={actionData?.fieldErrors?.password}
         />
-        <div>
+        <div className="mb-5">
           {actionData?.fieldErrors?.password ? (
             <p
               className='text-red-700'
@@ -48,11 +49,15 @@ export default function LoginForm() {
             >
               {actionData?.fieldErrors?.password}
             </p>
-          ) : null}
+          ) : (
+            <div className="mb-5">
+
+            </div>
+          )}
         </div>
         <button 
-          className="w-full p-2 bg-gray-50 rounded-full font-bold text-gray-900 border border-gray-700 "
-          type='submit' value='login' style={{ backgroundColor: 'lightBlue' }}>
+          className="w-full p-2 bg-violet-400 rounded-full font-bold text-gray-900 border border-gray-700 "
+          type='submit' value='login'>
           Login
         </button>
       </Form>

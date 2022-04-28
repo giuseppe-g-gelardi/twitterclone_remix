@@ -4,9 +4,9 @@ import { redirect } from "@remix-run/node";
 
 import type { User } from "./api/models/user.models";
 import type { Post } from "./api/models/post.models";
-import { 
-  createNewPost, 
-  getUserPosts 
+import {
+  createNewPost,
+  getUserPosts
 } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
@@ -48,7 +48,7 @@ export default function HomePage() {
 
   return (
     // main container
-    <div className="p-16 font-sans flex place-content-center">
+    <div className="p-10 font-sans flex place-content-center">
 
       <div className="col-span-3">
         <Sidebar />
@@ -56,16 +56,21 @@ export default function HomePage() {
 
       {/* main content. tweets, profile, etc */}
       <div className="col-span-6">
-        <UserProfileHeader />
-        <PostBox />
-        {posts
-          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((post: any) => (
-            <PostCard
-              key={post._id}
-              post={post}
-            />
-          ))}
+        
+          <UserProfileHeader />
+
+            {/* <PostBox /> */}
+            {posts
+              .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+              .map((post: any) => (
+                <PostCard
+                  key={post._id}
+                  post={post}
+                />
+              ))}
+
+    
+        
       </div>
 
       {/* right sidebar. suggested users, first to disappear */}

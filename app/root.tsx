@@ -37,7 +37,7 @@ export const links: LinksFunction = () => {
 }
 
 export default function App() {
-  const { user } = useLoaderData()
+  // const { user } = useLoaderData()
   return (
     <html lang="en">
       <head>
@@ -45,7 +45,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <>
+        {/* <>
           {user ? (
             <Form action='/logout' method="post">
               <button 
@@ -62,7 +62,7 @@ export default function App() {
               >Login</button>
             </Link>
           )}
-        </>
+        </> */}
         <Outlet />
         <ScrollRestoration />
         <Scripts />
