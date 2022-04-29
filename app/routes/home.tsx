@@ -12,10 +12,10 @@ import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
 
 import SuggestedUsers from '~/routes/components/SuggestedUsers'
-import UserProfileHeader from "./components/UserProfileHeader";
 import PostCard from "./components/PostCard";
 import Sidebar from "./components/Sidebar";
 import PostBox from "./components/PostBox";
+// import UserProfileHeader from "./components/UserProfileHeader";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()

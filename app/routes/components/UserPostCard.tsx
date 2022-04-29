@@ -73,7 +73,9 @@ export default function PostCard({ post }: { post: Post }) {
           <div className="">
             <h3 className="flex text-base mb-1">
               <p>
-                {user.username}{' '}
+                <Link to={`/${user.username}`}>
+                  {user.username}{' '}
+                </Link>
               </p>
               <p>
                 {Icons.verified}{' '}
