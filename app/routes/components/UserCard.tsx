@@ -5,7 +5,7 @@ import Icons from "./Icons"
 export default function UserCard({ user }: any) {
   return (
 
-    <div className="flex items-start border-2 rounded-full">
+    <div className="flex items-start">
       <div className="p-5">
         <img src={user.profilePicture}
           alt=''

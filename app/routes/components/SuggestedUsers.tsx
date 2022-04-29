@@ -29,7 +29,10 @@ export default function SuggestedUsers() {
 }, [publicUsers])
 
   return (
-    <div>
+    <div className="border-2 rounded-3xl bg-slate-200">
+      <h1 className="p-2 font-bold text-lg flex">
+        Who to follow
+      </h1>
         <ul>
           {suggested?.map(user => 
           <UserCard key={user._id} user={user} />)}
