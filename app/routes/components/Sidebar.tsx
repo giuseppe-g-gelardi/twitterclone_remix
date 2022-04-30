@@ -2,7 +2,7 @@ import { Form, NavLink } from "@remix-run/react"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
-    <div className="flex font-extrabold text-lg mr-6 items-center hover:bg-slate-400 hover:rounded-3xl hover:text-indigo-600 hover:ease-out active:text-violet-400">
+    <div className="flex font-extrabold text-lg items-center hover:bg-slate-400 hover:rounded-3xl hover:text-indigo-600 hover:ease-out active:text-violet-400">
       <h2>{text}</h2>
     </div>
   )
@@ -11,7 +11,7 @@ export const SidebarOption = ({ _active, text }: any) => {
 export default function Sidebar() {
 
   const menu = (
-    <div>
+    <div className="border-2 rounded-3xl bg-slate-200">
       <NavLink to='/home'>
         <SidebarOption active text='Home' />
       </NavLink>
@@ -40,10 +40,8 @@ export default function Sidebar() {
   )
 
 
-
-
   return (
-    <div className="border-r border-indigo-400 flex mt-5 pr-5">
+    <div className="border-r flex my-5 p-5 rounded-3xl bg-slate-200">
       {menu}
     </div>
   )
