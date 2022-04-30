@@ -12,9 +12,10 @@ import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
 
 import SuggestedUsers from '~/routes/components/SuggestedUsers'
-import PostCard from "./components/PostCard";
+// import PostCard from "./components/PostCard";
 import Sidebar from "./components/Sidebar";
 import PostBox from "./components/PostBox";
+import Feed from "./components/Feed";
 // import UserProfileHeader from "./components/UserProfileHeader";
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -25,9 +26,27 @@ export const loader: LoaderFunction = async ({ request }) => {
   const username = loggedInUser?.username
   const posts = await getUserPosts(username)
 
+  const followedUsers = loggedInUser?.following
+
+  // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! //
+  // TODO: plz fix
+  async function getFeed(users: any) {
+    const userFeed = []
+    for (const element of users) {
+      const item = await getUserPosts(element)
+      userFeed.push(item)
+    }
+    return userFeed
+    // this returns an array of arrays with post/user objects. 
+    // need to figure out how to get this to return one single array
+  }
+  const feed = await getFeed(loggedInUser?.following)
+  // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! //
+
+
   if (!user) return redirect('/')
 
-  return { publicUsers, data, loggedInUser, posts }
+  return { publicUsers, data, loggedInUser, posts, feed, followedUsers }
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -44,7 +63,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function HomePage() {
-  const { posts } = useLoaderData()
+  const { posts, feed, followedUsers } = useLoaderData()
 
   return (
     // main container
@@ -62,14 +81,25 @@ export default function HomePage() {
         {/* <UserProfileHeader /> */}
         {/* create unique post box for home page */}
         <PostBox />
-        {posts
+        <Feed />
+        <button 
+          onClick={() => console.log(feed)}
+        className="bg-indigo-500">
+          feed logger
+        </button>
+        <button 
+          onClick={() => console.log(followedUsers)}
+        className="bg-indigo-500">
+          followedUsers logger
+        </button>
+        {/* {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
           .map((post: any) => (
             <PostCard
               key={post._id}
               post={post}
             />
-          ))}
+          ))} */}
       </div>
 
 

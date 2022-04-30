@@ -26,4 +26,3 @@ export async function createNewPost(username: string | undefined, body: any) {
 
   return newPost
 }
-
