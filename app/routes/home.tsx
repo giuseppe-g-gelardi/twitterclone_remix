@@ -29,24 +29,25 @@ export const loader: LoaderFunction = async ({ request }) => {
   const followedUsers = loggedInUser?.following
 
   // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! //
-  // TODO: plz fix
+  // TODO: this works, spread loggedInUser posts to feed array
   async function getFeed(users: any) {
     const userFeed = []
     for (const element of users) {
       const item = await getUserPosts(element)
-      userFeed.push(item)
+      userFeed.push(...item)
     }
     return userFeed
     // this returns an array of arrays with post/user objects. 
     // need to figure out how to get this to return one single array
   }
   const feed = await getFeed(loggedInUser?.following)
+  // TODO: this works, spread loggedInUser posts to feed array
   // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! //
 
 
   if (!user) return redirect('/')
 
-  return { publicUsers, data, loggedInUser, posts, feed, followedUsers }
+  return { publicUsers, data, loggedInUser, posts, feed }
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -63,7 +64,8 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function HomePage() {
-  const { posts, feed, followedUsers } = useLoaderData()
+  // const { posts, feed } = useLoaderData()
+  const { feed } = useLoaderData()
 
   return (
     // main container
@@ -81,17 +83,17 @@ export default function HomePage() {
         {/* <UserProfileHeader /> */}
         {/* create unique post box for home page */}
         <PostBox />
-        <Feed />
-        <button 
-          onClick={() => console.log(feed)}
-        className="bg-indigo-500">
-          feed logger
-        </button>
-        <button 
-          onClick={() => console.log(followedUsers)}
-        className="bg-indigo-500">
-          followedUsers logger
-        </button>
+ 
+        {feed
+          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+          .map((feed: any) => (
+            <Feed 
+              key={feed._id}
+              feed={feed}
+              user={feed.user}
+            />
+          ))
+        }
         {/* {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
           .map((post: any) => (
@@ -114,3 +116,8 @@ export default function HomePage() {
   )
 }
 
+{/* <button 
+onClick={() => console.log(feed)}
+className="bg-indigo-500">
+feed logger
+</button> */}
