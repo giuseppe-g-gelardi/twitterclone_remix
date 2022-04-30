@@ -48,30 +48,32 @@ export default function HomePage() {
 
   return (
     // main container
-    <div className="p-10 font-sans flex place-content-center">
+    <div className="font-sans flex place-content-center">
 
       <div className="col-span-3">
         <Sidebar />
       </div>
 
+
+
+
       {/* main content. tweets, profile, etc */}
       <div className="col-span-6">
-        
-          {/* <UserProfileHeader /> */}
-{/* create unique post box for home page */}
-            <PostBox />
-            {posts
-              .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-              .map((post: any) => (
-                <PostCard
-                  key={post._id}
-                  post={post}
-                />
-              ))}
-
-    
-        
+        {/* <UserProfileHeader /> */}
+        {/* create unique post box for home page */}
+        <PostBox />
+        {posts
+          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+          .map((post: any) => (
+            <PostCard
+              key={post._id}
+              post={post}
+            />
+          ))}
       </div>
+
+
+
 
       {/* right sidebar. suggested users, first to disappear */}
       <div className="col-span-3 place-content-center">
