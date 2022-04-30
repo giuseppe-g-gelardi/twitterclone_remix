@@ -1,11 +1,9 @@
-
 import { Link } from '@remix-run/react'
 import moment from 'moment'
+
 import Icons from "./Icons"
 
-
-
-export default function Feed({ feed, user }: any) {
+export default function HomeFeed({ feed, user }: any) {
   const createdAt = feed.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
 
@@ -28,16 +26,16 @@ export default function Feed({ feed, user }: any) {
 
   const settingsIcon = (
     <button onClick={() => console.log('Settings button clicked')}>
-    {Icons.dotsHorizontal}
-  </button>
-)
+      {Icons.dotsHorizontal}
+    </button>
+  )
 
-const shareIcon = (
-  <button onClick={() => console.log('share icon clicked')}>
-    <div className="hover:bg-slate-400 rounded-full">
-      {Icons.shareOutline}
-    </div>
-  </button>
+  const shareIcon = (
+    <button onClick={() => console.log('share icon clicked')}>
+      <div className="hover:bg-slate-400 rounded-full">
+        {Icons.shareOutline}
+      </div>
+    </button>
   )
 
   const chatIcons = (
@@ -63,7 +61,7 @@ const shareIcon = (
 
 
   return (
-<div className="flex items-start border-t-2 border-r-2 border-l-2 border-b-violet-200">
+    <div className="flex items-start border-t-2 border-r-2 border-l-2 border-b-violet-200">
       <div>
         <img
           className="inline object-cover w-12 h-12 mr-2 rounded-full border-2 mt-2 ml-2"
@@ -80,14 +78,13 @@ const shareIcon = (
                   {user.username}{' '}
                 </Link>
               </p>
-              <p>
-                {user.isVerified ? (
-                  <p>{Icons.verified}</p>
-                ) : (
-                  null
-                )}
-                {/* {Icons.verified}{' '} */}
-              </p>
+              {user.isVerified ? (
+                <p>
+                  {Icons.verified}
+                </p>
+              ) : (
+                null
+              )}
               <p className="grow">
                 {timestamp}{' '}
               </p>

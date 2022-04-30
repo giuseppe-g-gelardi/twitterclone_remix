@@ -15,8 +15,7 @@ import SuggestedUsers from '~/routes/components/SuggestedUsers'
 // import PostCard from "./components/PostCard";
 import Sidebar from "./components/Sidebar";
 import PostBox from "./components/PostBox";
-import Feed from "./components/Feed";
-// import UserProfileHeader from "./components/UserProfileHeader";
+import HomeFeed from "./components/HomeFeed";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -26,23 +25,17 @@ export const loader: LoaderFunction = async ({ request }) => {
   const username = loggedInUser?.username
   const posts = await getUserPosts(username)
 
-  const followedUsers = loggedInUser?.following
 
-  // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! //
-  // TODO: this works, spread loggedInUser posts to feed array
-  async function getFeed(users: any) {
+  async function getFeed(users: any, userPosts: Post[]) {
     const userFeed = []
+
     for (const element of users) {
       const item = await getUserPosts(element)
       userFeed.push(...item)
     }
-    return userFeed
-    // this returns an array of arrays with post/user objects. 
-    // need to figure out how to get this to return one single array
+    return userFeed.concat(userPosts)
   }
-  const feed = await getFeed(loggedInUser?.following)
-  // TODO: this works, spread loggedInUser posts to feed array
-  // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! // ! //
+  const feed = await getFeed(loggedInUser?.following, posts)
 
 
   if (!user) return redirect('/')
@@ -83,14 +76,14 @@ export default function HomePage() {
         {/* <UserProfileHeader /> */}
         {/* create unique post box for home page */}
         <PostBox />
- 
+
         {feed
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((feed: any) => (
-            <Feed 
-              key={feed._id}
-              feed={feed}
-              user={feed.user}
+          .map((postFeed: any) => (
+            <HomeFeed 
+              key={postFeed._id}
+              feed={postFeed}
+              user={postFeed.user}
             />
           ))
         }
@@ -116,8 +109,3 @@ export default function HomePage() {
   )
 }
 
-{/* <button 
-onClick={() => console.log(feed)}
-className="bg-indigo-500">
-feed logger
-</button> */}

@@ -1,13 +1,9 @@
-import { NavLink } from "@remix-run/react"
+import { Form, NavLink } from "@remix-run/react"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
-    // <div className={`sidebarOption ${active && 'sidebarOption--active'}`}>
     <div className="flex font-extrabold text-lg mr-6 items-center hover:bg-slate-400 hover:rounded-3xl hover:text-indigo-600 hover:ease-out active:text-violet-400">
-    {/* <div> */}
-
-
-        <h2>{text}</h2>
+      <h2>{text}</h2>
     </div>
   )
 }
@@ -34,14 +30,12 @@ export default function Sidebar() {
       <NavLink to='/settings'>
         <SidebarOption text='Settings' />
       </NavLink>
-      <NavLink
-        to='/logout'
-        onClick={() =>
-          `${localStorage.removeItem('token')}${window.location.reload()}`
-        }
-      >
-        <SidebarOption text='Logout' />
-      </NavLink>
+    
+      <Form action="/logout" method="post">
+        <button type="submit">
+          <SidebarOption text='Logout' />
+        </button>
+      </Form>
     </div>
   )
 

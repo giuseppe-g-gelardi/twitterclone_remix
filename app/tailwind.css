@@ -1035,6 +1035,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(29 78 216 / var(--tw-border-opacity));
 }
 
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .active\:text-violet-400:active {
   --tw-text-opacity: 1;
   color: rgb(167 139 250 / var(--tw-text-opacity));
