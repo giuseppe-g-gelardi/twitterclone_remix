@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react"
-import { useEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 
 import type { User } from "../api/models/user.models"
 import UserCard from "./UserCard"
@@ -23,9 +23,10 @@ export default function SuggestedUsers() {
     setSuggested([...result])
   }
 
-  useEffect(() => {
-    getThreeRandomPublicUsers(publicUsers, 3)
-    setInterval(getThreeRandomPublicUsers, 15000, publicUsers, 3)
+  // ? should switch back to useEffect() => { ??? }
+  useLayoutEffect(() => {
+      getThreeRandomPublicUsers(publicUsers, 3)
+      setInterval(getThreeRandomPublicUsers, 15000, publicUsers, 3)
 }, [publicUsers])
 
   return (

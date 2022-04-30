@@ -6,7 +6,7 @@ import type { User } from "./api/models/user.models";
 import type { Post } from "./api/models/post.models";
 import {
   createNewPost,
-  getUserPosts
+  getUserPosts,
 } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";

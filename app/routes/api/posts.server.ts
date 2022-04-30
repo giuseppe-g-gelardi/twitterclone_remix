@@ -26,3 +26,18 @@ export async function createNewPost(username: string | undefined, body: any) {
 
   return newPost
 }
+
+// http://localhost:8000/api/posts/${postid}/likes
+export async function likeUnlikePost(userid: string | undefined, postid: string | undefined) {
+  const response = await fetch(`http://localhost:8000/api/posts/${postid}/likes`, {
+    method: 'PUT',
+    body: JSON.stringify({ userid }),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  console.log(response)
+  const liked = response.json()
+
+  return liked
+}
