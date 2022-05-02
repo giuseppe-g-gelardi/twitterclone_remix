@@ -15,6 +15,7 @@ import UserPostCard from './components/UserPostCard'
 import Sidebar from "./components/Sidebar";
 import SuggestedUsers from "./components/SuggestedUsers";
 import SearchBar from "./components/SearchBar";
+import HomeFeed from "./components/HomeFeed";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -28,7 +29,7 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
 }
 
 export default function UserPage() {
-  const { posts } = useLoaderData()
+  const { posts, user } = useLoaderData()
   return (
     <div className=" font-sans flex place-content-center">
 
@@ -36,7 +37,7 @@ export default function UserPage() {
         <Sidebar />
       </div>
 
-      <div className="col-span-6 border-2 mt-12" >
+      {/* <div className="col-span-6 border-2 mt-12" >
         <ProfileHeader />
         {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
@@ -44,6 +45,19 @@ export default function UserPage() {
             <UserPostCard
               key={post._id}
               post={post}
+            />
+          ))}
+      </div> */}
+
+      <div className="col-span-6 border-2 mt-12" >
+        <ProfileHeader />
+        {posts
+          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+          .map((post: any) => (
+            <HomeFeed
+              key={post._id}
+              feed={post}
+              user={user}
             />
           ))}
       </div>

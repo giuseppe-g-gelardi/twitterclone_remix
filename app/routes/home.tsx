@@ -12,7 +12,6 @@ import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
 
 import SuggestedUsers from '~/routes/components/SuggestedUsers'
-// import PostCard from "./components/PostCard";
 import Sidebar from "./components/Sidebar";
 import PostBox from "./components/PostBox";
 import HomeFeed from "./components/HomeFeed";
@@ -61,8 +60,7 @@ export const action: ActionFunction = async ({ request }) => {
 // pathname = window.location.pathname
 export default function HomePage() {
   // const { posts, feed } = useLoaderData()
-  // const { feed } = useLoaderData()
-  const { feed, loggedInUser, posts, getFeed } = useLoaderData()
+  const { feed } = useLoaderData()
 
 
 
