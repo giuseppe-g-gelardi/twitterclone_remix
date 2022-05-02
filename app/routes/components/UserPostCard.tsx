@@ -1,4 +1,5 @@
 import { Link, useLoaderData } from "@remix-run/react"
+// import { Link } from "@remix-run/react"
 import moment from 'moment'
 
 import type { Post } from "../api/models/post.models"
@@ -76,10 +77,14 @@ export default function PostCard({ post }: { post: Post }) {
                 <Link to={`/${user.username}`}>
                   {user.username}{' '}
                 </Link>
-              </p>
-              <p>
-                {Icons.verified}{' '}
-              </p>
+              </p>             
+              {user.isVerified ? (
+                <p>
+                  {Icons.verified}
+                </p>
+              ) : (
+                null
+              )}              
               <p className="grow">
                 {timestamp}{' '}
               </p>

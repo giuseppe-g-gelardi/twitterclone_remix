@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react"
-import { useLayoutEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import type { User } from "../api/models/user.models"
 import UserCard from "./UserCard"
@@ -7,6 +7,7 @@ import UserCard from "./UserCard"
 export default function SuggestedUsers() {
   const { publicUsers }: { publicUsers: User[]} = useLoaderData()
   const [ suggested, setSuggested ] = useState<User[]>([])
+  const isCancelled = useRef<boolean>(false)
 
   const getThreeRandomPublicUsers = async (arr: User[], n: number):Promise<void> => {
     let result = new Array(n),
@@ -23,10 +24,16 @@ export default function SuggestedUsers() {
     setSuggested([...result])
   }
 
-  // ? should switch back to useEffect() => { ??? }
-  useLayoutEffect(() => {
-      getThreeRandomPublicUsers(publicUsers, 3)
+  useEffect(() => {
+
+    getThreeRandomPublicUsers(publicUsers, 3)
+    if (!isCancelled) {
       setInterval(getThreeRandomPublicUsers, 15000, publicUsers, 3)
+    }
+
+    return () => {
+      isCancelled.current = true
+    }
 }, [publicUsers])
 
   return (

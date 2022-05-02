@@ -25,22 +25,25 @@ export const loader: LoaderFunction = async ({ request }) => {
   const username = loggedInUser?.username
   const posts = await getUserPosts(username)
 
-
   async function getFeed(users: any, userPosts: Post[]) {
-    const userFeed = []
+    try {
 
-    for (const element of users) {
-      const item = await getUserPosts(element)
-      userFeed.push(...item)
+      const userFeed: any[] = []
+      for (const element of users) {
+        const item = await getUserPosts(element)
+        userFeed.push(...item)
+      }
+
+      return userFeed.concat(userPosts)
+    } catch (error: any) {
+      throw new Error(error)
     }
-    return userFeed.concat(userPosts)
   }
   const feed = await getFeed(loggedInUser?.following, posts)
 
-
   if (!user) return redirect('/')
 
-  return { publicUsers, data, loggedInUser, posts, feed }
+  return { publicUsers, data, loggedInUser, posts, feed, getFeed }
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -55,10 +58,13 @@ export const action: ActionFunction = async ({ request }) => {
 
   return newPost
 }
-
+// pathname = window.location.pathname
 export default function HomePage() {
   // const { posts, feed } = useLoaderData()
-  const { feed } = useLoaderData()
+  // const { feed } = useLoaderData()
+  const { feed, loggedInUser, posts, getFeed } = useLoaderData()
+
+
 
   return (
     // main container
@@ -73,20 +79,40 @@ export default function HomePage() {
 
       {/* main content. tweets, profile, etc */}
       <div className="col-span-6">
-        {/* <UserProfileHeader /> */}
-        {/* create unique post box for home page */}
+
         <PostBox />
 
-        {feed
+
+        <div className="col-span-6 border-2 mt-12" >
+
+          {feed
+            .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+            .map((postFeed: any) => (
+              <HomeFeed
+                key={postFeed._id}
+                feed={postFeed}
+                user={postFeed.user}
+              />
+            ))
+          }
+        </div>
+
+
+        {/* <div className="col-span-6 border-2 mt-12" >
+        <ProfileHeader />
+        {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((postFeed: any) => (
-            <HomeFeed 
-              key={postFeed._id}
-              feed={postFeed}
-              user={postFeed.user}
+          .map((post: any) => (
+            <UserPostCard
+              key={post._id}
+              post={post}
             />
-          ))
-        }
+          ))}
+      </div> */}
+
+
+
+
         {/* {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
           .map((post: any) => (

@@ -2,12 +2,11 @@ import {
   Links,
   LiveReload,
   Meta,
-  // useLoaderData,
+
   Outlet,
   Scripts,
   ScrollRestoration,
-  // Link,
-  // Form,
+
 } from "@remix-run/react";
 
 import type { 
@@ -37,7 +36,6 @@ export const links: LinksFunction = () => {
 }
 
 export default function App() {
-  // const { user } = useLoaderData()
   return (
     <html lang="en">
       <head>
@@ -45,24 +43,6 @@ export default function App() {
         <Links />
       </head>
       <body>
-        {/* <>
-          {user ? (
-            <Form action='/logout' method="post">
-              <button 
-                type='submit'
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2"
-              >
-                Logout {user.username}
-              </button>
-            </Form>
-          ) : (
-            <Link to='/login'>
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2"
-              >Login</button>
-            </Link>
-          )}
-        </> */}
         <Outlet />
         <ScrollRestoration />
         <Scripts />
