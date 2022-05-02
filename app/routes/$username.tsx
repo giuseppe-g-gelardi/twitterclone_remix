@@ -11,11 +11,10 @@ import { getUserPosts } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 
 import ProfileHeader from "./components/ProfileHeader";
-import UserPostCard from './components/UserPostCard'
 import Sidebar from "./components/Sidebar";
 import SuggestedUsers from "./components/SuggestedUsers";
 import SearchBar from "./components/SearchBar";
-import HomeFeed from "./components/HomeFeed";
+import Feed from "./components/Feed";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -37,24 +36,14 @@ export default function UserPage() {
         <Sidebar />
       </div>
 
-      {/* <div className="col-span-6 border-2 mt-12" >
-        <ProfileHeader />
-        {posts
-          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((post: any) => (
-            <UserPostCard
-              key={post._id}
-              post={post}
-            />
-          ))}
-      </div> */}
+
 
       <div className="col-span-6 border-2 mt-12" >
         <ProfileHeader />
         {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
           .map((post: any) => (
-            <HomeFeed
+            <Feed
               key={post._id}
               feed={post}
               user={user}

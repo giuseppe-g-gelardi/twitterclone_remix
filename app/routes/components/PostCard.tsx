@@ -69,10 +69,10 @@ export default function PostCard({ post }: { post: Post }) {
         />
       </div>
       <div className="flex-1 p-2.5">
-        <div className="">
-          <div className="">
+        <div>
+          <div>
             <h3 className="flex text-base mb-1">
-              <p>
+              <p className="">
                 <Link to={`/${loggedInUser.username}`}>
                   {loggedInUser.username}{' '}
                 </Link>

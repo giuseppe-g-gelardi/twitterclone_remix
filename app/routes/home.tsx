@@ -14,7 +14,7 @@ import { findPublicUsers } from "./api/user.server";
 import SuggestedUsers from '~/routes/components/SuggestedUsers'
 import Sidebar from "./components/Sidebar";
 import PostBox from "./components/PostBox";
-import HomeFeed from "./components/HomeFeed";
+import Feed from "./components/Feed";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -23,12 +23,13 @@ export const loader: LoaderFunction = async ({ request }) => {
   const loggedInUser = data.user
   const username = loggedInUser?.username
   const posts = await getUserPosts(username)
+  const following: string[] | undefined = loggedInUser?.following
 
-  async function getFeed(users: any, userPosts: Post[]) {
+  async function getFeed(users: string[] | undefined, userPosts: Post[]) {
     try {
 
       const userFeed: any[] = []
-      for (const element of users) {
+      for (const element of users!) {
         const item = await getUserPosts(element)
         userFeed.push(...item)
       }
@@ -38,7 +39,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       throw new Error(error)
     }
   }
-  const feed = await getFeed(loggedInUser?.following, posts)
+  const feed = await getFeed(following, posts)
 
   if (!user) return redirect('/')
 
@@ -57,12 +58,8 @@ export const action: ActionFunction = async ({ request }) => {
 
   return newPost
 }
-// pathname = window.location.pathname
 export default function HomePage() {
-  // const { posts, feed } = useLoaderData()
   const { feed } = useLoaderData()
-
-
 
   return (
     // main container
@@ -72,57 +69,22 @@ export default function HomePage() {
         <Sidebar />
       </div>
 
-
-
-
       {/* main content. tweets, profile, etc */}
       <div className="col-span-6">
 
         <PostBox />
 
-
-        <div className="col-span-6 border-2 mt-12" >
-
-          {feed
-            .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-            .map((postFeed: any) => (
-              <HomeFeed
-                key={postFeed._id}
-                feed={postFeed}
-                user={postFeed.user}
-              />
-            ))
-          }
-        </div>
-
-
-        {/* <div className="col-span-6 border-2 mt-12" >
-        <ProfileHeader />
-        {posts
+        {feed
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((post: any) => (
-            <UserPostCard
-              key={post._id}
-              post={post}
+          .map((postFeed: any) => (
+            <Feed
+              key={postFeed._id}
+              feed={postFeed}
+              user={postFeed.user}
             />
-          ))}
-      </div> */}
-
-
-
-
-        {/* {posts
-          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((post: any) => (
-            <PostCard
-              key={post._id}
-              post={post}
-            />
-          ))} */}
+          ))
+        }
       </div>
-
-
-
 
       {/* right sidebar. suggested users, first to disappear */}
       <div className="col-span-3 place-content-center">

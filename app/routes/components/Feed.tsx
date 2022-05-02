@@ -1,21 +1,17 @@
-import { Link, useLoaderData } from "@remix-run/react"
-// import { Link } from "@remix-run/react"
+import { Link } from '@remix-run/react'
 import moment from 'moment'
 
-import type { Post } from "../api/models/post.models"
-import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
 
-export default function PostCard({ post }: { post: Post }) {
-  const { user }: { user: User } = useLoaderData()
-  const createdAt = post.createdAt as unknown as Date
+export default function Feed({ feed, user }: any) {
+  const createdAt = feed.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
 
   const likeIcons = (
     <div className="flex">
       <button onClick={() => console.log('like button pressed')}>
         <div className="hover:bg-slate-400 rounded-full">
-          {post.likes.length ? (
+          {feed.likes.length ? (
             Icons.heartFilled
           ) : (
             Icons.heartOutline
@@ -23,7 +19,7 @@ export default function PostCard({ post }: { post: Post }) {
         </div>
       </button>
       <div>
-        {post.likes.length ? post.likes.length : '0'}
+        {feed.likes.length ? feed.likes.length : '0'}
       </div>
     </div>
   )
@@ -44,9 +40,9 @@ export default function PostCard({ post }: { post: Post }) {
 
   const chatIcons = (
     <div className="flex">
-      <button onClick={() => console.log('chat button pressed', post)} >
+      <button onClick={() => console.log('chat button pressed', feed)} >
         <div className="hover:bg-slate-400 rounded-full">
-          {post.comments.length ? (
+          {feed.comments.length ? (
             Icons.chatFilled
           ) : (
             Icons.chatOutline
@@ -54,13 +50,17 @@ export default function PostCard({ post }: { post: Post }) {
         </div>
       </button>
       <div>
-        {post.comments.length ? post.comments.length : '0'}
+        {feed.comments.length ? feed.comments.length : '0'}
       </div>
     </div>
   )
 
+
+
+
+
+
   return (
-    // this had padding bottom ( pb-2.5 )
     <div className="flex items-start border-t-2 border-r-2 border-l-2 border-b-violet-200">
       <div>
         <img
@@ -77,14 +77,14 @@ export default function PostCard({ post }: { post: Post }) {
                 <Link to={`/${user.username}`}>
                   {user.username}{' '}
                 </Link>
-              </p>             
+              </p>
               {user.isVerified ? (
                 <p>
                   {Icons.verified}
                 </p>
               ) : (
                 null
-              )}              
+              )}
               <p className="grow">
                 {timestamp}{' '}
               </p>
@@ -95,8 +95,8 @@ export default function PostCard({ post }: { post: Post }) {
           </div>
           <div className="text-base mb-1">
             <button>
-              <Link to={`../posts/${post._id}`}>
-                <p>{post.body}</p>
+              <Link to={`../posts/${feed._id}`}>
+                <p>{feed.body}</p>
               </Link>
             </button>
           </div>
@@ -116,3 +116,4 @@ export default function PostCard({ post }: { post: Post }) {
     </div>
   )
 }
+
