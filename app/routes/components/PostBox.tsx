@@ -5,6 +5,8 @@ export default function PostBox() {
   const { loggedInUser } = useLoaderData()
 
   return (
+    // TODO: Remove "home" and "view profile" from post box
+    // ! and add to home page, this is for post box reusability
     <div className="border-x-2">
       <div className="px-5 my-2 flex">
         <h1 className="flex font-bold text-xl">
