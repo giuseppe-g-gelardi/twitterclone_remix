@@ -72,16 +72,16 @@ export default function HomePage() {
 
       {/* main content. tweets, profile, etc */}
       <div className="col-span-6">
-      <div className="px-5 my-2 flex">
-        <h1 className="flex font-bold text-xl">
-          Home
-        </h1>
-        <h2 className="font-bold text-lg ml-auto hover:bg-sky-200 hover:rounded-full p-1">
-        <Link to={`/${loggedInUser.username}`}>
-          View your profile
-                </Link>
-        </h2>
-      </div>
+        <div className="px-5 my-2 flex">
+          <h1 className="flex font-bold text-xl">
+            Home
+          </h1>
+          <h2 className="font-bold text-lg ml-auto hover:bg-sky-200 hover:rounded-full p-1">
+            <Link to={`/${loggedInUser.username}`}>
+              View your profile
+            </Link>
+          </h2>
+        </div>
 
         <PostBox />
 
