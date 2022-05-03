@@ -42,7 +42,7 @@ export default function Feed({ feed, user }: any) {
     <div className="flex">
       <button onClick={() => console.log('chat button pressed', feed)} >
         <div className="hover:bg-slate-400 rounded-full">
-          {feed.comments.length ? (
+          {feed?.comments?.length ? (
             Icons.chatFilled
           ) : (
             Icons.chatOutline
@@ -50,7 +50,7 @@ export default function Feed({ feed, user }: any) {
         </div>
       </button>
       <div>
-        {feed.comments.length ? feed.comments.length : '0'}
+        {feed?.comments?.length ? feed?.comments?.length : '0'}
       </div>
     </div>
   )
@@ -79,6 +79,11 @@ export default function Feed({ feed, user }: any) {
           src={user.profilePicture}
           alt=""
         />
+        <button
+          onClick={() => console.log(user)}
+        >
+          logger
+        </button>
       </div>
       <div className="flex-1 p-2.5">
         <div className="">
