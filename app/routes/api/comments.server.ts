@@ -17,5 +17,19 @@ export async function fetchComments(commentid: any) {
   return comment
 }
 
+export async function postNewComment(postid: any, username: any, body: any) {
+// http://localhost:8000/api/comments/${username}/${postid}/new
 
-// http://localhost:8000/api/comments/${username}/${postid}/comments/${commentid}
+const response = await fetch(`http://localhost:8000/api/comments/${username}/${postid}/new` ,{
+    method: 'POST',
+    body: JSON.stringify({ body }),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  const newComment = response.json()
+
+  return newComment
+}
+
+

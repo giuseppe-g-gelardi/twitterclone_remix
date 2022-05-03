@@ -1,7 +1,6 @@
-import type { LoaderFunction } from "@remix-run/node"
+import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
-// import type { Post } from "./api/models/post.models"
 import type { User } from "./api/models/user.models"
 
 import { getSinglePost } from "./api/posts.server"
@@ -9,11 +8,10 @@ import { getUser } from "./api/session.server"
 import Feed from "./components/Feed"
 import PostBox from "./components/PostBox"
 import Sidebar from "./components/Sidebar"
-// import SuggestedUsers from "./components/SuggestedUsers"
 
 import Icons from "./components/Icons"
-import { fetchComments } from "./api/comments.server"
-import { findPublicUsers } from "./api/user.server"
+import { fetchComments, postNewComment } from "./api/comments.server"
+import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
 import SuggestedUsers from "./components/SuggestedUsers"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
@@ -22,13 +20,16 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
+  const postUser = await findByUsername({username: post?.username})
+
 
   async function getCommentsFeed(commentsArray: any) {
     try {
       let postFeed = []
       for (let comment of commentsArray) {
-        const item = await fetchComments(comment)
-        postFeed.push(item)
+        let item = await fetchComments(comment)
+        const commentUser = await findUserById(item.user)
+        postFeed.push({item, commentUser})
       }
       return postFeed
 
@@ -36,14 +37,27 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
       throw new Error(error)
     }
   }
-  const comments = await getCommentsFeed(post.comments)
+  const commentData = await getCommentsFeed(post.comments)
 
-  return { post, loggedInUser, comments, publicUsers }
+  return { post, loggedInUser, commentData, publicUsers, postUser }
 }
 
 
+export const action: ActionFunction = async ({ request, params }) => {
+  const form = await request.formData()
+  const body = form.get('body')
+  const user: User | null = await getUser(request)
+  const data = { user }
+  const loggedInUser = data.user
+  const post = await getSinglePost(params.postid)
+
+  const newComment = await postNewComment(post._id, loggedInUser?.username, body)
+
+  return newComment
+}
+
 export default function SinglePostPage() {
-  const { post, comments } = useLoaderData()
+  const { post, commentData, postUser } = useLoaderData()
 
   return (
     <div className="font-sans flex place-content-center">
@@ -69,17 +83,19 @@ export default function SinglePostPage() {
 
           <Feed
             feed={post}
-            user={post.user}
+            user={postUser}
           />
         </div>
         <div className="mt-2.5">
 
           <PostBox />
-          {comments.map((comment: { _id: any; user: any }) => (
+          {commentData
+          // .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+          .map((comment: { _id: any; item: any; commentUser: any }) => (
             <Feed
               key={comment._id}
-              feed={comment}
-              user={comment.user}
+              feed={comment.item}
+              user={comment.commentUser}
             />
           ))}
         </div>

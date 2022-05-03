@@ -79,11 +79,6 @@ export default function Feed({ feed, user }: any) {
           src={user.profilePicture}
           alt=""
         />
-        <button
-          onClick={() => console.log(user)}
-        >
-          logger
-        </button>
       </div>
       <div className="flex-1 p-2.5">
         <div className="">
