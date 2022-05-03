@@ -1,5 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 
 import type { User } from "./api/models/user.models";
@@ -15,6 +15,7 @@ import SuggestedUsers from '~/routes/components/SuggestedUsers'
 import Sidebar from "./components/Sidebar";
 import PostBox from "./components/PostBox";
 import Feed from "./components/Feed";
+import SearchBar from "./components/SearchBar";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -59,7 +60,7 @@ export const action: ActionFunction = async ({ request }) => {
   return newPost
 }
 export default function HomePage() {
-  const { feed } = useLoaderData()
+  const { feed, loggedInUser } = useLoaderData()
 
   return (
     // main container
@@ -71,6 +72,16 @@ export default function HomePage() {
 
       {/* main content. tweets, profile, etc */}
       <div className="col-span-6">
+      <div className="px-5 my-2 flex">
+        <h1 className="flex font-bold text-xl">
+          Home
+        </h1>
+        <h2 className="font-bold text-lg ml-auto hover:bg-sky-200 hover:rounded-full p-1">
+        <Link to={`/${loggedInUser.username}`}>
+          View your profile
+                </Link>
+        </h2>
+      </div>
 
         <PostBox />
 
@@ -88,6 +99,7 @@ export default function HomePage() {
 
       {/* right sidebar. suggested users, first to disappear */}
       <div className="col-span-3 place-content-center">
+        <SearchBar />
         <SuggestedUsers />
       </div>
 

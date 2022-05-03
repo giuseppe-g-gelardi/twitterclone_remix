@@ -1,23 +1,11 @@
-import { Form, Link, useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import Icons from "./Icons";
 
 export default function PostBox() {
   const { loggedInUser } = useLoaderData()
 
   return (
-    // TODO: Remove "home" and "view profile" from post box
-    // ! and add to home page, this is for post box reusability
     <div className="border-x-2">
-      <div className="px-5 my-2 flex">
-        <h1 className="flex font-bold text-xl">
-          Home
-        </h1>
-        <h2 className="font-bold text-lg ml-auto hover:bg-sky-200 hover:rounded-full p-1">
-        <Link to={`/${loggedInUser.username}`}>
-          View your profile
-                </Link>
-        </h2>
-      </div>
       <Form replace method="post">
         <div className="flex px-5">
           <img

@@ -6,9 +6,9 @@ import type { User } from "./api/models/user.models"
 import { getSinglePost } from "./api/posts.server"
 import { getUser } from "./api/session.server"
 import Feed from "./components/Feed"
-import PostBox from "./components/PostBox"
+// import PostBox from "./components/PostBox"
 import Sidebar from "./components/Sidebar"
-import SuggestedUsers from "./components/SuggestedUsers"
+// import SuggestedUsers from "./components/SuggestedUsers"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const post = await getSinglePost(params.postid)
@@ -48,14 +48,14 @@ export default function SinglePostPage() {
           feed={post}
           user={post.user}
         />
-        <PostBox 
+        {/* <PostBox 
           loggedInUser={loggedInUser}
-        />
+        /> */}
       </div>
 
 
       <div className="col-span-3 place-content-center">
-        <SuggestedUsers />
+        {/* <SuggestedUsers /> */}
       </div>
 
     </div>

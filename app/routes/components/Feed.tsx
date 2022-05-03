@@ -55,7 +55,18 @@ export default function Feed({ feed, user }: any) {
     </div>
   )
 
-
+  const repostIcon = (
+    <div className='flex'>
+      <button onClick={() => console.log('repost icon pressed', feed)}>
+        <div className='hover:bg-slate-400 rounded-full'>
+          {Icons.repost}
+        </div>
+      </button>
+      <div>
+        0
+      </div>
+    </div>
+  )
 
 
 
@@ -104,6 +115,9 @@ export default function Feed({ feed, user }: any) {
         <div className="flex justify-between mt-2 ">
           <div>
             {chatIcons}
+          </div>
+          <div>
+            {repostIcon}
           </div>
           <div>
             {likeIcons}
