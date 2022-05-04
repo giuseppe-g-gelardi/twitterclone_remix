@@ -2,12 +2,9 @@ import {
   Links,
   LiveReload,
   Meta,
-
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
-
 } from "@remix-run/react";
 
 import type {
@@ -36,32 +33,6 @@ export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: styles }]
 }
 
-interface LayoutProps {
-  children: React.ReactNode
-}
-
-function Layout({ children }: LayoutProps) {
-  const { user } = useLoaderData()
-
-  return (
-    <div>
-
-      <div>
-
-        {user ? (
-          <div>{children}</div>
-        ) : (
-          <button onClick={() => console.log(user)}>
-            logger
-          </button>
-        )}
-
-      </div>
-
-    </div>
-  )
-}
-
 export default function App() {
   return (
     <html lang="en">
@@ -70,9 +41,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Layout>
-          <Outlet />
-        </Layout>
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -80,70 +49,3 @@ export default function App() {
     </html>
   );
 }
-
-// export default function App() {
-//   return (
-//     <Document>
-//       <Layout>
-//         <Outlet />
-//       </Layout>
-//     </Document>
-//   );
-// }
-
-
-// export function ErrorBoundary({ error }: any) {
-//   console.log(error)
-//   return (
-//     <Document>
-//       <Layout>
-//         <h1>Error</h1>
-//         <p>{error.message}</p>
-//       </Layout>
-//     </Document>
-//   )
-// }
-
-// function Document({ children, title }: any) {
-//   return (
-//     <html lang='en'>
-//       <head>
-//         <meta charSet='utf-8' />
-//         <meta name='viewport' content='width=device-width,initial-scale=1' />
-//         <Meta />
-//         <Links />
-//         <title>{title ? title : 'Remix Twitter Clone'}</title>
-//       </head>
-//       <body>
-//         {children}
-//         {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-//         <ScrollRestoration />
-//         <Scripts />
-//       </body>
-//     </html>
-//   )
-// }
-
-// function Layout({ children }: any) {
-//   const {user} = useLoaderData()
-
-//   return (
-//     <>
-//     <button
-//       onClick={() => console.log(user)}
-//     >
-//       ROOT logger
-//     </button>
-//       <div className="title">
-//         {user ?
-//           (
-//             <p>yes</p>
-//           ) : (
-//             <p>no</p>
-//           )
-//         }
-//       </div>
-//       <div className="container">{children}</div>
-//     </>
-//   )
-// }

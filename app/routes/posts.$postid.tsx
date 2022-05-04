@@ -9,10 +9,10 @@ import Feed from "./components/Feed"
 import PostBox from "./components/PostBox"
 import Sidebar from "./components/Sidebar"
 
-import Icons from "./components/Icons"
 import { fetchComments, postNewComment } from "./api/comments.server"
 import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
 import SuggestedUsers from "./components/SuggestedUsers"
+import BackButton from "./components/BackButton"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -65,19 +65,12 @@ export default function SinglePostPage() {
 
       <div className="col-span-6 m-auto w-full">
 
-        <div className="px-5 my-2 flex">
-          <button
-            onClick={() => history.back()}
-            className="flex font-bold p-1 mr-5"
-          >
-            {Icons.backButton}
-          </button>
-          <h1 className="flex font-bold text-xl">
-            Post
-          </h1>
-        </div>
-        <div className="border-b-2">
+        <BackButton 
+          text='Post'
+        />
 
+
+        <div className="border-b-2">
           <Feed
             feed={post}
             user={postUser}
