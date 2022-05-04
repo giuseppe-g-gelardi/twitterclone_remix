@@ -87,7 +87,7 @@ export default function SinglePostPage() {
 
           <PostBox />
           {commentData
-            // .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+            .sort((a: any, b: any) => new Date(b.item.createdAt).valueOf() - new Date(a.item.createdAt).valueOf())
             .map((comment: { _id: any; item: any; commentUser: any }) => (
               <Feed
                 key={comment._id}

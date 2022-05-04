@@ -1,8 +1,10 @@
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData, useTransition } from "@remix-run/react";
 import Icons from "./Icons";
 
 export default function PostBox() {
   const { loggedInUser } = useLoaderData()
+  const transition = useTransition()
+  const isAdding = transition.state === 'submitting' && transition.submission.formData.get('body')
 
   return (
     <div className="border-x-2">
@@ -30,12 +32,13 @@ export default function PostBox() {
           <button className="mx-2" onClick={() => console.log('insert emoji')}>
             {Icons.insertEmoji}
           </button>
+
           <button
             type='submit'
             value='post'
             className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto mr-2 mb-2"
           >
-            Post
+            {isAdding ? 'Posting...' : 'Post'}
           </button>
         </div>
 
