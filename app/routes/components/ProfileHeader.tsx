@@ -2,6 +2,7 @@ import { useLoaderData } from "@remix-run/react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
+import Modal from "./Modal"
 
 export default function ProfileHeader() {
   const { user, loggedInUser }: { user: User, loggedInUser: User | null } = useLoaderData()
@@ -22,17 +23,13 @@ export default function ProfileHeader() {
               alt=''
             />
           ) : (
-            // <div
-            //   className=" bg-indigo-500">
-            //   {/* className="flex w-full h-52 relative bg-gray-500"> */}
-            // </div>
-            null
+            <img
+              className="flex w-full h-auto overflow-hidden relative object-none object-right"
+              src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
+              alt=""
+            />
+            // null
           )}
-          {/* <img
-            className="flex w-full h-auto overflow-hidden relative"
-            src='https://upload.wikimedia.org/wikipedia/commons/4/4c/San_Francisco_with_two_bridges_and_the_low_fog.jpg'
-            alt=''
-          /> */}
         </div>
 
         <div className="flex z-10 -mt-16">
@@ -46,11 +43,17 @@ export default function ProfileHeader() {
             className="ml-auto"
           >
             {loggedInUser?._id === user._id ? (
+
+
               <button
                 className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
                 onClick={() => console.log('edit profile')}
               >
-                Edit Profile
+                {/* Edit Profile */}
+                <Modal
+                  buttonText='Edit Profile'
+                  header='Edit Profile'
+                />
               </button>
             ) : (
               <button
@@ -114,3 +117,5 @@ export default function ProfileHeader() {
     </div>
   )
 }
+
+

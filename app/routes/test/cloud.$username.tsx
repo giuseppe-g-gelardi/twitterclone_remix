@@ -45,12 +45,37 @@ export default function Index() {
   const data = useActionData<ActionData>();
   return (
     <>
-      <Form method="post" encType="multipart/form-data" className="flex flex-col">
-        <label htmlFor="img-field">Image to upload</label>
-        <input id="img-field" type="file" name="img" accept="image/*" />
-        <label htmlFor="img-desc">Image description</label>
-        <input id="img-desc" type="text" name="desc" />
-        <button type="submit">upload to cloudinary</button>
+      <Form 
+        method="post" 
+        encType="multipart/form-data" 
+        className="flex flex-col"
+      >
+
+        <label htmlFor="img-field">
+          Image to upload
+        </label>
+
+        <input 
+          id="img-field" 
+          type="file" 
+          name="img" 
+          accept="image/*" 
+        />
+
+        {/* <label htmlFor="img-desc">
+          Image description
+        </label>
+
+        <input 
+          id="img-desc" 
+          type="text" 
+          name="desc" 
+        /> */}
+
+        <button type="submit">
+          upload to cloudinary
+        </button>
+
       </Form>
       {data?.errorMsg && <h2>{data.errorMsg}</h2>}
       {data?.imgSrc && (
