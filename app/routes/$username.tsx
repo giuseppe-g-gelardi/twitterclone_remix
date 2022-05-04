@@ -15,6 +15,7 @@ import Sidebar from "./components/Sidebar";
 import SuggestedUsers from "./components/SuggestedUsers";
 import SearchBar from "./components/SearchBar";
 import Feed from "./components/Feed";
+import Icons from "./components/Icons";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -36,9 +37,19 @@ export default function UserPage() {
         <Sidebar />
       </div>
 
+      <div className="col-span-6 border-2 w-full" >
+        <div className="px-5 my-2 flex">
+          <button
+            onClick={() => history.back()}
+            className="flex font-bold p-1 mr-5"
+          >
+            {Icons.backButton}
+          </button>
+          <h1 className="flex font-bold text-xl">
+            {user.username}
+          </h1>
+        </div>
 
-
-      <div className="col-span-6 border-2 mt-12" >
         <ProfileHeader />
         {posts
           .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())

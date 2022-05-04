@@ -20,8 +20,7 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
-  const postUser = await findByUsername({username: post?.username})
-
+  const postUser = await findByUsername({ username: post?.username })
 
   async function getCommentsFeed(commentsArray: any) {
     try {
@@ -29,7 +28,7 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
       for (let comment of commentsArray) {
         let item = await fetchComments(comment)
         const commentUser = await findUserById(item.user)
-        postFeed.push({item, commentUser})
+        postFeed.push({ item, commentUser })
       }
       return postFeed
 
@@ -42,7 +41,6 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
   return { post, loggedInUser, commentData, publicUsers, postUser }
 }
 
-
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData()
   const body = form.get('body')
@@ -50,7 +48,6 @@ export const action: ActionFunction = async ({ request, params }) => {
   const data = { user }
   const loggedInUser = data.user
   const post = await getSinglePost(params.postid)
-
   const newComment = await postNewComment(post._id, loggedInUser?.username, body)
 
   return newComment
@@ -90,14 +87,14 @@ export default function SinglePostPage() {
 
           <PostBox />
           {commentData
-          // .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((comment: { _id: any; item: any; commentUser: any }) => (
-            <Feed
-              key={comment._id}
-              feed={comment.item}
-              user={comment.commentUser}
-            />
-          ))}
+            // .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+            .map((comment: { _id: any; item: any; commentUser: any }) => (
+              <Feed
+                key={comment._id}
+                feed={comment.item}
+                user={comment.commentUser}
+              />
+            ))}
         </div>
       </div>
 
