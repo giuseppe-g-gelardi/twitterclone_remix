@@ -52,11 +52,16 @@ export default function Modal({
 
         <div className="flex w-full h-52 relative bg-gray-500">
           {loggedInUser.profileBanner ? (
+            <button
+              onClick={() => console.log('update profile banner')}
+            >
+
             <img
               className="flex w-full h-auto overflow-hidden relative"
               src={loggedInUser.profileBanner}
               alt=''
-            />
+              />
+              </button>
           ) : (
             <img
               className="flex w-full h-auto overflow-hidden relative object-none object-right"
@@ -67,11 +72,16 @@ export default function Modal({
         </div>
 
         <div className="flex z-10 -mt-16">
+          <button
+            onClick={() => console.log('update profile image')}
+          >
+
           <img
             src={loggedInUser.profilePicture}
             alt=''
             className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
-          />
+            />
+            </button>
           </div>
 
 

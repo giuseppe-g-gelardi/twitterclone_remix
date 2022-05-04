@@ -45,7 +45,6 @@ export default function ProfileHeader() {
                 className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
                 onClick={() => console.log('edit profile')}
               >
-                {/* Edit Profile */}
                 <Modal
                   buttonText='Edit Profile'
                   header='Edit Profile'
