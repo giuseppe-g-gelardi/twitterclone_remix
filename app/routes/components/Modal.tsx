@@ -35,10 +35,10 @@ export default function Modal({
                     {header}
                   </h3>
                   <button
-                    className="p-1 ml-auto ` text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    className="ml-auto -mt-1 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
                   >
-                    <span className=" text-red-500 text-3xl hover:bg-red-200 rounded-full">
+                    <span className=" text-red-500 text-3xl hover:text-red-900">
                       ×
                     </span>
                   </button>
@@ -117,7 +117,7 @@ export default function Modal({
 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-red-200 rounded-lg"
                     onClick={() => setShowModal(false)}
                   >
                     Close
