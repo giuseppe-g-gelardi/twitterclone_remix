@@ -1,9 +1,13 @@
 import { useLoaderData } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 
 import {
   findByUsername,
-  findPublicUsers
+  findPublicUsers,
+  updateBio,
+  updateFirstname,
+  updateLastname,
+  updateLocation
 } from "./api/user.server";
 import type { User } from "./api/models/user.models";
 import type { Post } from "./api/models/post.models";
@@ -26,6 +30,24 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
   const loggedInUser = data.sessionUser
 
   return { user, posts, publicUsers, loggedInUser }
+}
+
+export const action: ActionFunction = async ({ request }) => {
+  const form = await request.formData()
+  const user: User | null = await getUser(request)
+  const data = { user }
+  const loggedInUser = data.user
+  const firstname = form.get('firstname') as string
+  const lastname = form.get('lastname') as string
+  const bio = form.get('bio') as string
+  const location = form.get('location') as string
+
+  const updateFirst = await updateFirstname(loggedInUser?.username, firstname)
+  const updateLast = await updateLastname(loggedInUser?.username, lastname)
+  const update_bio = await updateBio(loggedInUser?.username, bio)
+  const update_location = await updateLocation(loggedInUser?.username, location)
+
+  return { updateFirst, updateLast, update_bio, update_location }
 }
 
 export default function UserPage() {

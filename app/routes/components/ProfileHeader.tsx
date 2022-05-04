@@ -14,7 +14,6 @@ export default function ProfileHeader() {
     <div className="flex flex-col max-h-full">
       <div className="shrink-0 w-full min-h-full relative">
 
-        {/* figure out conditional rendering here and forced width ugh */}
         <div className="flex w-full h-52 relative bg-gray-500">
           {user.profileBanner ? (
             <img
@@ -28,7 +27,6 @@ export default function ProfileHeader() {
               src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
               alt=""
             />
-            // null
           )}
         </div>
 
@@ -43,8 +41,6 @@ export default function ProfileHeader() {
             className="ml-auto"
           >
             {loggedInUser?._id === user._id ? (
-
-
               <button
                 className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
                 onClick={() => console.log('edit profile')}
