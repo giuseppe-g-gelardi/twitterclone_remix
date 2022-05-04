@@ -1,4 +1,5 @@
 import { Form, useLoaderData, useTransition } from "@remix-run/react";
+import { useEffect, useRef } from "react";
 import Icons from "./Icons";
 
 export default function PostBox() {
@@ -6,9 +7,17 @@ export default function PostBox() {
   const transition = useTransition()
   const isAdding = transition.state === 'submitting' && transition.submission.formData.get('body')
 
+  const formRef = useRef<any>()
+
+  useEffect(() => {
+    if (!isAdding) {
+      formRef.current?.reset()
+    }
+  }, [isAdding])
+
   return (
     <div className="border-x-2">
-      <Form replace method="post">
+      <Form ref={formRef} replace method="post">
         <div className="flex px-5">
           <img
             className="inline object-cover w-12 h-12 rounded-full border-2"
@@ -19,7 +28,7 @@ export default function PostBox() {
             type='text'
             name="body"
             className="flex text-gray-500 rounded-xl w-full mx-2 border-0 focus:outline-none"
-            placeholder="  What's happening?"
+            placeholder="What's happening?"
           />
         </div>
         <div className="flex ml-20">
