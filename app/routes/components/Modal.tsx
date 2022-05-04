@@ -24,7 +24,7 @@ export default function Modal({
         {buttonText}
       </button>
       {showModal ? (
-        <Form>
+        <Form replace method='put'>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
@@ -42,51 +42,50 @@ export default function Modal({
                       ×
                     </span>
                   </button>
-                  
                 </div>
 
 
 
 
 
+{/* profile banner and pfp */}
+                <div className="flex w-full h-52 relative bg-gray-500">
+                  {loggedInUser.profileBanner ? (
+                    <button
+                      onClick={() => console.log('update profile banner')}
+                      >
+                      <img
+                        className="flex w-full h-auto overflow-hidden relative"
+                        src={loggedInUser.profileBanner}
+                        alt=''
+                      />
+                    </button>
+                  ) : (
+                    <img
+                      className="flex w-full h-auto overflow-hidden relative object-none object-right"
+                      src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
+                      alt=""
+                    />
+                  )}
+                </div>
+                      {/* profile banner and pfp */}
 
-        <div className="flex w-full h-52 relative bg-gray-500">
-          {loggedInUser.profileBanner ? (
-            <button
-              onClick={() => console.log('update profile banner')}
-            >
+                <div className="flex z-10 -mt-16">
+                  <button
+                    onClick={() => console.log('update profile image')}
+                  >
 
-            <img
-              className="flex w-full h-auto overflow-hidden relative"
-              src={loggedInUser.profileBanner}
-              alt=''
-              />
-              </button>
-          ) : (
-            <img
-              className="flex w-full h-auto overflow-hidden relative object-none object-right"
-              src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
-              alt=""
-            />
-          )}
-        </div>
-
-        <div className="flex z-10 -mt-16">
-          <button
-            onClick={() => console.log('update profile image')}
-          >
-
-          <img
-            src={loggedInUser.profilePicture}
-            alt=''
-            className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
-            />
-            </button>
-          </div>
+                    <img
+                      src={loggedInUser.profilePicture}
+                      alt=''
+                      className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
+                    />
+                  </button>
+                </div>
 
 
 
-          
+
 
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
@@ -94,8 +93,6 @@ export default function Modal({
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
 
                     <div id='form wrapper'>
-                      {/* <Form replace method='put'> */}
-                      {/* add profile image && banner */}
 
                       <input
                         className="w-full p-2 rounded-md border border-gray-700 focus:border-blue-700"
@@ -103,6 +100,7 @@ export default function Modal({
                         name='firstname'
                         id='firstname'
                         placeholder={loggedInUser?.firstname}
+                        defaultValue={loggedInUser?.firstname}
                       />
 
 
@@ -112,6 +110,7 @@ export default function Modal({
                         name='lastname'
                         id='lastname'
                         placeholder={loggedInUser?.lastname}
+                        defaultValue={loggedInUser?.lastname}
                       />
 
                       <textarea
@@ -119,6 +118,7 @@ export default function Modal({
                         name='bio'
                         id='bio'
                         placeholder={loggedInUser?.bio}
+                        defaultValue={loggedInUser?.bio}
                       />
 
                       <input
@@ -127,10 +127,10 @@ export default function Modal({
                         name='location'
                         id='location'
                         placeholder={loggedInUser?.location}
+                        defaultValue={loggedInUser?.location}
                       />
 
 
-                      {/* </Form> */}
                     </div>
 
                   </p>
@@ -139,7 +139,6 @@ export default function Modal({
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
                     onClick={() => setShowModal(false)}
                   >
                     Close
@@ -147,8 +146,9 @@ export default function Modal({
                   <button
                     className="bg-violet-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="submit"
-                    value='put'
-                    onClick={() => setShowModal(false)}
+                    name='_action'
+                    value='update'
+                    // onClick={() => setShowModal(false)}
                   >
                     Save Changes
                   </button>

@@ -4,10 +4,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import {
   findByUsername,
   findPublicUsers,
-  updateBio,
-  updateFirstname,
-  updateLastname,
-  updateLocation
+  updateUserProfile
 } from "./api/user.server";
 import type { User } from "./api/models/user.models";
 import type { Post } from "./api/models/post.models";
@@ -37,17 +34,11 @@ export const action: ActionFunction = async ({ request }) => {
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
-  const firstname = form.get('firstname') as string
-  const lastname = form.get('lastname') as string
-  const bio = form.get('bio') as string
-  const location = form.get('location') as string
+  const { _action, ...values } = Object.fromEntries(form)
 
-  const updateFirst = await updateFirstname(loggedInUser?.username, firstname)
-  const updateLast = await updateLastname(loggedInUser?.username, lastname)
-  const update_bio = await updateBio(loggedInUser?.username, bio)
-  const update_location = await updateLocation(loggedInUser?.username, location)
+  console.log(loggedInUser?.username, { ...values })
 
-  return { updateFirst, updateLast, update_bio, update_location }
+  if (_action === 'update') return updateUserProfile(loggedInUser?.username, {...values})
 }
 
 export default function UserPage() {

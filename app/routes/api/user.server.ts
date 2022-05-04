@@ -58,11 +58,10 @@ export async function followAndUnfollowUsers() {
   return true
 }
 
-// consolidate the profile updates
-export async function updateFirstname(username: any, firstname: any) {
+export async function updateUserProfile(username: string | undefined, {input}: any) { 
   const response = await fetch(`http://localhost:8000/api/users/${username}/updateuser`, {
     method: 'PUT',
-    body: JSON.stringify({ firstname }),
+    body: JSON.stringify({ input }),
     headers: {
       'Content-type': 'application/json'
     }
@@ -71,44 +70,3 @@ export async function updateFirstname(username: any, firstname: any) {
 
   return update
 }
-
-export async function updateLastname(username: any, lastname: any) {
-  const response = await fetch(`http://localhost:8000/api/users/${username}/updateuser`, {
-    method: 'PUT',
-    body: JSON.stringify({ lastname }),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  })
-  const update = await response.json()
-
-  return update
-}
-
-export async function updateBio(username: any, bio: any) {
-  const response = await fetch(`http://localhost:8000/api/users/${username}/updateuser`, {
-    method: 'PUT',
-    body: JSON.stringify({ bio }),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  })
-  const update = await response.json()
-
-  return update
-}
-
-export async function updateLocation(username: any, location: any) {
-  const response = await fetch(`http://localhost:8000/api/users/${username}/updateuser`, {
-    method: 'PUT',
-    body: JSON.stringify({ location }),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  })
-  const update = await response.json()
-
-  return update
-}
-
-
