@@ -58,10 +58,10 @@ export async function followAndUnfollowUsers() {
   return true
 }
 
-export async function updateUserProfile(username: string | undefined, {input}: any) { 
+export async function updateUserProfile(username: string | undefined, input: any) { 
   const response = await fetch(`http://localhost:8000/api/users/${username}/updateuser`, {
     method: 'PUT',
-    body: JSON.stringify({ input }),
+    body: JSON.stringify({ ...input }),
     headers: {
       'Content-type': 'application/json'
     }
