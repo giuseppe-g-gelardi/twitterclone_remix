@@ -1,18 +1,18 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
-import type { User } from "./api/models/user.models"
+import type { User } from "../api/models/user.models"
 
-import { getSinglePost } from "./api/posts.server"
-import { getUser } from "./api/session.server"
-import Feed from "./components/Feed"
-import PostBox from "./components/PostBox"
-import Sidebar from "./components/Sidebar"
+import { getSinglePost } from "../api/posts.server"
+import { getUser } from "../api/session.server"
+import Feed from "../components/Feed"
+import PostBox from "../components/PostBox"
+import Sidebar from "../components/Sidebar"
 
-import { fetchComments, postNewComment } from "./api/comments.server"
-import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
-import SuggestedUsers from "./components/SuggestedUsers"
-import BackButton from "./components/BackButton"
+import { fetchComments, postNewComment } from "../api/comments.server"
+import { findByUsername, findPublicUsers, findUserById } from "../api/user.server"
+import SuggestedUsers from "../components/SuggestedUsers"
+import BackButton from "../components/BackButton"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
