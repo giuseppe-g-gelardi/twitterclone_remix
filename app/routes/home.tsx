@@ -11,11 +11,10 @@ import {
 import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
 
-import SuggestedUsers from '~/routes/components/SuggestedUsers'
-import Sidebar from "./components/Sidebar";
+
 import PostBox from "./components/PostBox";
 import Feed from "./components/Feed";
-import SearchBar from "./components/SearchBar";
+import Layout from "./components/Layout";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -59,51 +58,42 @@ export const action: ActionFunction = async ({ request }) => {
 
   return newPost
 }
+
+type LoaderData = {
+  feed: Post[],
+  loggedInUser: User
+}
+
 export default function HomePage() {
-  const { feed, loggedInUser } = useLoaderData()
+  const { feed, loggedInUser } = useLoaderData<LoaderData>()
 
   return (
-    // main container
-    <div className="font-sans flex place-content-center">
-
-      <div className="col-span-3">
-        <Sidebar />
+    <Layout>
+      <div className="px-5 my-2 flex">
+        <h1 className="flex font-bold text-xl">
+          Home
+        </h1>
+        <h2 className="font-bold text-lg ml-auto hover:bg-sky-200 hover:rounded-full p-1">
+          <Link to={`/${loggedInUser.username}`}>
+            View your profile
+          </Link>
+        </h2>
       </div>
 
-      {/* main content. tweets, profile, etc */}
-      <div className="col-span-6">
-        <div className="px-5 my-2 flex">
-          <h1 className="flex font-bold text-xl">
-            Home
-          </h1>
-          <h2 className="font-bold text-lg ml-auto hover:bg-sky-200 hover:rounded-full p-1">
-            <Link to={`/${loggedInUser.username}`}>
-              View your profile
-            </Link>
-          </h2>
-        </div>
+      <PostBox />
 
-        <PostBox />
+      {feed
+        .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+        .map((postFeed: any) => (
+          <Feed
+            key={postFeed._id}
+            feed={postFeed}
+            user={postFeed.user}
+          />
+        ))
+      }
 
-        {feed
-          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((postFeed: any) => (
-            <Feed
-              key={postFeed._id}
-              feed={postFeed}
-              user={postFeed.user}
-            />
-          ))
-        }
-      </div>
-
-      {/* right sidebar. suggested users, first to disappear */}
-      <div className="col-span-3 place-content-center">
-        <SearchBar />
-        <SuggestedUsers />
-      </div>
-
-    </div>
+    </Layout>
   )
 }
 

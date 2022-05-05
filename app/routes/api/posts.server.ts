@@ -27,7 +27,6 @@ export async function createNewPost(username: string | undefined, body: any) {
   return newPost
 }
 
-// http://localhost:8000/api/posts/${postid}/likes
 export async function likeUnlikePost(userid: string | undefined, postid: string | undefined) {
   const response = await fetch(`http://localhost:8000/api/posts/${postid}/likes`, {
     method: 'PUT',

@@ -12,11 +12,9 @@ import { getUserPosts } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 
 import ProfileHeader from "./components/ProfileHeader";
-import Sidebar from "./components/Sidebar";
-import SuggestedUsers from "./components/SuggestedUsers";
-import SearchBar from "./components/SearchBar";
 import Feed from "./components/Feed";
 import BackButton from "./components/BackButton";
+import Layout from "./components/Layout";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -36,41 +34,34 @@ export const action: ActionFunction = async ({ request }) => {
   const loggedInUser = data.user
   const { _action, ...values } = Object.fromEntries(form)
 
-  if (_action === 'update') return updateUserProfile(loggedInUser?.username, {...values})
+  if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
+}
+
+type LoaderData = {
+  user: User,
+  posts: Post[]
 }
 
 export default function UserPage() {
-  const { posts, user } = useLoaderData()
+  const { posts, user } = useLoaderData<LoaderData>()
   return (
-    <div className=" font-sans flex place-content-center">
+    <Layout>
 
-      <div className="col-span-3">
-        <Sidebar />
-      </div>
+      <BackButton
+        text={user.username}
+      />
 
-      <div className="col-span-6 border-2 w-full" >
+      <ProfileHeader />
+      {posts
+        .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+        .map((post: any) => (
+          <Feed
+            key={post._id}
+            feed={post}
+            user={user}
+          />
+        ))}
 
-        <BackButton 
-          text={user.username}
-        />
-
-        <ProfileHeader />
-        {posts
-          .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-          .map((post: any) => (
-            <Feed
-              key={post._id}
-              feed={post}
-              user={user}
-            />
-          ))}
-      </div>
-
-      <div className="col-span-3 place-content-center">
-        <SearchBar />
-        <SuggestedUsers />
-      </div>
-
-    </div>
+    </Layout>
   )
 }

@@ -1,18 +1,17 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
-import type { User } from "../api/models/user.models"
+import type { User } from "./api/models/user.models"
 
-import { getSinglePost } from "../api/posts.server"
-import { getUser } from "../api/session.server"
-import Feed from "../components/Feed"
-import PostBox from "../components/PostBox"
-import Sidebar from "../components/Sidebar"
+import { getSinglePost } from "./api/posts.server"
+import { getUser } from "./api/session.server"
+import Feed from "./components/Feed"
+import PostBox from "./components/PostBox"
 
-import { fetchComments, postNewComment } from "../api/comments.server"
-import { findByUsername, findPublicUsers, findUserById } from "../api/user.server"
-import SuggestedUsers from "../components/SuggestedUsers"
-import BackButton from "../components/BackButton"
+import { fetchComments, postNewComment } from "./api/comments.server"
+import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
+import BackButton from "./components/BackButton"
+import Layout from "./components/Layout"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -57,19 +56,11 @@ export default function SinglePostPage() {
   const { post, commentData, postUser } = useLoaderData()
 
   return (
-    <div className="font-sans flex place-content-center">
 
-      <div className="col-span-3">
-        <Sidebar />
-      </div>
-
-      <div className="col-span-6 m-auto w-full">
-
-        <BackButton 
+    <Layout>
+        <BackButton
           text='Post'
         />
-
-
         <div className="border-b-2">
           <Feed
             feed={post}
@@ -77,7 +68,6 @@ export default function SinglePostPage() {
           />
         </div>
         <div className="mt-2.5">
-
           <PostBox />
           {commentData
             .sort((a: any, b: any) => new Date(b.item.createdAt).valueOf() - new Date(a.item.createdAt).valueOf())
@@ -89,13 +79,6 @@ export default function SinglePostPage() {
               />
             ))}
         </div>
-      </div>
-
-
-      <div className="col-span-3 place-content-center">
-        <SuggestedUsers />
-      </div>
-
-    </div>
+    </Layout>
   )
 }
