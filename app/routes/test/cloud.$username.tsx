@@ -27,7 +27,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     uploadHandler
   );
   const imgSrc = formData.get("img");
-  const imgDesc = formData.get("desc");
+  // const imgDesc = formData.get("desc");
   if (!imgSrc) {
     return json({
       error: "something wrong",
@@ -35,13 +35,13 @@ export const action: ActionFunction = async ({ request, params }) => {
   }
   return json({
     imgSrc,
-    imgDesc,
+    // imgDesc,
   },
     await uploadProfileImage(params.username, imgSrc.toString())
   );
 };
 
-export default function Index() {
+export default function ImageUpload() {
   const data = useActionData<ActionData>();
   return (
     <>
@@ -51,28 +51,21 @@ export default function Index() {
         className="flex flex-col"
       >
 
-        <label htmlFor="img-field">
-          Image to upload
-        </label>
-
         <input 
           id="img-field" 
           type="file" 
           name="img" 
-          accept="image/*" 
+          accept="image/*"
+          className="text-transparent"
+          // style={{ display: 'none' }}
         />
 
-        {/* <label htmlFor="img-desc">
-          Image description
-        </label>
-
-        <input 
-          id="img-desc" 
-          type="text" 
-          name="desc" 
-        /> */}
-
-        <button type="submit">
+        <button 
+          type="submit" 
+          className="bg-slate-400"
+          name='_action'
+          value='pfp'
+        >
           upload to cloudinary
         </button>
 
@@ -87,3 +80,4 @@ export default function Index() {
     </>
   );
 }
+

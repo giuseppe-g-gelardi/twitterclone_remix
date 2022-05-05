@@ -2,6 +2,7 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 
 import type { User } from '../api/models/user.models'
+import ImageUpload from "../test/cloud.$username";
 
 type LoaderData = {
   loggedInUser: User
@@ -72,6 +73,8 @@ export default function Modal({
                       alt=''
                       className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
                       />
+                          <ImageUpload />
+
                   </button>
                 </div>
 {/* profile banner and pfp */}

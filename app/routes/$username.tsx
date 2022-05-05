@@ -36,8 +36,6 @@ export const action: ActionFunction = async ({ request }) => {
   const loggedInUser = data.user
   const { _action, ...values } = Object.fromEntries(form)
 
-  console.log({...values})
-
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, {...values})
 }
 
