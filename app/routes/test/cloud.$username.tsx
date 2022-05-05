@@ -2,7 +2,7 @@ import type { ActionFunction, UploadHandler } from "@remix-run/node";
 import { json, unstable_parseMultipartFormData } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
-import { uploadImage } from "~/routes/utils/utils.server"
+import { uploadImage } from "~/routes/api/utils.server"
 import { uploadProfileImage } from "../api/user.server";
 
 type ActionData = {
@@ -27,7 +27,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     uploadHandler
   );
   const imgSrc = formData.get("img");
-  // const imgDesc = formData.get("desc");
+  const imgDesc = formData.get("desc");
   if (!imgSrc) {
     return json({
       error: "something wrong",
@@ -35,7 +35,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   }
   return json({
     imgSrc,
-    // imgDesc,
+    imgDesc,
   },
     await uploadProfileImage(params.username, imgSrc.toString())
   );
