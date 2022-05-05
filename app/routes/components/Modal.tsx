@@ -47,23 +47,15 @@ export default function Modal(props: ModalProps) {
               </div>
               {/* profile banner and pfp */}
               <div className="flex w-full h-52 relative bg-gray-500">
-                {loggedInUser.profileBanner ? (
-                  <button
-                    onClick={() => console.log('update profile banner')}
-                  >
-                    <img
-                      className="flex w-full h-auto overflow-hidden relative"
-                      src={loggedInUser.profileBanner}
-                      alt=''
-                    />
-                  </button>
-                ) : (
+                <button
+                  onClick={() => console.log('update profile banner')}
+                >
                   <img
-                    className="flex w-full h-auto overflow-hidden relative object-none object-right"
-                    src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
-                    alt=""
+                    className="flex w-full h-auto overflow-hidden relative"
+                    src={loggedInUser.profileBanner}
+                    alt='https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg'
                   />
-                )}
+                </button>
               </div>
               <div className="flex z-10 -mt-16">
                 <button
@@ -125,7 +117,7 @@ export default function Modal(props: ModalProps) {
                   <button
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-red-200 rounded-lg"
                     onClick={() => setShowModal(false)}
-                    type='button'                    
+                    type='button'
                   >
                     Close
                   </button>
