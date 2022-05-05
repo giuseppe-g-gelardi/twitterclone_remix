@@ -35,6 +35,8 @@ export const action: ActionFunction = async ({ request }) => {
   const { _action, ...values } = Object.fromEntries(form)
 
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
+
+  if (!_action) return null
 }
 
 type LoaderData = {

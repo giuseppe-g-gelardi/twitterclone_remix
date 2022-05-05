@@ -1,4 +1,5 @@
 import { useLoaderData } from "@remix-run/react"
+import { useState } from "react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
@@ -41,15 +42,17 @@ export default function ProfileHeader() {
             className="ml-auto"
           >
             {loggedInUser?._id === user._id ? (
-              <button
-                className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
-                onClick={() => console.log('edit profile')}
-              >
+
+                <div
+                  className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
+                >
+                
                 <Modal
                   buttonText='Edit Profile'
                   header='Edit Profile'
-                />
-              </button>
+                  />
+          
+                </div>
             ) : (
               <button
                 className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
