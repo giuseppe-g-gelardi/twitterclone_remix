@@ -1,30 +1,15 @@
-import type { ActionFunction } from '@remix-run/node'
+import { ActionFunction } from '@remix-run/node'
 import { Form, Link } from '@remix-run/react'
 import moment from 'moment'
+
 import type { Post } from '../api/models/post.models'
 import type { User } from '../api/models/user.models'
-import { likeUnlikePost } from '../api/posts.server'
-import { getUser } from '../api/session.server'
 
 import Icons from "./Icons"
 
-// export const action: ActionFunction = async ({ request }) => {
-//   const form = await request.formData()
-//   const user: User | null = await getUser(request)
-//   const data = { user }
-//   const loggedInUser = data.user
-
-//   const postid = form.get('like') as string
-//   // const { _action, ...values } = Object.fromEntries(form)
-
-//   // console.log(await likeUnlikePost(user?._id, postid))
-
-//   // if (_action === 'like') return likeUnlikePost(user?._id, postid)
-
-//   const like = await likeUnlikePost(loggedInUser?._id, postid)
-
-//   return like
-// }
+export const action: ActionFunction = async ({ request }) => {
+  return true
+}
 
 type PropTypes = {
   feed: Post,

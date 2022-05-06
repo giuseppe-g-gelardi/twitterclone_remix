@@ -54,11 +54,20 @@ export const action: ActionFunction = async ({ request }) => {
   const data = { user }
   const loggedInUser = data.user
   const username = loggedInUser?.username
+  // const { _action, ...values } = Object.fromEntries(form)
+
+
+  // console.log('action: ', _action, 'values: ', {...values})
+
+  // if (_action === 'post') return createNewPost(username, {...values})
 
   const newPost: Post = await createNewPost(username, body)
   // likeUnlikePost()
 
   return newPost
+
+  // if (!_action) return null
+
 }
 
 type LoaderData = {

@@ -27,6 +27,7 @@ export default function PostBox() {
           <input
             type='text'
             name="body"
+            
             className="flex text-gray-500 rounded-xl w-full mx-2 border-0 focus:outline-none"
             placeholder="What's happening?"
           />
@@ -44,6 +45,7 @@ export default function PostBox() {
 
           <button
             type='submit'
+            name='_action'
             value='post'
             className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto mr-2 mb-2"
           >
