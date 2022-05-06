@@ -1,5 +1,6 @@
 import { Form, useLoaderData, useTransition } from "@remix-run/react";
 import { useEffect, useRef } from "react";
+
 import Icons from "./Icons";
 
 export default function PostBox() {

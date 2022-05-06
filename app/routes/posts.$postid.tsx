@@ -3,13 +3,13 @@ import { useLoaderData } from "@remix-run/react"
 
 import type { User } from "./api/models/user.models"
 
-import { getSinglePost } from "./api/posts.server"
+import { getSinglePost, likeUnlikePost } from "./api/posts.server"
 import { getUser } from "./api/session.server"
-import Feed from "./components/Feed"
-import PostBox from "./components/PostBox"
-
 import { fetchComments, postNewComment } from "./api/comments.server"
 import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
+
+import Feed from "./components/Feed"
+import PostBox from "./components/PostBox"
 import BackButton from "./components/BackButton"
 import Layout from "./components/Layout"
 
@@ -47,6 +47,13 @@ export const action: ActionFunction = async ({ request, params }) => {
   const data = { user }
   const loggedInUser = data.user
   const post = await getSinglePost(params.postid)
+  const { _action } = Object.fromEntries(form)
+
+
+  const postid = form.get('like') as string
+  if (_action === 'like') return likeUnlikePost(user?._id, postid)
+
+
   const newComment = await postNewComment(post._id, loggedInUser?.username, body)
 
   return newComment

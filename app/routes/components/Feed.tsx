@@ -1,15 +1,11 @@
-import { ActionFunction } from '@remix-run/node'
 import { Form, Link } from '@remix-run/react'
+
 import moment from 'moment'
 
 import type { Post } from '../api/models/post.models'
 import type { User } from '../api/models/user.models'
 
 import Icons from "./Icons"
-
-export const action: ActionFunction = async ({ request }) => {
-  return true
-}
 
 type PropTypes = {
   feed: Post,

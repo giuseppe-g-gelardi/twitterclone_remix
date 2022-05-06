@@ -4,6 +4,7 @@ import { redirect } from "@remix-run/node";
 
 import type { User } from "./api/models/user.models";
 import type { Post } from "./api/models/post.models";
+
 import {
   createNewPost,
   getUserPosts,
@@ -11,7 +12,6 @@ import {
 } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
-
 
 import PostBox from "./components/PostBox";
 import Feed from "./components/Feed";
@@ -54,20 +54,14 @@ export const action: ActionFunction = async ({ request }) => {
   const data = { user }
   const loggedInUser = data.user
   const username = loggedInUser?.username
-  // const { _action, ...values } = Object.fromEntries(form)
+  const { _action } = Object.fromEntries(form)
+  const postid = form.get('like') as string
 
-
-  // console.log('action: ', _action, 'values: ', {...values})
-
-  // if (_action === 'post') return createNewPost(username, {...values})
+  if (_action === 'like') return likeUnlikePost(user?._id, postid)
 
   const newPost: Post = await createNewPost(username, body)
-  // likeUnlikePost()
 
   return newPost
-
-  // if (!_action) return null
-
 }
 
 type LoaderData = {
