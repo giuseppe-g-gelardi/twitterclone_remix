@@ -44,8 +44,9 @@ export default function Feed({ feed, user }: PropTypes) {
           name='like'
         />
         <button
-          type='submit'
+          type="submit"
           name='_action'
+          value='like'
         >
           <div className="hover:bg-slate-400 rounded-full">
             {feed.likes.length ? (
