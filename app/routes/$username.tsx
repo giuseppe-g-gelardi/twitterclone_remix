@@ -42,21 +42,6 @@ export const action: ActionFunction = async ({ request }) => {
   if (!_action) return null
 }
 
-// export const unstable_shouldReload: ShouldReloadFunction =
-//   ({
-//     submission,
-//     params,
-//     url,
-//     prevUrl
-//   }) => {
-//     console.log('submission: ', submission)
-//     console.log('params: ', params)
-//     console.log('url: ', url)
-//     console.log('prevUrl: ', prevUrl)
-//     return submission && submission.action !== "/seppe";
-//     // return true
-//   }
-
 type LoaderData = {
   user: User,
   posts: Post[]
@@ -64,6 +49,11 @@ type LoaderData = {
 
 export default function UserPage() {
   const { posts, user } = useLoaderData<LoaderData>()
+
+
+
+
+
   return (
     <Layout>
 

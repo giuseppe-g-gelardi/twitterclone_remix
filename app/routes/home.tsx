@@ -70,7 +70,8 @@ export const unstable_shouldReload: ShouldReloadFunction =
     submission,
   }) => {
     console.log('submission: ', submission)
-    return !!submission && submission.action !== "/home";
+    // return !!submission && submission.action !== "/home";
+    return true
   }
 
 type LoaderData = {

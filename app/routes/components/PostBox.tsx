@@ -1,10 +1,16 @@
 import { Form, useLoaderData, useTransition } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
+import type { User } from "../api/models/user.models";
+
 import Icons from "./Icons";
 
+type LoaderData = {
+  loggedInUser: User
+}
+
 export default function PostBox() {
-  const { loggedInUser } = useLoaderData()
+  const { loggedInUser } = useLoaderData<LoaderData>()
   const transition = useTransition()
   const isAdding = transition.state === 'submitting' && transition.submission.formData.get('body')
 

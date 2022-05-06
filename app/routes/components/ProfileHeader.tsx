@@ -4,13 +4,17 @@ import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
 import Modal from "./Modal"
 
+type LoaderData = {
+  user: User,
+  loggedInUser: User | null
+}
+
 export default function ProfileHeader() {
-  const { user, loggedInUser }: { user: User, loggedInUser: User | null } = useLoaderData()
+  const { user, loggedInUser } = useLoaderData<LoaderData>()
   const createdAt = user.createdAt as unknown as Date
   const joinedDate = new Date(createdAt).toLocaleString('default', { month: 'long', year: 'numeric' })
 
   return (
-    // TODO: add banner, use user profile picture
     <div className="flex flex-col max-h-full">
       <div className="shrink-0 w-full min-h-full relative">
 
