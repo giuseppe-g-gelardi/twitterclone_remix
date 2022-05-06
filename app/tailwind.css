@@ -868,6 +868,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-color: rgb(221 214 254 / var(--tw-border-opacity));
 }
 
+.bg-indigo-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(129 140 248 / var(--tw-bg-opacity));
+}
+
 .bg-violet-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(167 139 250 / var(--tw-bg-opacity));

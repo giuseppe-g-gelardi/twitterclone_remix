@@ -1,5 +1,4 @@
 import { useLoaderData } from "@remix-run/react"
-import { useState } from "react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
