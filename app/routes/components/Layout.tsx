@@ -2,7 +2,6 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 
 import {
   findByUsername,
-  findPublicUsers,
   updateUserProfile
 } from "../api/user.server";
 import type { User } from "../api/models/user.models";
@@ -15,14 +14,14 @@ import SuggestedUsers from "../components/SuggestedUsers";
 import SearchBar from "../components/SearchBar";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
-  const publicUsers: User[] = await findPublicUsers()
+  // const publicUsers: User[] = await findPublicUsers()
   const user: User = await findByUsername(params)
   const posts: Post[] = await getUserPosts(user.username)
   const sessionUser: User | null = await getUser(request)
   const data = { sessionUser }
   const loggedInUser = data.sessionUser
 
-  return { user, posts, publicUsers, loggedInUser }
+  return { user, posts, loggedInUser }
 }
 
 export const action: ActionFunction = async ({ request }) => {

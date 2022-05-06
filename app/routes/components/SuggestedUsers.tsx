@@ -2,10 +2,37 @@ import { useLoaderData } from "@remix-run/react"
 import { useEffect, useRef, useState } from "react"
 
 import type { User } from "../api/models/user.models"
+import { findPublicUsers } from "../api/user.server"
 import UserCard from "./UserCard"
 
+export const loader = async () => {
+  const publicUsers: User[] = await findPublicUsers()
+
+  console.log(publicUsers)
+  return { publicUsers }
+}
+
+// export const unstable_shouldReload: ShouldReloadFunction =
+//   ({
+//     submission,
+//     params,
+//     url,
+//     prevUrl
+//   }) => {
+//     console.log('submission: ', submission)
+//     console.log('params: ', params)
+//     console.log('url: ', url)
+//     console.log('prevUrl: ', prevUrl)
+//     return submission && submission.action !== "/seppe";
+//     // return true
+//   }
+
+  type LoaderData = {
+    publicUsers: User[]
+  }
+
 export default function SuggestedUsers() {
-  const { publicUsers }: { publicUsers: User[]} = useLoaderData()
+  const { publicUsers } = useLoaderData<LoaderData>()
   const [ suggested, setSuggested ] = useState<User[]>([])
   const isCancelled = useRef<boolean>(false)
 
@@ -25,7 +52,6 @@ export default function SuggestedUsers() {
   }
 
   useEffect(() => {
-
     getThreeRandomPublicUsers(publicUsers, 3)
     if (!isCancelled) {
       setInterval(getThreeRandomPublicUsers, 15000, publicUsers, 3)

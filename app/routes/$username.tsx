@@ -24,7 +24,7 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
   const data = { sessionUser }
   const loggedInUser = data.sessionUser
 
-  return { user, posts, publicUsers, loggedInUser }
+  return { user, posts, loggedInUser, publicUsers }
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -35,11 +35,27 @@ export const action: ActionFunction = async ({ request }) => {
   const { _action, ...values } = Object.fromEntries(form)
   const postid = form.get('like') as string
 
+
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
 
   if (!_action) return null
 }
+
+// export const unstable_shouldReload: ShouldReloadFunction =
+//   ({
+//     submission,
+//     params,
+//     url,
+//     prevUrl
+//   }) => {
+//     console.log('submission: ', submission)
+//     console.log('params: ', params)
+//     console.log('url: ', url)
+//     console.log('prevUrl: ', prevUrl)
+//     return submission && submission.action !== "/seppe";
+//     // return true
+//   }
 
 type LoaderData = {
   user: User,
