@@ -35,7 +35,7 @@ export async function likeUnlikePost(userid: string | undefined, postid: string 
       'Content-type': 'application/json'
     }
   })
-  console.log(response)
+  // console.log('api route response: ', response)
   const liked = response.json()
 
   return liked

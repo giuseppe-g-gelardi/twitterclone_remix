@@ -1,23 +1,61 @@
-import { Link } from '@remix-run/react'
+import type { ActionFunction } from '@remix-run/node'
+import { Form, Link } from '@remix-run/react'
 import moment from 'moment'
+import type { Post } from '../api/models/post.models'
+import type { User } from '../api/models/user.models'
+import { likeUnlikePost } from '../api/posts.server'
+import { getUser } from '../api/session.server'
 
 import Icons from "./Icons"
 
-export default function Feed({ feed, user }: any) {
+// export const action: ActionFunction = async ({ request }) => {
+//   const form = await request.formData()
+//   const user: User | null = await getUser(request)
+//   const data = { user }
+//   const loggedInUser = data.user
+
+//   const postid = form.get('like') as string
+//   // const { _action, ...values } = Object.fromEntries(form)
+
+//   // console.log(await likeUnlikePost(user?._id, postid))
+
+//   // if (_action === 'like') return likeUnlikePost(user?._id, postid)
+
+//   const like = await likeUnlikePost(loggedInUser?._id, postid)
+
+//   return like
+// }
+
+type PropTypes = {
+  feed: Post,
+  user: User
+}
+
+export default function Feed({ feed, user }: PropTypes) {
   const createdAt = feed.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
 
   const likeIcons = (
     <div className="flex">
-      <button onClick={() => console.log('like button pressed')}>
-        <div className="hover:bg-slate-400 rounded-full">
-          {feed.likes.length ? (
-            Icons.heartFilled
-          ) : (
-            Icons.heartOutline
-          )}
-        </div>
-      </button>
+      <Form replace method='put'>
+        <input
+          type='hidden'
+          value={feed._id}
+          name='like'
+        />
+        <button
+          type='submit'
+          name='_action'
+        >
+          <div className="hover:bg-slate-400 rounded-full">
+            {feed.likes.length ? (
+              Icons.heartFilled
+            ) : (
+              Icons.heartOutline
+            )}
+          </div>
+        </button>
+      </Form>
       <div>
         {feed.likes.length ? feed.likes.length : '0'}
       </div>
@@ -121,6 +159,7 @@ export default function Feed({ feed, user }: any) {
           </div>
           <div>
             {likeIcons}
+          
           </div>
           <div>
             {shareIcon}

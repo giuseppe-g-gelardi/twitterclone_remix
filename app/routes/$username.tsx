@@ -8,7 +8,7 @@ import {
 } from "./api/user.server";
 import type { User } from "./api/models/user.models";
 import type { Post } from "./api/models/post.models";
-import { getUserPosts } from "./api/posts.server";
+import { getUserPosts, likeUnlikePost } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 
 import ProfileHeader from "./components/ProfileHeader";
@@ -33,8 +33,13 @@ export const action: ActionFunction = async ({ request }) => {
   const data = { user }
   const loggedInUser = data.user
   const { _action, ...values } = Object.fromEntries(form)
+  const postid = form.get('like') as string
 
+  console.log('action:', _action)
+
+  console.log(await likeUnlikePost(user?._id, postid))
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
+  // if (_action === 'like') return likeUnlikePost(user?._id, postid)
 
   if (!_action) return null
 }
