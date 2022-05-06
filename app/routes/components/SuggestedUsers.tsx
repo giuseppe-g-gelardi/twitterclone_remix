@@ -10,7 +10,6 @@ import UserCard from "./UserCard"
 
 export default function SuggestedUsers() {
   const { publicUsers } = useLoaderData<LoaderData>()
-  const { sup } = useLoaderData()
   const [ suggested, setSuggested ] = useState<User[]>([])
   const isCancelled = useRef<boolean>(false)
 
@@ -44,11 +43,6 @@ export default function SuggestedUsers() {
     <div className="border-2 rounded-3xl bg-slate-200">
       <h1 className="p-2 font-bold text-lg flex">
         Who to follow
-        <button
-          onClick={() => console.log(sup)}
-        >
-          sup
-        </button>
       </h1>
         <ul>
           {suggested?.map(user => 

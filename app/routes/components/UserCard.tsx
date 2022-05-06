@@ -1,8 +1,14 @@
 import { Link } from "@remix-run/react"
 
+import type { User } from "../api/models/user.models"
+
 import Icons from "./Icons"
 
-export default function UserCard({ user }: any) {
+type UserCardProps = {
+  user: User
+}
+
+export default function UserCard({ user }: UserCardProps) {
   return (
 
     <div className="flex items-start">

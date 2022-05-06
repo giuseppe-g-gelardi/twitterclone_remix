@@ -50,10 +50,6 @@ type LoaderData = {
 export default function UserPage() {
   const { posts, user } = useLoaderData<LoaderData>()
 
-
-
-
-
   return (
     <Layout>
 

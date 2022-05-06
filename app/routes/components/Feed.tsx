@@ -88,9 +88,6 @@ export default function Feed({ feed, user }: PropTypes) {
     </div>
   )
 
-
-
-
   return (
     <div className="flex items-start border-t-2 border-r-2 border-l-2 border-b-violet-200">
       <div>
@@ -141,7 +138,6 @@ export default function Feed({ feed, user }: PropTypes) {
           </div>
           <div>
             {likeIcons}
-          
           </div>
           <div>
             {shareIcon}
