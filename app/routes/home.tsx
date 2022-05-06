@@ -7,6 +7,7 @@ import type { Post } from "./api/models/post.models";
 import {
   createNewPost,
   getUserPosts,
+  likeUnlikePost,
 } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
@@ -55,6 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
   const username = loggedInUser?.username
 
   const newPost: Post = await createNewPost(username, body)
+  // likeUnlikePost()
 
   return newPost
 }
