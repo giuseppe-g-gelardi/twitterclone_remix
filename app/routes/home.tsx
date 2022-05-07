@@ -104,6 +104,8 @@ export default function HomePage() {
             key={postFeed._id}
             feed={postFeed}
             user={postFeed.user}
+            inputName='like'
+            buttonValue='like'
           />
         ))
       }

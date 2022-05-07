@@ -5,7 +5,7 @@ import type { User } from "./api/models/user.models"
 
 import { getSinglePost, likeUnlikePost } from "./api/posts.server"
 import { getUser } from "./api/session.server"
-import { fetchComments, postNewComment } from "./api/comments.server"
+import { fetchComments, likeUnlikeComment, postNewComment } from "./api/comments.server"
 import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
 
 import Feed from "./components/Feed"
@@ -54,6 +54,10 @@ export const action: ActionFunction = async ({ request, params }) => {
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
 
 
+  const commentid = form.get('commentLike') as string
+  if (_action === 'commentLike') return likeUnlikeComment(params.postid, commentid, user?._id)
+  
+
   const newComment = await postNewComment(post._id, loggedInUser?.username, body)
 
   return newComment
@@ -72,6 +76,8 @@ export default function SinglePostPage() {
           <Feed
             feed={post}
             user={postUser}
+            inputName='like'
+            buttonValue='like'
           />
         </div>
         <div className="mt-2.5">
@@ -83,6 +89,8 @@ export default function SinglePostPage() {
                 key={comment._id}
                 feed={comment.item}
                 user={comment.commentUser}
+                inputName='commentLike'
+                buttonValue='commentLike'
               />
             ))}
         </div>

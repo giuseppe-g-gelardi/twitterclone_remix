@@ -9,10 +9,12 @@ import Icons from "./Icons"
 
 type PropTypes = {
   feed: Post,
-  user: User
+  user: User,
+  inputName: string,
+  buttonValue: string,
 }
 
-export default function Feed({ feed, user }: PropTypes) {
+export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) {
   const createdAt = feed.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
 
@@ -22,12 +24,12 @@ export default function Feed({ feed, user }: PropTypes) {
         <input
           type='hidden'
           value={feed._id}
-          name='like'
+          name={inputName}
         />
         <button
           type="submit"
           name='_action'
-          value='like'
+          value={buttonValue}
         >
           <div className="hover:bg-slate-400 rounded-full">
             {feed.likes.length ? (

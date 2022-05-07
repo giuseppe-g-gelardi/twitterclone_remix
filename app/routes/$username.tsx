@@ -65,6 +65,8 @@ export default function UserPage() {
             key={post._id}
             feed={post}
             user={user}
+            inputName='like'
+            buttonValue='like'
           />
         ))}
 
