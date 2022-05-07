@@ -15,6 +15,7 @@ import type {
 
 import { getUser } from "./routes/api/session.server";
 import styles from './tailwind.css'
+import { ThemeProvider } from "./routes/context/themeContext";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -33,7 +34,7 @@ export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: styles }]
 }
 
-export default function App() {
+function App() {
   return (
     <html lang="en">
       <head>
@@ -48,4 +49,12 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export default function AppWithProviders() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  )
 }
