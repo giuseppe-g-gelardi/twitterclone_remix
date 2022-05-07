@@ -1,11 +1,9 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ReactNode } from "react";
 
-import {
-  findByUsername,
-  updateUserProfile
-} from "../api/user.server";
 import type { User } from "../api/models/user.models";
 import type { Post } from "../api/models/post.models";
+import { findByUsername, updateUserProfile } from "../api/user.server";
 import { getUserPosts } from "../api/posts.server";
 import { getUser } from "../api/session.server";
 
@@ -14,7 +12,6 @@ import SuggestedUsers from "../components/SuggestedUsers";
 import SearchBar from "../components/SearchBar";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
-  // const publicUsers: User[] = await findPublicUsers()
   const user: User = await findByUsername(params)
   const posts: Post[] = await getUserPosts(user.username)
   const sessionUser: User | null = await getUser(request)
@@ -34,7 +31,12 @@ export const action: ActionFunction = async ({ request }) => {
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, {...values})
 }
 
-export default function Layout({ children }: any) {
+type Proptype = {
+  children: ReactNode,
+
+}
+
+export default function Layout({ children }: Proptype) {
 
   return (
     <div className=" font-sans flex place-content-center">

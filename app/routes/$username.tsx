@@ -38,7 +38,6 @@ export const action: ActionFunction = async ({ request, params }) => {
   const followname = form.get('follow') as string
 
   if (_action === 'follow') return followAndUnfollowUsers(params.username, followname)
-  if (_action === 'follow') return console.log(params.username, followname)
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
 
