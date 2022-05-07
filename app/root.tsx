@@ -15,7 +15,9 @@ import type {
 
 import { getUser } from "./routes/api/session.server";
 import styles from './tailwind.css'
-import { ThemeProvider } from "./routes/context/themeContext";
+import { ThemeProvider, 
+  // useTheme 
+} from "./routes/context/themeContext";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -35,6 +37,8 @@ export const links: LinksFunction = () => {
 }
 
 function App() {
+  // const [theme] = useTheme()
+
   return (
     <html lang="en">
       <head>
