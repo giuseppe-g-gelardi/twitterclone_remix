@@ -33,7 +33,6 @@ export const action: ActionFunction = async ({ request }) => {
 
 type Proptype = {
   children: ReactNode,
-
 }
 
 export default function Layout({ children }: Proptype) {
@@ -45,7 +44,7 @@ export default function Layout({ children }: Proptype) {
         <Sidebar />
       </div>
 
-      <div className="col-span-6 border-2 w-full" >
+      <div className="col-span-6 border-2 border-gray-500 w-full" >
         {children}
       </div>
 

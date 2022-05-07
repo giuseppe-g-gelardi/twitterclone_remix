@@ -883,6 +883,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(148 163 184 / var(--tw-border-opacity));
 }
 
+.border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
+}
+
 .border-b-violet-200 {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(221 214 254 / var(--tw-border-opacity));
