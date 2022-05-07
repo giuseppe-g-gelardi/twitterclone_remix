@@ -1,4 +1,5 @@
 import { Form, useLoaderData } from "@remix-run/react"
+import { useEffect } from "react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
@@ -13,6 +14,22 @@ export default function ProfileHeader() {
   const { user, loggedInUser } = useLoaderData<LoaderData>()
   const createdAt = user.createdAt as unknown as Date
   const joinedDate = new Date(createdAt).toLocaleString('default', { month: 'long', year: 'numeric' })
+
+  
+  const followers = user.followers
+  const followButtonText = (
+    {HI RANDY}
+  )
+
+  // if (followers.includes(loggedInUser?.username)) return true
+  // return false
+  
+  useEffect(() => {
+    // // console.log(user.followers)
+    // // return followers.forEach(follower => console.log(follower === loggedInUser?.username))
+
+
+  })
 
   return (
     <div className="flex flex-col max-h-full">
@@ -57,12 +74,7 @@ export default function ProfileHeader() {
 
               </div>
             ) : (
-
-
-
               <Form replace method='put'>
-
-
                 <input
                   type='hidden'
                   value={loggedInUser?.username}
@@ -77,11 +89,7 @@ export default function ProfileHeader() {
                 >
                   Follow
                 </button>
-
               </Form>
-
-
-
             )}
           </div>
         </div>
