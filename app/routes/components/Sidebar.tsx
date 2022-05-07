@@ -2,7 +2,7 @@ import { Form, NavLink } from "@remix-run/react"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
-    <div className="flex font-extrabold text-lg items-center hover:bg-slate-400 hover:rounded-3xl hover:text-indigo-600 hover:ease-out active:text-violet-400">
+    <div className="flex font-extrabold text-lg items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
       <h2>{text}</h2>
     </div>
   )
