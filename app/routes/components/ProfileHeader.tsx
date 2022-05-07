@@ -1,5 +1,4 @@
 import { Form, useLoaderData } from "@remix-run/react"
-import { useEffect } from "react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
@@ -15,21 +14,9 @@ export default function ProfileHeader() {
   const createdAt = user.createdAt as unknown as Date
   const joinedDate = new Date(createdAt).toLocaleString('default', { month: 'long', year: 'numeric' })
 
-  
+  const username = loggedInUser?.username as string as never
   const followers = user.followers
-  const followButtonText = (
-    {HI RANDY}
-  )
-
-  // if (followers.includes(loggedInUser?.username)) return true
-  // return false
-  
-  useEffect(() => {
-    // // console.log(user.followers)
-    // // return followers.forEach(follower => console.log(follower === loggedInUser?.username))
-
-
-  })
+  const isFollowing = followers.includes(username)
 
   return (
     <div className="flex flex-col max-h-full">
@@ -87,7 +74,11 @@ export default function ProfileHeader() {
                   value='follow'
                   className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
                 >
-                  Follow
+                  {isFollowing ? (
+                    <span>following</span>
+                  ) : (
+                    <span>follow</span>
+                  )}
                 </button>
               </Form>
             )}
