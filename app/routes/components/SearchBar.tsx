@@ -37,23 +37,26 @@ export default function SearchBar() {
           name='userSearch'
           placeholder='   Search for other users...'
           onChange={e => setSearchTerm(e.target.value)}
-          className='flex text-gray-500 rounded-full h-12 w-full  mt-2 mb-5 bg-zinc-700 focus:outline-none focus:border-2 focus:border-violet-500'
+          className='flex text-gray-500 rounded-full h-12 w-full mt-2 mb-5 bg-zinc-700 focus:outline-none focus:border-2 focus:border-violet-500'
         />
       </Form>
       {dropdown ? (
-        <div>
+        <div className="bg-zinc-700 mb-5 rounded-3xl">
           <ul>
             {publicUsers
               .filter(val => {
                 let searchString = ''
-                for (let [key, value] of Object.entries(val)) {
+                for (let [key, value] of Object.entries(val)
+                  .filter(([key]) => key.includes('name'))) {
                   searchString += `${value}\t`
-                  
                 }
-                if (searchTerm === '') return val
-                else if (searchString.toLowerCase().includes(searchTerm.toLowerCase()))
-                return val
-              }).slice(0, 3)
+                if (searchTerm === '') return null
+                // return val to show 3 right away
+                else if (searchString.toLowerCase().includes(searchTerm.toLowerCase())) {
+                  return val
+                }
+              })
+              .slice(0, 3)
               .map(user => (
                 <UserCard key={user._id} user={user} />
               ))}

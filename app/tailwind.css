@@ -623,6 +623,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: auto;
 }
 
+.mt-0 {
+  margin-top: 0px;
+}
+
+.-mt-0 {
+  margin-top: -0px;
+}
+
+.-mt-5 {
+  margin-top: -1.25rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -813,6 +825,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-b {
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
+}
+
+.rounded-b-3xl {
+  border-bottom-right-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
 }
 
 .border-2 {
