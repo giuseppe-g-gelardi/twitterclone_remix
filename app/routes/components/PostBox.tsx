@@ -23,7 +23,7 @@ export default function PostBox() {
   }, [isAdding])
 
   return (
-    <div className="border-x-2">
+    <div className="">
       <Form ref={formRef} replace method="post">
         <div className="flex px-5">
           <img
@@ -35,7 +35,7 @@ export default function PostBox() {
             type='text'
             name="body"
             
-            className="flex text-gray-500 rounded-xl w-full mx-2 border-0 focus:outline-none"
+            className="flex text-gray-500 rounded-xl w-full mx-2 border-0 focus:outline-none bg-transparent"
             placeholder="What's happening?"
           />
         </div>

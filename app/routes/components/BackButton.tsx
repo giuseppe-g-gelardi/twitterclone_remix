@@ -5,7 +5,7 @@ export default function BackButton({ text }: any) {
     <div className="px-5 my-2 flex">
     <button
       onClick={() => history.back()}
-      className="flex font-bold p-1 mr-5 text-indigo-500"
+      className="flex font-bold p-1 mr-5 text-violet-500"
     >
       {Icons.backButton}
     </button>

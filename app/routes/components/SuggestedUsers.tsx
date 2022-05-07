@@ -40,7 +40,7 @@ export default function SuggestedUsers() {
 }, [publicUsers])
 
   return (
-    <div className="border-2 rounded-3xl bg-slate-200">
+    <div className="rounded-3xl bg-slate-200 dark:bg-zinc-700">
       <h1 className="p-2 font-bold text-lg flex">
         Who to follow
       </h1>

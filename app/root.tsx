@@ -37,10 +37,9 @@ export const links: LinksFunction = () => {
 }
 
 function App() {
-  // const [theme] = useTheme()
 
   return (
-    <html lang="en">
+    <html lang="en" className='bg-white dark:bg-black text-black dark:text-white'>
       <head>
         <Meta />
         <Links />

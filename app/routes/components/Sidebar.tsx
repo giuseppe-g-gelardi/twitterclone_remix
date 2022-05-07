@@ -11,7 +11,7 @@ export const SidebarOption = ({ _active, text }: any) => {
 export default function Sidebar() {
 
   const menu = (
-    <div className="border-2 rounded-3xl bg-slate-200">
+    <div>
       <NavLink to='/home'>
         <SidebarOption active text='Home' />
       </NavLink>
@@ -41,24 +41,9 @@ export default function Sidebar() {
 
 
   return (
-    <div className="border-r flex my-5 p-5 rounded-3xl bg-slate-200">
+    <div className="border-r flex my-5 p-5 rounded-3xl bg-slate-200 dark:bg-zinc-700">
       {menu}
     </div>
   )
 }
 
-
-
-
-// {/* <NavLink
-// to={'/home'}
-// prefetch="intent"
-// className={({ isActive }) =>
-//   `w-full hover:underline p-3 rounded border border-slate-400 inline-block ${isActive
-//     ? 'bg-slate-300 text-black font-bold border-2'
-//     : 'text-blue-500 '
-//   } `
-// }
-// >
-// {text}
-// </NavLink> */}

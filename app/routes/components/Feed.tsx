@@ -91,7 +91,7 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
   )
 
   return (
-    <div className="flex items-start border-t-2 border-r-2 border-l-2 border-b-violet-200">
+    <div className="flex items-start border-t-2 border-b-violet-200">
       <div>
         <img
           className="inline object-cover w-12 h-12 mr-2 rounded-full border-2 mt-2 ml-2"
@@ -105,17 +105,24 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
             <h3 className="flex text-base mb-1">
               <p>
                 <Link to={`/${user.username}`}>
-                  {user.username}{' '}
+                  <span className='font-bold hover:underline'>
+                    {user.firstname}{' '}{user.lastname}
+                  </span>
+                </Link>
+                <Link to={`/${user.username}`}>
+                  <span className='text-gray-500 hover:underline ml-1'>
+                    @{user.username}{' '}
+                  </span>
                 </Link>
               </p>
               {user.isVerified ? (
-                <p>
+                <p className='ml-1'>
                   {Icons.verified}
                 </p>
               ) : (
                 null
               )}
-              <p className="grow">
+              <p className="grow ml-1">
                 {timestamp}{' '}
               </p>
               <div className="hover:bg-slate-400 rounded-full h-5 w-5">
