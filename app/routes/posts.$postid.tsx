@@ -49,14 +49,11 @@ export const action: ActionFunction = async ({ request, params }) => {
   const post = await getSinglePost(params.postid)
   const { _action } = Object.fromEntries(form)
 
-
   const postid = form.get('like') as string
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
 
-
   const commentid = form.get('commentLike') as string
-  if (_action === 'commentLike') return likeUnlikeComment(params.postid, commentid, user?._id)
-  
+  if (_action === 'commentLike') return likeUnlikeComment(loggedInUser?._id, commentid)
 
   const newComment = await postNewComment(post._id, loggedInUser?.username, body)
 
@@ -69,31 +66,31 @@ export default function SinglePostPage() {
   return (
 
     <Layout>
-        <BackButton
-          text='Post'
+      <BackButton
+        text='Post'
+      />
+      <div className="border-b-2">
+        <Feed
+          feed={post}
+          user={postUser}
+          inputName='like'
+          buttonValue='like'
         />
-        <div className="border-b-2">
-          <Feed
-            feed={post}
-            user={postUser}
-            inputName='like'
-            buttonValue='like'
-          />
-        </div>
-        <div className="mt-2.5">
-          <PostBox />
-          {commentData
-            .sort((a: any, b: any) => new Date(b.item.createdAt).valueOf() - new Date(a.item.createdAt).valueOf())
-            .map((comment: { _id: any; item: any; commentUser: any }) => (
-              <Feed
-                key={comment._id}
-                feed={comment.item}
-                user={comment.commentUser}
-                inputName='commentLike'
-                buttonValue='commentLike'
-              />
-            ))}
-        </div>
+      </div>
+      <div className="mt-2.5">
+        <PostBox />
+        {commentData
+          .sort((a: any, b: any) => new Date(b.item.createdAt).valueOf() - new Date(a.item.createdAt).valueOf())
+          .map((comment: { _id: any; item: any; commentUser: any }) => (
+            <Feed
+              key={comment._id}
+              feed={comment.item}
+              user={comment.commentUser}
+              inputName='commentLike'
+              buttonValue='commentLike'
+            />
+          ))}
+      </div>
     </Layout>
   )
 }

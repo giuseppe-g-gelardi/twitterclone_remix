@@ -32,10 +32,10 @@ const response = await fetch(`http://localhost:8000/api/comments/${username}/${p
   return newComment
 }
 
-export async function likeUnlikeComment(postid: string | undefined, commentid: string, body: string | undefined) {
-  const response = await fetch(`http://localhost:8000/api/comments/${postid}/${commentid}/likes`, {
+export async function likeUnlikeComment(userid: string | undefined, commentid: string) {
+  const response = await fetch(`http://localhost:8000/api/comments/${commentid}/likes`, {
     method: 'PUT',
-    body: JSON.stringify({ body }),
+    body: JSON.stringify({ userid }),
     headers: {
       'Content-type': 'application/json'
     }
