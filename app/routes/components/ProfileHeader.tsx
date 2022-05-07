@@ -68,18 +68,25 @@ export default function ProfileHeader() {
                   name='follow'
                 />
 
-                <button
-                  type='submit'
-                  name='_action'
-                  value='follow'
-                  className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
-                >
-                  {isFollowing ? (
-                    <span>following</span>
-                  ) : (
-                    <span>follow</span>
-                  )}
-                </button>
+                {isFollowing ? (
+                  <button
+                    type='submit'
+                    name='_action'
+                    value='follow'
+                    className="bg-transparent border-2 hover:border-rose-500 hover:text-rose-500 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
+                  >
+                    following
+                  </button>
+                ) : (
+                  <button
+                    type='submit'
+                    name='_action'
+                    value='follow'
+                    className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
+                  >
+                    follow
+                  </button>
+                )}
               </Form>
             )}
           </div>
