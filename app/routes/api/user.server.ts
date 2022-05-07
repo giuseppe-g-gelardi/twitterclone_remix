@@ -54,10 +54,6 @@ export async function uploadProfileBanner(username: any, image: any) {
   return profileBanner
 }
 
-export async function followAndUnfollowUsers() {
-  return true
-}
-
 export async function updateUserProfile(username: string | undefined, input: any) { 
   const response = await fetch(`http://localhost:8000/api/users/${username}/updateuser`, {
     method: 'PUT',
@@ -67,6 +63,19 @@ export async function updateUserProfile(username: string | undefined, input: any
     }
   })
   const update = await response.json()
-
+  
   return update
+}
+
+export async function followAndUnfollowUsers(usersPage: string | undefined, newFollower: string) {
+  const response = await fetch(`http://localhost:8000/api/users/${usersPage}/following`, {
+    method: 'PUT',
+    body: JSON.stringify({ username: newFollower }),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  const follow = response.json()
+
+  return follow
 }

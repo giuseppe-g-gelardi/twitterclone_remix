@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react"
+import { Form, useLoaderData } from "@remix-run/react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
@@ -46,23 +46,42 @@ export default function ProfileHeader() {
           >
             {loggedInUser?._id === user._id ? (
 
-                <div
-                  className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
-                >
-                
+              <div
+                className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
+              >
+
                 <Modal
                   buttonText='Edit Profile'
                   header='Edit Profile'
-                  />
-          
-                </div>
+                />
+
+              </div>
             ) : (
-              <button
-                className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
-                onClick={() => console.log('follow/unfollow user')}
-              >
-                Follow
-              </button>
+
+
+
+              <Form replace method='put'>
+
+
+                <input
+                  type='hidden'
+                  value={loggedInUser?.username}
+                  name='follow'
+                />
+
+                <button
+                  type='submit'
+                  name='_action'
+                  value='follow'
+                  className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
+                >
+                  Follow
+                </button>
+
+              </Form>
+
+
+
             )}
           </div>
         </div>

@@ -4,6 +4,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import {
   findByUsername,
   findPublicUsers,
+  followAndUnfollowUsers,
   updateUserProfile
 } from "./api/user.server";
 import type { User } from "./api/models/user.models";
@@ -27,15 +28,19 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
   return { user, posts, loggedInUser, publicUsers }
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData()
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
   const { _action, ...values } = Object.fromEntries(form)
   const postid = form.get('like') as string
+  const followname = form.get('follow') as string
 
+  // followAndUnfollowUsers
 
+  if (_action === 'follow') return followAndUnfollowUsers(params.username, followname)
+  if (_action === 'follow') return console.log(params.username, followname)
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
 
