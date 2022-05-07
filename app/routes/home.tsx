@@ -88,7 +88,7 @@ export default function HomePage() {
         <h1 className="flex font-bold text-xl">
           Home
         </h1>
-        <h2 className="font-bold text-lg ml-auto hover:bg-sky-200 hover:rounded-full p-1">
+        <h2 className="font-bold text-lg ml-auto hover:bg-violet-500 hover:rounded-full p-1">
           <Link to={`/${loggedInUser.username}`}>
             View your profile
           </Link>
