@@ -79,3 +79,6 @@ export async function followAndUnfollowUsers(usersPage: string | undefined, newF
 
   return follow
 }
+
+// clear notifications endpoint
+// http://localhost:8000/${username}/notifications/clear

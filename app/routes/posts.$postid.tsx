@@ -95,6 +95,8 @@ export default function SinglePostPage() {
   //       new Date(b.item.createdAt).valueOf()
   //       - new Date(a.item.createdAt).valueOf())
   // }
+  // sortByNew(commentData)
+
 
   return (
     <Layout>
@@ -112,7 +114,7 @@ export default function SinglePostPage() {
       <div className="mt-2.5">
         <PostBox />
         {commentData
-        // sortByNew(commentData)
+        // .sort((a: any, b: any) => new Date(b.item.createdAt).valueOf() - new Date(a.item.createdAt).valueOf())
           .map((comment: Comments) => (
             <Feed
               key={comment._id}

@@ -20,8 +20,6 @@ export default function Sidebar() {
 
   const menu = (
 
-
-
     <div>
 
       <NavLink to='/home'>
@@ -48,6 +46,9 @@ export default function Sidebar() {
             {Icons.bellIcon}
           </span>
           <SidebarOption text='Notifications' />
+          <span>
+            {loggedInUser.notifications.length ? loggedInUser.notifications.length : null}
+          </span>
         </div>
       </NavLink>
 
