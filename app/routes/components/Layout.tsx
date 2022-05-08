@@ -1,5 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { ReactNode, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 
 import type { User } from "../api/models/user.models";
 import type { Post } from "../api/models/post.models";
@@ -48,15 +48,10 @@ export default function Layout({ children }: Proptype) {
 
 
         <div className="col-span-3 border-2 border-gray-500 md:w-6/12 lg:3/12 xl:2/12 mx-4 sm:max-w-screen-sm">
-          <BottomNav />
+          {/* <BottomNav /> */}
           {children}
         </div>
 
-
-
-      {/* <div className="col-span-4 border-2 border-gray-500 w-6/12 mx-4">
-        {children}
-      </div> */}
 
         <div className="col-span-3 place-content-left mr-auto">
           <SearchBar />

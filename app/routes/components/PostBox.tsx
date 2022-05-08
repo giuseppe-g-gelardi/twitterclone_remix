@@ -34,7 +34,6 @@ export default function PostBox() {
           <input
             type='text'
             name="body"
-            
             className="flex text-gray-500 rounded-xl w-full mx-2 border-0 focus:outline-none bg-transparent"
             placeholder="What's happening?"
           />

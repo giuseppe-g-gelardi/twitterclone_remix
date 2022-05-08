@@ -1,5 +1,6 @@
 import { Form, useLoaderData } from "@remix-run/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import type { MutableRefObject } from 'react'
 
 import type { User } from "../api/models/user.models";
 import UserCard from "./UserCard";
@@ -12,15 +13,15 @@ export default function SearchBar() {
   const { publicUsers } = useLoaderData<LoaderData>()
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [dropdown, setDropdown] = useState<boolean>(false)
-
+  const formRef = useRef<HTMLFormElement>(null)
 
   return (
-    <div className="">
-      <Form>
+    <div className="mt-5">
+      <Form ref={formRef}>
 
         <input
           onFocus={() => setDropdown(true)}
-          // onBlur={() => setDropdown(false)}
+          onBlur={() => formRef.current?.reset()}
           name='userSearch'
           placeholder='   Search for other users...'
           onChange={e => setSearchTerm(e.target.value)}
@@ -47,7 +48,7 @@ export default function SearchBar() {
               })
               .slice(0, 3)
               .map(user => (
-                <UserCard key={user._id} user={user} />
+                <UserCard key={user._id} user={user} setDropdown={setDropdown} />
               ))}
           </ul>
         </div>

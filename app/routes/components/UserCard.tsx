@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react"
+import type { Dispatch, SetStateAction } from "react"
 
 import type { User } from "../api/models/user.models"
 
@@ -6,9 +7,10 @@ import Icons from "./Icons"
 
 type UserCardProps = {
   user: User
+  setDropdown: Dispatch<SetStateAction<boolean>>
 }
 
-export default function UserCard({ user }: UserCardProps) {
+export default function UserCard({ user , setDropdown}: UserCardProps) {
   return (
 
     <div className="flex items-start">
@@ -23,7 +25,7 @@ export default function UserCard({ user }: UserCardProps) {
           <div className="text-sm mb-1.5">
             <h3 className="text-base mb-1.5">
               <div className="flex no-wrap text-ellipsis overflow-hidden">
-                <Link to={`/${user.username}`}>
+                <Link onClick={() => setDropdown(false)} to={`/${user.username}`}>
                   {user.username}
                 </Link>
                 {user.isVerified && (
