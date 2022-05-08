@@ -5,7 +5,7 @@ import Icons from "./Icons"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
-    <div className="flex font-extrabold text-lg items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
+    <div className="flex font-bold p-2 text-2xl items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
       <h2>{text}</h2>
     </div>
   )
@@ -20,7 +20,6 @@ export default function Sidebar() {
 
   const menu = (
     <div>
-
 
       <NavLink to='/home'>
         <div className="flex">
@@ -37,6 +36,24 @@ export default function Sidebar() {
             {Icons.searchIcon}
           </span>
           <SidebarOption text='Search' />
+        </div>
+      </NavLink>
+
+      <NavLink to='/notifications'>
+        <div className="flex">
+          <span className="m-2">
+            {Icons.bellIcon}
+          </span>
+          <SidebarOption text='Notifications' />
+        </div>
+      </NavLink>
+
+      <NavLink to='/messages'>
+        <div className="flex">
+          <span className="m-2">
+            {Icons.mailIcon}
+          </span>
+          <SidebarOption text='Messages' />
         </div>
       </NavLink>
 
@@ -101,7 +118,7 @@ export default function Sidebar() {
 
 
   return (
-    <div className="border-r flex my-5 p-5 rounded-3xl bg-slate-200 dark:bg-zinc-700">
+    <div className=" flex my-5 p-5 rounded-3xl bg=transparent">
       {menu}
     </div>
   )

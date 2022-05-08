@@ -1,5 +1,5 @@
 import { Form, useLoaderData } from "@remix-run/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import type { User } from "../api/models/user.models";
 import UserCard from "./UserCard";
@@ -15,30 +15,19 @@ export default function SearchBar() {
 
 
   return (
-    // <div className="rounded-full">
-    //   <Form>
-    //     <div className="flex rounded-full h-12 w-full mt-2 mb-5 border-2">
-    //       <input 
-    //         type='text'
-    //         name='userSearch'
-    //         placeholder='Search for other users...'
-    //         className="flex text-gray-500 rounded-xl w-full mx-2 bg-transparent focus:outline-none"
-    //       />
-    //     </div>
-    //   </Form>
-    // </div>
-
     <div className="">
       <Form>
 
         <input
           onFocus={() => setDropdown(true)}
-          onBlur={() => setDropdown(false)}
+          // onBlur={() => setDropdown(false)}
           name='userSearch'
           placeholder='   Search for other users...'
           onChange={e => setSearchTerm(e.target.value)}
           className='flex text-gray-500 rounded-full h-12 w-full mt-2 mb-5 dark:bg-zinc-700 bg-slate-200 focus:outline-none focus:border-2 focus:border-violet-500'
-        />
+        >
+          
+        </input>
       </Form>
       {dropdown ? (
         <div className="dark:bg-zinc-700 mb-5 rounded-3xl bg-slate-200">
