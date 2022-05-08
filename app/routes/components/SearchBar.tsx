@@ -37,11 +37,11 @@ export default function SearchBar() {
           name='userSearch'
           placeholder='   Search for other users...'
           onChange={e => setSearchTerm(e.target.value)}
-          className='flex text-gray-500 rounded-full h-12 w-full mt-2 mb-5 bg-zinc-700 focus:outline-none focus:border-2 focus:border-violet-500'
+          className='flex text-gray-500 rounded-full h-12 w-full mt-2 mb-5 dark:bg-zinc-700 bg-slate-200 focus:outline-none focus:border-2 focus:border-violet-500'
         />
       </Form>
       {dropdown ? (
-        <div className="bg-zinc-700 mb-5 rounded-3xl">
+        <div className="dark:bg-zinc-700 mb-5 rounded-3xl bg-slate-200">
           <ul>
             {publicUsers
               .filter(val => {
