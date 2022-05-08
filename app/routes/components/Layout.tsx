@@ -10,7 +10,7 @@ import { getUser } from "../api/session.server";
 import Sidebar from "../components/Sidebar";
 import SuggestedUsers from "../components/SuggestedUsers";
 import SearchBar from "../components/SearchBar";
-import BottomNav from "./BottomNav";
+// import BottomNav from "./BottomNav";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const user: User = await findByUsername(params)

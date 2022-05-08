@@ -1,7 +1,9 @@
+import type { Key } from "react"
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
 import type { User } from "./api/models/user.models"
+import type { Post } from "./api/models/post.models"
 
 import { getSinglePost, likeUnlikePost } from "./api/posts.server"
 import { getUser } from "./api/session.server"
@@ -60,11 +62,41 @@ export const action: ActionFunction = async ({ request, params }) => {
   return newComment
 }
 
+type LoaderData = {
+  post: Post,
+  commentData: CommentData
+  postUser: User
+}
+
+type CommentData = {
+  [x: string]: any
+  item: any,
+  commentUser: User
+}
+
+type Comments = {
+  _id: Key | null | undefined;
+  item: Post;
+  commentUser: User
+}
+
+// type CreatedAt = {
+//   item: {
+//     createdAt: string | number | Date
+//   }
+// }
+
 export default function SinglePostPage() {
-  const { post, commentData, postUser } = useLoaderData()
+  const { post, commentData, postUser } = useLoaderData<LoaderData>()
+
+  // function sortByNew(data: CommentData): CommentData {
+  //   return data
+  //     .sort((a: CreatedAt, b: CreatedAt) =>
+  //       new Date(b.item.createdAt).valueOf()
+  //       - new Date(a.item.createdAt).valueOf())
+  // }
 
   return (
-
     <Layout>
       <BackButton
         text='Post'
@@ -80,8 +112,8 @@ export default function SinglePostPage() {
       <div className="mt-2.5">
         <PostBox />
         {commentData
-          .sort((a: any, b: any) => new Date(b.item.createdAt).valueOf() - new Date(a.item.createdAt).valueOf())
-          .map((comment: { _id: any; item: any; commentUser: any }) => (
+        // sortByNew(commentData)
+          .map((comment: Comments) => (
             <Feed
               key={comment._id}
               feed={comment.item}
