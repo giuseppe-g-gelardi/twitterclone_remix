@@ -19,6 +19,9 @@ export default function Sidebar() {
   const { loggedInUser } = useLoaderData<LoaderData>()
 
   const menu = (
+
+
+
     <div>
 
       <NavLink to='/home'>
@@ -114,11 +117,15 @@ export default function Sidebar() {
       </Form>
 
     </div>
+
   )
 
 
+  
+
+
   return (
-    <div className=" flex my-5 p-5 rounded-3xl bg=transparent">
+    <div className="flex my-5 p-5 rounded-3xl bg=transparent">
       {menu}
     </div>
   )
