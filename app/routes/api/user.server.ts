@@ -3,7 +3,9 @@ import type { User } from "./models/user.models"
 // ? api routes for (non auth) user endpoints
 
 // * express server users endpoint
-// http://localhost:8000/api/users/
+// http://localhost:8000/
+// api/users/
+//
 
 // ! all user auth (login, register) is located in session.server.ts
 
@@ -80,5 +82,15 @@ export async function followAndUnfollowUsers(usersPage: string | undefined, newF
   return follow
 }
 
-// clear notifications endpoint
-// http://localhost:8000/${username}/notifications/clear
+// TODO: set up action
+export async function clearNotifications(username: string) {
+  const response = await fetch(`http://localhost:8000/${username}/notifications/clear`, {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  const cleared = response.json()
+
+  return cleared
+} 
