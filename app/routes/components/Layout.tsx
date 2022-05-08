@@ -38,17 +38,17 @@ type Proptype = {
 export default function Layout({ children }: Proptype) {
 
   return (
-    <div className=" font-sans flex place-content-center">
+    <div className="font-sans flex">
 
-      <div className="col-span-3">
+      <div className="col-span-4 place-content-right ml-auto">
         <Sidebar />
       </div>
 
-      <div className="col-span-6 border-2 border-gray-500 w-full" >
+      <div className="col-span-4 border-2 border-gray-500 w-6/12 mx-4">
         {children}
       </div>
 
-      <div className="col-span-3 place-content-center">
+      <div className="col-span-4 place-content-left mr-auto">
         <SearchBar />
         <SuggestedUsers />
       </div>

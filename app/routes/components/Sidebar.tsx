@@ -1,4 +1,7 @@
-import { Form, NavLink } from "@remix-run/react"
+import { Form, NavLink, useLoaderData } from "@remix-run/react"
+
+import type { User } from "../api/models/user.models"
+import Icons from "./Icons"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
@@ -8,34 +11,91 @@ export const SidebarOption = ({ _active, text }: any) => {
   )
 }
 
+type LoaderData = {
+  loggedInUser: User
+}
+
 export default function Sidebar() {
+  const { loggedInUser } = useLoaderData<LoaderData>()
 
   const menu = (
     <div>
+
+
       <NavLink to='/home'>
-        <SidebarOption active text='Home' />
+        <div className="flex">
+          <span className="m-2">
+            {Icons.homeIcon}
+          </span>
+          <SidebarOption active text='Home' />
+        </div>
       </NavLink>
+
       <NavLink to='/search'>
-        <SidebarOption text='Search' />
+        <div className="flex">
+          <span className="m-2">
+            {Icons.searchIcon}
+          </span>
+          <SidebarOption text='Search' />
+        </div>
       </NavLink>
+
       <NavLink to='/feed'>
-        <SidebarOption text='Feed' />
+        <div className="flex">
+          <span className="m-2">
+            {Icons.feedIcon}
+          </span>
+          <SidebarOption text='Feed' />
+        </div>
       </NavLink>
+
       <NavLink to='/fray'>
-        <SidebarOption text='The Fray' />
+        <div className="flex">
+          <span className="m-2">
+            {Icons.sparkles}
+          </span>
+          <SidebarOption text='The Fray' />
+        </div>
       </NavLink>
+
       <NavLink to='/following'>
-        <SidebarOption text='Following' />
+        <div className="flex">
+          <span className="m-2">
+            {Icons.frayIcon}
+          </span>
+          <SidebarOption text='Following' />
+        </div>
       </NavLink>
+
       <NavLink to='/settings'>
-        <SidebarOption text='Settings' />
+        <div className="flex">
+          <span className="m-2">
+            {Icons.fingerprint}
+          </span>
+          <SidebarOption text='Settings' />
+        </div>
       </NavLink>
-    
+
+      <NavLink to={`/${loggedInUser.username}`}>
+        <div className="flex">
+          <span className="m-2">
+            {Icons.userIcon}
+          </span>
+          <SidebarOption text='Profile' />
+        </div>
+      </NavLink>
+
       <Form action="/logout" method="post">
-        <button type="submit">
-          <SidebarOption text='Logout' />
-        </button>
+        <div className="flex">
+          <span className="m-2">
+            {Icons.logoutIcon}
+          </span>
+          <button type="submit">
+            <SidebarOption text='Logout' />
+          </button>
+        </div>
       </Form>
+
     </div>
   )
 
