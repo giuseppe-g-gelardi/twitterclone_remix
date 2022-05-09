@@ -1,24 +1,69 @@
+import { Link } from "@remix-run/react";
+import type { User } from "../api/models/user.models";
 
-  type Props = {
-    to: any; 
-    from: any; 
-    message: any; 
-    link: any; 
-    type: any; 
-  }
+type Props = {
+  to: {
+    userid: string,
+    username: string
+  };
+  from: {
+    userid: string,
+    username: string,
+    user: User
+  };
+  notificationType: string;
+  navToPost: string;
+  navToUser: string;
+  message: string;
+  commentid: string | null;
+  postid: string | null;
+}
 
 export default function Notifications(props: Props) {
-  const { to, from, message, link, type } = props
+  const {
+    to,
+    from,
+    notificationType,
+    navToPost,
+    navToUser,
+    message,
+    commentid,
+    postid
+  } = props
+
   return (
-    <div>
-      {message}
+    <div className="flex items-center p-2">
+      <div>
+        <Link to={`/${from.user.username}`}>
+
+          <img
+            className="inline object-cover w-12 h-12 mr-2 rounded-full border-2 mt-2 ml-2"
+            src={from.user.profilePicture}
+            alt=""
+          />
+        </Link>
+      </div>
+      <p className="mt-5">
+        {message}
+      </p>
     </div>
   )
 }
-    // notification = {
-      // to: "620eaf7c23102c0148a49cc2"
-      // from: "620eaf8323102c0148a49cc5"
-      // message: "nebby liked your comment!"
-      // link: "62791d8d2e8412d9cecac5cb"
-      // notificationType: "comment_like"
-    // }
+
+// notification = {
+//   to: {
+//     userid: user._id,
+//     username: user.username
+//   },
+//   from: {
+//     userid: liker._id,
+//     username: liker.username,
+//     user: liker
+//   },
+//   notificationType: 'post_like',
+//   navToPost: `/posts/${post._id}`,
+//   navToUser: `/${liker.username}`,
+//   message: `${liker.username} liked your post!`,
+//   commentid: null,
+//   postid: post._id,
+// }

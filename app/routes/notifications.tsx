@@ -33,12 +33,22 @@ export const action: ActionFunction = async ({ request }) => {
   if (!_action) return null
 }
 
-type NotificationType = {
-  to: any; 
-  from: any; 
-  message: any; 
-  link: any; 
-  type: any; 
+type NotificationType = { 
+  to: {
+    userid: string,
+    username: string
+  }; 
+  from: {
+    userid: string,
+    username: string,
+    user: User
+  }; 
+  notificationType: string; 
+  navToPost: string; 
+  navToUser: string; 
+  message: string; 
+  commentid: string | null; 
+  postid: string | null; 
 }
 
 export default function NotificationsPage() {
@@ -76,9 +86,12 @@ export default function NotificationsPage() {
           <Notifications 
             to={notification.to}
             from={notification.from}
+            notificationType={notification.notificationType}
+            navToPost={notification.navToPost}
+            navToUser={notification.navToUser}
             message={notification.message}
-            link={notification.link}
-            type={notification.type}
+            commentid={notification.commentid}
+            postid={notification.postid}
           />
         </ul>
       ))}
