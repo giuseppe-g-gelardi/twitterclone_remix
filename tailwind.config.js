@@ -2,12 +2,12 @@ module.exports = {
   content: ['./app/**/*.{ts,tsx,js,jsx}'],
   darkMode: 'media',
   theme: {
-    // screens: {
-    //   sm: '768px',
-    //   md: '768px',
-    //   lg: '976px',
-    //   xl: '1440px',
-    // },
+    screens: {
+      sm: '850px',
+      md: '1300px',
+      lg: '1440px',
+      xl: '2560px',
+    },
     extend: {},
   },
   variants: {},

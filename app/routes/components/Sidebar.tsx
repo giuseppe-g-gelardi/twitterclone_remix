@@ -5,7 +5,7 @@ import Icons from "./Icons"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
-    <div className="flex font-bold p-2 text-2xl items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
+    <div className="flex font-bold py-2.5 text-2xl items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
       <h2>{text}</h2>
     </div>
   )
@@ -21,13 +21,14 @@ export default function Sidebar() {
   const menu = (
 
     <div>
-
       <NavLink to='/home'>
         <div className="flex">
           <span className="m-4">
             {Icons.homeIcon}
           </span>
-          <SidebarOption active text='Home' />
+          <div className="hidden md:block">
+            <SidebarOption active text='Home' />
+          </div>
         </div>
       </NavLink>
 
@@ -36,20 +37,22 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.searchIcon}
           </span>
-          <SidebarOption text='Search' />
+          <div className="hidden md:block">
+            <SidebarOption text='Search' />
+          </div>
         </div>
       </NavLink>
 
       <NavLink to='/notifications'>
         <div className="flex">
-          <span className="m-4">
+          <div className="m-4">
             {loggedInUser.notifications.length ?
-            Icons.bellFilled : Icons.bellIcon}
-          </span>
-          <SidebarOption text='Notifications' />
-          <span className="text-rose-500 mt-2">
-            {loggedInUser.notifications.length ? loggedInUser.notifications.length : null}
-          </span>
+            <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
+          </div>
+          <div className="hidden md:block">
+            <SidebarOption text='Notifications' />
+          </div>
+
         </div>
       </NavLink>
 
@@ -58,7 +61,9 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.mailIcon}
           </span>
+          <div className="hidden md:block">
           <SidebarOption text='Messages' />
+          </div>
         </div>
       </NavLink>
 
@@ -67,7 +72,10 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.feedIcon}
           </span>
+          <div className="hidden md:block">
+
           <SidebarOption text='Feed' />
+          </div>
         </div>
       </NavLink>
 
@@ -76,7 +84,10 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.sparkles}
           </span>
+          <div className="hidden md:block">
+
           <SidebarOption text='The Fray' />
+          </div>
         </div>
       </NavLink>
 
@@ -85,7 +96,10 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.frayIcon}
           </span>
+          <div className="hidden md:block">
+
           <SidebarOption text='Following' />
+          </div>
         </div>
       </NavLink>
 
@@ -94,7 +108,10 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.fingerprint}
           </span>
+          <div className="hidden md:block">
+            
           <SidebarOption text='Settings' />
+          </div>
         </div>
       </NavLink>
 
@@ -103,7 +120,10 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.userIcon}
           </span>
+          <div className="hidden md:block">
+
           <SidebarOption text='Profile' />
+          </div>
         </div>
       </NavLink>
 
@@ -113,7 +133,10 @@ export default function Sidebar() {
             {Icons.logoutIcon}
           </span>
           <button type="submit">
+            <div className="hidden md:block">
+
             <SidebarOption text='Logout' />
+            </div>
           </button>
         </div>
       </Form>
@@ -127,7 +150,7 @@ export default function Sidebar() {
 
 
   return (
-    <div className="flex my-5 p-5 rounded-3xl bg=transparent">
+    <div className="flex my-5 bg-transparent">
       {menu}
     </div>
   )

@@ -10,7 +10,7 @@ import { getUser } from "../api/session.server";
 import Sidebar from "../components/Sidebar";
 import SuggestedUsers from "../components/SuggestedUsers";
 import SearchBar from "../components/SearchBar";
-// import BottomNav from "./BottomNav";
+import BottomNav from "./BottomNav";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const user: User = await findByUsername(params)
@@ -42,18 +42,23 @@ export default function Layout({ children }: Proptype) {
   return (
     <div className="font-sans flex">
 
-        <div className="col-span-3 place-content-right ml-auto">
+        <div className="p-0 sm:pr-5 col-span-3 place-content-right ml-auto hidden sm:block">
           <Sidebar />
         </div>
 
 
-        <div className="col-span-3 border-2 border-gray-500 md:w-6/12 lg:3/12 xl:2/12 mx-4 sm:max-w-screen-sm">
-          {/* <BottomNav /> */}
+      <div className="">
+
+        <div className="col-span-3 border-0 sm:border-2 border-gray-500 md:w-6/12 lg:3/12 xl:2/12">
           {children}
         </div>
+        <div className="col-span-3 border-2 border-gray-500 w-full fixed bottom-0 sm:invisible sm:block">
+          <BottomNav />
+        </div>
+      </div>
 
 
-        <div className="col-span-3 place-content-left mr-auto">
+        <div className="col-span-3 pl-4 sm:pl-0 place-content-left mr-auto hidden sm:block">
           <SearchBar />
           <SuggestedUsers />
         </div>
@@ -63,30 +68,3 @@ export default function Layout({ children }: Proptype) {
     </div>
   )
 }
-
-
-
-      // {/* <div className="col-span-4 border-2 border-gray-500 w-6/12 mx-4"> */}
-      // <div className={({ isMobile }) =>
-      //   `${isMobile
-      //     ? 'col-span-12 border-2 border-gray-500 w-full mx-4 place-content-center'
-      //     : 'col-span-4 border-2 border-gray-500 w-6/12 mx-4'
-      //   }
-      // `
-      // }
-
-      // const [isMobile, setIsMobile] = useState<boolean>(false)
-
-      // function handleResize() {
-      //   if (window.innerWidth > 920) {
-      //     console.log('mobile view')
-      //     setIsMobile(true)
-      //   } else {
-      //     console.log('standard view')
-      //     setIsMobile(false)
-      //   }
-      // }
-    
-      // useEffect(() => {
-      //   window.addEventListener('resize', handleResize)
-      // }, [isMobile])
