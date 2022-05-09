@@ -1,5 +1,7 @@
 import { Link } from "@remix-run/react";
+
 import type { User } from "../api/models/user.models";
+
 import Icons from "./Icons";
 
 type Props = {
@@ -28,7 +30,7 @@ export default function Notifications(props: Props) {
     // to,
     from,
     action,
-    // navToPost,
+    navToPost,
     // navToUser,
     // commentid,
     // postid
@@ -54,10 +56,14 @@ export default function Notifications(props: Props) {
         ) : ''}{' '}
 
         {action.actionType === 'commented'
-          ? 'commented on' : action.actionType} your {' '} {action.actionOn}!
-      </p>
-      <p className="mt-5">
-
+          ? 'commented on' : action.actionType} your&nbsp;
+          {action.actionOn === 'post' ? 
+          <Link 
+            className="hover:text-rose-300 underline flex" 
+            to={`${navToPost}`}>
+              {action.actionOn}
+          </Link> 
+          : action.actionOn}!
       </p>
     </div>
   )
