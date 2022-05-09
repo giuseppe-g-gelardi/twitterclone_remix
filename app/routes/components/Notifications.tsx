@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import type { User } from "../api/models/user.models";
+import Icons from "./Icons";
 
 type Props = {
   to: {
@@ -11,7 +12,10 @@ type Props = {
     username: string,
     user: User
   };
-  notificationType: string;
+  action: {
+    actionType: string,
+    actionOn: string
+  }
   navToPost: string;
   navToUser: string;
   message: string;
@@ -21,49 +25,40 @@ type Props = {
 
 export default function Notifications(props: Props) {
   const {
-    to,
+    // to,
     from,
-    notificationType,
-    navToPost,
-    navToUser,
-    message,
-    commentid,
-    postid
+    action,
+    // navToPost,
+    // navToUser,
+    // commentid,
+    // postid
   } = props
 
   return (
-    <div className="flex items-center p-2">
-      <div>
+    <div className="flex items-center p-2.5 border-2">
+      <div className="">
         <Link to={`/${from.user.username}`}>
-
           <img
-            className="inline object-cover w-12 h-12 mr-2 rounded-full border-2 mt-2 ml-2"
+            className="inline object-cover w-12 h-12 mr-2 rounded-full  ml-2"
             src={from.user.profilePicture}
             alt=""
           />
         </Link>
       </div>
+      <p className=" flex">
+        {from.user.username}{' '}
+        {from.user.isVerified ? (
+          <span className='mr-1'>
+            {Icons.verified}
+          </span>
+        ) : ''}{' '}
+
+        {action.actionType === 'commented'
+          ? 'commented on' : action.actionType} your {' '} {action.actionOn}!
+      </p>
       <p className="mt-5">
-        {message}
+
       </p>
     </div>
   )
 }
-
-// notification = {
-//   to: {
-//     userid: user._id,
-//     username: user.username
-//   },
-//   from: {
-//     userid: liker._id,
-//     username: liker.username,
-//     user: liker
-//   },
-//   notificationType: 'post_like',
-//   navToPost: `/posts/${post._id}`,
-//   navToUser: `/${liker.username}`,
-//   message: `${liker.username} liked your post!`,
-//   commentid: null,
-//   postid: post._id,
-// }
