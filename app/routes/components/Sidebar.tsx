@@ -24,7 +24,7 @@ export default function Sidebar() {
 
       <NavLink to='/home'>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.homeIcon}
           </span>
           <SidebarOption active text='Home' />
@@ -33,7 +33,7 @@ export default function Sidebar() {
 
       <NavLink to='/search'>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.searchIcon}
           </span>
           <SidebarOption text='Search' />
@@ -42,11 +42,12 @@ export default function Sidebar() {
 
       <NavLink to='/notifications'>
         <div className="flex">
-          <span className="m-2">
-            {Icons.bellIcon}
+          <span className="m-4">
+            {loggedInUser.notifications.length ?
+            Icons.bellFilled : Icons.bellIcon}
           </span>
           <SidebarOption text='Notifications' />
-          <span>
+          <span className="text-rose-500 mt-2">
             {loggedInUser.notifications.length ? loggedInUser.notifications.length : null}
           </span>
         </div>
@@ -54,7 +55,7 @@ export default function Sidebar() {
 
       <NavLink to='/messages'>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.mailIcon}
           </span>
           <SidebarOption text='Messages' />
@@ -63,7 +64,7 @@ export default function Sidebar() {
 
       <NavLink to='/feed'>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.feedIcon}
           </span>
           <SidebarOption text='Feed' />
@@ -72,7 +73,7 @@ export default function Sidebar() {
 
       <NavLink to='/fray'>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.sparkles}
           </span>
           <SidebarOption text='The Fray' />
@@ -81,7 +82,7 @@ export default function Sidebar() {
 
       <NavLink to='/following'>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.frayIcon}
           </span>
           <SidebarOption text='Following' />
@@ -90,7 +91,7 @@ export default function Sidebar() {
 
       <NavLink to='/settings'>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.fingerprint}
           </span>
           <SidebarOption text='Settings' />
@@ -99,7 +100,7 @@ export default function Sidebar() {
 
       <NavLink to={`/${loggedInUser.username}`}>
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.userIcon}
           </span>
           <SidebarOption text='Profile' />
@@ -108,7 +109,7 @@ export default function Sidebar() {
 
       <Form action="/logout" method="post">
         <div className="flex">
-          <span className="m-2">
+          <span className="m-4">
             {Icons.logoutIcon}
           </span>
           <button type="submit">

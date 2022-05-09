@@ -77,20 +77,37 @@ export async function followAndUnfollowUsers(usersPage: string | undefined, newF
       'Content-type': 'application/json'
     }
   })
-  const follow = response.json()
+  const follow = await response.json()
 
   return follow
 }
 
-// TODO: set up action
-export async function clearNotifications(username: string) {
-  const response = await fetch(`http://localhost:8000/${username}/notifications/clear`, {
+// // TODO: set up action
+// // TODO: replace this with the new clearNotificationsById
+// // since this only works for one user. no idea why. 
+// export async function clearNotifications(username: string) {
+//   const response = await fetch(`http://localhost:8000/${username}/notifications/clear`, {
+//     method: 'PUT',
+//     headers: {
+//       'Content-type': 'application/json'
+//     }
+//   })
+//   const cleared = response.json()
+
+//   return cleared
+// } 
+
+export async function clearNotifications(userid: any) {
+  const response = await fetch(`http://localhost:8000/api/users/notifications/${userid}/clear`, {
     method: 'PUT',
     headers: {
       'Content-type': 'application/json'
     }
   })
-  const cleared = response.json()
+  const cleared = await response.json()
+  console.log(cleared)
 
   return cleared
-} 
+}
+// http://localhost:8000/api/users/notifications/${userid}/clear
+// http://localhost:8000/api/users/notifications/${userid}/clear
