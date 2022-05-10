@@ -35,7 +35,7 @@ export default function Sidebar() {
 
 
       <NavLink to='/home'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.homeIcon}
           </span>
@@ -46,7 +46,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/search'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.searchIcon}
           </span>
@@ -57,7 +57,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/notifications'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <div className="m-4">
             {loggedInUser.notifications.length ?
             <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
@@ -70,7 +70,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/messages'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.mailIcon}
           </span>
@@ -81,7 +81,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/feed'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.feedIcon}
           </span>
@@ -93,7 +93,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/fray'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.sparkles}
           </span>
@@ -105,7 +105,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/following'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] ">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.frayIcon}
           </span>
@@ -117,7 +117,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/settings'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] ">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.fingerprint}
           </span>
@@ -129,7 +129,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to={`/${loggedInUser.username}`}>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] ">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.userIcon}
           </span>
@@ -141,7 +141,7 @@ export default function Sidebar() {
       </NavLink>
 
       <Form action="/logout" method="post">
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] ">
+        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.logoutIcon}
           </span>
