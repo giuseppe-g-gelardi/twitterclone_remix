@@ -11,7 +11,7 @@ type LoaderData = {
 export default function SearchBar() {
   const { publicUsers } = useLoaderData<LoaderData>()
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const [dropdown, setDropdown] = useState<boolean>(false)
+  const [dropdown, setDropdown] = useState<boolean | undefined>(false)
   const formRef = useRef<HTMLFormElement>(null)
 
   const filteredUsers = publicUsers

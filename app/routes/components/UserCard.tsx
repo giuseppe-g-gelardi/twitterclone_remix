@@ -7,7 +7,7 @@ import Icons from "./Icons"
 
 type UserCardProps = {
   user: User
-  setDropdown: Dispatch<SetStateAction<boolean>>
+  setDropdown: Dispatch<SetStateAction<boolean | undefined>>
 }
 
 export default function UserCard({ user, setDropdown }: UserCardProps) {
@@ -25,7 +25,9 @@ export default function UserCard({ user, setDropdown }: UserCardProps) {
           <div className="text-sm mb-1.5">
             <h3 className="text-base mb-1.5">
               <div className="flex no-wrap text-ellipsis overflow-hidden">
-                <Link onClick={() => setDropdown(false)} to={`/${user.username}`}>
+                <Link onClick={() => setDropdown(false)} 
+                  to={`/${user.username}`}
+                >
                   {user.username}
                 </Link>
                 {user.isVerified && (
@@ -41,7 +43,6 @@ export default function UserCard({ user, setDropdown }: UserCardProps) {
         </div>
       </div>
         <button
-          
           className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto my-auto mr-5"
         >
           follow

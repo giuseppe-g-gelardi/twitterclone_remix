@@ -719,26 +719,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 2rem;
 }
 
-.min-w-min {
-  min-width: -webkit-min-content;
-  min-width: -moz-min-content;
-  min-width: min-content;
+.min-w-\[598px\] {
+  min-width: 598px;
 }
 
 .min-w-full {
   min-width: 100%;
 }
 
-.min-w-\[598px\] {
-  min-width: 598px;
+.max-w-\[598px\] {
+  max-width: 598px;
 }
 
 .max-w-\[250px\] {
   max-width: 250px;
-}
-
-.max-w-\[598px\] {
-  max-width: 598px;
 }
 
 .max-w-3xl {
