@@ -41,7 +41,7 @@ export default function Notifications(props: Props) {
       <div className="">
         <Link to={`/${from.user.username}`}>
           <img
-            className="inline object-cover w-12 h-12 mr-2 rounded-full  ml-2"
+            className="inline object-cover w-12 h-12 mr-2 rounded-full ml-2"
             src={from.user.profilePicture}
             alt=""
           />

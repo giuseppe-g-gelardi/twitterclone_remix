@@ -38,11 +38,11 @@ type Proptype = {
 
 export default function Layout({ children }: Proptype) {
 
-
+// Helvetica Neue
   return (
-    <div className="font-sans flex place-content-center">
+    <div className="font-helvetica flex place-content-center">
 
-        <div className="p-0 sm:pr-5 col-span-3 place-content-right ml-auto hidden sm:block max-w-[250px]">
+        <div className="p-0 sm:px-2 md:px-3 col-span-3 place-content-right ml-auto hidden sm:block ">
           <Sidebar />
         </div>
 
