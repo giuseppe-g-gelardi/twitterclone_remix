@@ -5,7 +5,7 @@ import Icons from "./Icons"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
-    <div className="flex font-bold py-2.5 text-2xl items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
+    <div className="flex font-bold text-2xl items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
       <h2>{text}</h2>
     </div>
   )
@@ -22,34 +22,34 @@ export default function Sidebar() {
 
     <div>
       <NavLink to='/home'>
-        <div className="flex">
+        <div className="flex py-1">
           <span className="m-4">
             {Icons.homeIcon}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block ">
             <SidebarOption active text='Home' />
           </div>
         </div>
       </NavLink>
 
       <NavLink to='/search'>
-        <div className="flex">
+        <div className="flex py-1">
           <span className="m-4">
             {Icons.searchIcon}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
             <SidebarOption text='Search' />
           </div>
         </div>
       </NavLink>
 
       <NavLink to='/notifications'>
-        <div className="flex">
+        <div className="flex py-1">
           <div className="m-4">
             {loggedInUser.notifications.length ?
             <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
           </div>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
             <SidebarOption text='Notifications' />
           </div>
 
@@ -57,22 +57,22 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/messages'>
-        <div className="flex">
+        <div className="flex py-1">
           <span className="m-4">
             {Icons.mailIcon}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
           <SidebarOption text='Messages' />
           </div>
         </div>
       </NavLink>
 
       <NavLink to='/feed'>
-        <div className="flex">
+        <div className="flex py-1">
           <span className="m-4">
             {Icons.feedIcon}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
 
           <SidebarOption text='Feed' />
           </div>
@@ -80,11 +80,11 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/fray'>
-        <div className="flex">
+        <div className="flex py-1">
           <span className="m-4">
             {Icons.sparkles}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
 
           <SidebarOption text='The Fray' />
           </div>
@@ -92,11 +92,11 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/following'>
-        <div className="flex">
+        <div className="flex py-1 ">
           <span className="m-4">
             {Icons.frayIcon}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
 
           <SidebarOption text='Following' />
           </div>
@@ -104,11 +104,11 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/settings'>
-        <div className="flex">
+        <div className="flex py-1 ">
           <span className="m-4">
             {Icons.fingerprint}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
             
           <SidebarOption text='Settings' />
           </div>
@@ -116,11 +116,11 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to={`/${loggedInUser.username}`}>
-        <div className="flex">
+        <div className="flex py-1 ">
           <span className="m-4">
             {Icons.userIcon}
           </span>
-          <div className="hidden md:block">
+          <div className="my-auto hidden md:block">
 
           <SidebarOption text='Profile' />
           </div>
@@ -128,12 +128,12 @@ export default function Sidebar() {
       </NavLink>
 
       <Form action="/logout" method="post">
-        <div className="flex">
+        <div className="flex py-1 ">
           <span className="m-4">
             {Icons.logoutIcon}
           </span>
           <button type="submit">
-            <div className="hidden md:block">
+            <div className="my-auto hidden md:block">
 
             <SidebarOption text='Logout' />
             </div>
@@ -150,7 +150,8 @@ export default function Sidebar() {
 
 
   return (
-    <div className="flex my-5 bg-transparent">
+    // <div className="flex my-5 bg-transparent">
+    <div className="flex bg-transparent">
       {menu}
     </div>
   )

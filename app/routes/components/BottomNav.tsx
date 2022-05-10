@@ -79,7 +79,7 @@ export default function BottomNav() {
 
 
   return (
-    <div>{bottomBar}</div>
+    <div className=''>{bottomBar}</div>
   )
 }
 

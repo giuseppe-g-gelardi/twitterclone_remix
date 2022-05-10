@@ -40,25 +40,24 @@ export default function Layout({ children }: Proptype) {
 
 
   return (
-    <div className="font-sans flex">
+    <div className="font-sans flex place-content-center">
 
-        <div className="p-0 sm:pr-5 col-span-3 place-content-right ml-auto hidden sm:block">
+        <div className="p-0 sm:pr-5 col-span-3 place-content-right ml-auto hidden sm:block max-w-[250px]">
           <Sidebar />
         </div>
 
 
       <div className="">
-
-        <div className="col-span-3 border-0 sm:border-2 border-gray-500 md:w-6/12 lg:3/12 xl:2/12">
+        <div className="col-span-3 border-0 sm:border-2 md:col-span-2 border-gray-500 w-full min-w-full max-w-[598px]">
           {children}
         </div>
-        <div className="col-span-3 border-2 border-gray-500 w-full fixed bottom-0 sm:invisible sm:block">
+        <div className="col-span-3 border-0 border-gray-500 w-full fixed bottom-0 sm:invisible sm:block md:col-span-2 max-w-[598px]">
           <BottomNav />
         </div>
       </div>
 
 
-        <div className="col-span-3 pl-4 sm:pl-0 place-content-left mr-auto hidden sm:block">
+        <div className="col-span-3 mr-auto pl-4 sm:pl-5 place-content-left hidden sm:block">
           <SearchBar />
           <SuggestedUsers />
         </div>

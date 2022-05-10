@@ -1,5 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { ShouldReloadFunction} from "@remix-run/react";
+// import type { ShouldReloadFunction} from "@remix-run/react";
 import { Link, useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 
@@ -65,14 +65,14 @@ export const action: ActionFunction = async ({ request }) => {
   return newPost
 }
 
-export const unstable_shouldReload: ShouldReloadFunction =
-  ({
-    submission,
-  }) => {
-    console.log('submission: ', submission)
-    // return !!submission && submission.action !== "/home";
-    return true
-  }
+// export const unstable_shouldReload: ShouldReloadFunction =
+//   ({
+//     submission,
+//   }) => {
+//     // console.log('submission: ', submission)
+//     // return !!submission && submission.action !== "/home";
+//     return true
+//   }
 
 type LoaderData = {
   feed: Post[],

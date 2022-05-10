@@ -10,7 +10,7 @@ type UserCardProps = {
   setDropdown: Dispatch<SetStateAction<boolean>>
 }
 
-export default function UserCard({ user , setDropdown}: UserCardProps) {
+export default function UserCard({ user, setDropdown }: UserCardProps) {
   return (
 
     <div className="flex items-start">
