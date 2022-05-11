@@ -2,7 +2,7 @@ import Icons from './Icons'
 
 export default function BackButton({ text }: any) {
   return (
-    <div className="px-5 my-2 flex">
+    <div className="px-5 my-2 z-20 flex sticky top-0 dark:bg-black bg-white">
       <button
         onClick={() => history.back()}
         className="flex font-bold p-1 mr-5 text-violet-500"

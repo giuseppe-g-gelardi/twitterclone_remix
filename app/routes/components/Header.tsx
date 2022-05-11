@@ -8,7 +8,7 @@ type Props = {
 
 export default function Header({ loggedInUser }: Props) {
   return (
-    <div className="px-5 mb-2 h-10 flex sticky top-0 dark:bg-black bg-white">
+    <div className="px-5 mb-2 h-10 z-20 flex sticky top-0 dark:bg-black bg-white">
         <h1 className="flex mt-1 font-bold text-xl place-content-center">
           Home
         </h1>

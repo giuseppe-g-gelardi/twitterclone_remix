@@ -54,9 +54,7 @@ export default function UserPage() {
 
   return (
     <>
-      <BackButton
-        text={user.username}
-      />
+      <BackButton text={user.username} />
 
       <ProfileHeader />
       {posts

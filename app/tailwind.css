@@ -504,6 +504,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 10;
 }
 
+.z-20 {
+  z-index: 20;
+}
+
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -1384,15 +1388,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:block {
     display: block;
-  }
-
-  .sm\:border-2 {
-    border-width: 2px;
-  }
-
-  .sm\:border-y-2 {
-    border-top-width: 2px;
-    border-bottom-width: 2px;
   }
 
   .sm\:border-x-2 {
