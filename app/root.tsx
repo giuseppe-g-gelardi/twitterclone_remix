@@ -88,8 +88,10 @@ function Layout({ children }: Props) {
         <Sidebar />
       </nav>
 
+{/* find out why border-x goes to the top of the screen @ home */}
+{/* but not on other pages */}
       <div className=""> 
-        <div className="col-span-3 border-0 sm:border-2 md:col-span-2 border-gray-500 w-full min-w-full max-w-[598px] xm:mr-auto">
+        <div className="col-span-3 border-0 sm:border-x-2 md:col-span-2 border-gray-500 w-full min-w-full max-w-[598px] xm:mr-auto">
           {children}
         </div>
         <div className="col-span-3 border-0 border-gray-500 w-full fixed bottom-0 sm:invisible sm:block md:col-span-2 max-w-[598px]">

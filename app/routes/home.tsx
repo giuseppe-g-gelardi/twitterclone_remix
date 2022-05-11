@@ -1,5 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 
 import type { User } from "./api/models/user.models";
@@ -15,6 +15,7 @@ import { findPublicUsers } from "./api/user.server";
 
 import PostBox from "./components/PostBox";
 import Feed from "./components/Feed";
+import Header from "./components/Header";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -73,17 +74,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="px-5 my-2 flex">
-        <h1 className="flex font-bold text-xl">
-          Home
-        </h1>
-        <h2 className="font-bold text-lg ml-auto hover:bg-violet-500 hover:rounded-full p-1">
-          <Link to={`/${loggedInUser.username}`}>
-            View your profile
-          </Link>
-        </h2>
-      </div>
-
+      <Header loggedInUser={loggedInUser} />
       <PostBox />
 
       {feed
