@@ -1,5 +1,8 @@
-import { useLoaderData } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+
+import type { User } from "./api/models/user.models";
+import type { Post } from "./api/models/post.models";
 
 import {
   findByUsername,
@@ -7,15 +10,12 @@ import {
   followAndUnfollowUsers,
   updateUserProfile
 } from "./api/user.server";
-import type { User } from "./api/models/user.models";
-import type { Post } from "./api/models/post.models";
 import { getUserPosts, likeUnlikePost } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 
 import ProfileHeader from "./components/ProfileHeader";
 import Feed from "./components/Feed";
 import BackButton from "./components/BackButton";
-import Layout from "./components/Layout";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -53,8 +53,7 @@ export default function UserPage() {
   const { posts, user } = useLoaderData<LoaderData>()
 
   return (
-    <Layout>
-
+    <>
       <BackButton
         text={user.username}
       />
@@ -71,7 +70,6 @@ export default function UserPage() {
             buttonValue='like'
           />
         ))}
-
-    </Layout>
+    </>
   )
 }

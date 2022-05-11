@@ -1,5 +1,5 @@
 import { NavLink } from '@remix-run/react'
-import React from 'react'
+
 import Icons from './Icons'
 
 export default function BottomNav() {
@@ -75,8 +75,6 @@ export default function BottomNav() {
       </div>
     </div>
   )
-
-
 
   return (
     <div className=''>{bottomBar}</div>

@@ -33,7 +33,7 @@ export default function SuggestedUsers() {
   useEffect(() => {
     getThreeRandomPublicUsers(publicUsers, 3)
     if (!isCancelled) {
-      setInterval(getThreeRandomPublicUsers, 15000, publicUsers, 3)
+      setInterval(getThreeRandomPublicUsers, 1000, publicUsers, 3)
     }
 
     return () => {
@@ -43,7 +43,7 @@ export default function SuggestedUsers() {
 
   return (
     <div className="rounded-3xl bg-slate-200 dark:bg-zinc-700">
-      <h1 className="p-2 font-bold text-lg flex">
+      <h1 className="p-4 font-bold text-lg flex">
         Who to follow
       </h1>
       <ul>

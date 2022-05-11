@@ -163,7 +163,7 @@ export default function Sidebar() {
 
 
   return (
-    <div className="flex bg-transparent">
+    <div className="bg-transparent ">
       {menu}
     </div>
   )

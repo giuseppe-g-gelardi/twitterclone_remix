@@ -13,7 +13,6 @@ import { findByUsername, findPublicUsers, findUserById } from "./api/user.server
 import Feed from "./components/Feed"
 import PostBox from "./components/PostBox"
 import BackButton from "./components/BackButton"
-import Layout from "./components/Layout"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -99,7 +98,7 @@ export default function SinglePostPage() {
 
 
   return (
-    <Layout>
+    <div className="flex flex-col min-w-[598px] max-w-[598px]">
       <BackButton
         text='Post'
       />
@@ -125,6 +124,6 @@ export default function SinglePostPage() {
             />
           ))}
       </div>
-    </Layout>
+    </div>
   )
 }

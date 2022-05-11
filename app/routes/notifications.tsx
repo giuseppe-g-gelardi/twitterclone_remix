@@ -1,10 +1,15 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
+
 import type { User } from "./api/models/user.models";
+
 import { getUser } from "./api/session.server";
-import { clearNotifications, findPublicUsers } from "./api/user.server";
+import { 
+  clearNotifications, 
+  findPublicUsers 
+} from "./api/user.server";
+
 import BackButton from "./components/BackButton";
-import Layout from "./components/Layout";
 import Notifications from "./components/Notifications";
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -54,7 +59,7 @@ export default function NotificationsPage() {
 
 
   return (
-    <Layout>
+    <>
 <div className="flex flex-col min-w-[598px] max-w-[598px]">
 
       <BackButton 
@@ -97,7 +102,7 @@ export default function NotificationsPage() {
           ))}
         </div>
                 </div>
-    </Layout>
+    </>
   )
 }
 

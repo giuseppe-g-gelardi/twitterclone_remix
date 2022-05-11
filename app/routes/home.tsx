@@ -1,5 +1,4 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-// import type { ShouldReloadFunction} from "@remix-run/react";
 import { Link, useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 
@@ -16,7 +15,6 @@ import { findPublicUsers } from "./api/user.server";
 
 import PostBox from "./components/PostBox";
 import Feed from "./components/Feed";
-import Layout from "./components/Layout";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -45,7 +43,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   if (!user) return redirect('/')
 
-  return { data, loggedInUser, posts, feed, getFeed, publicUsers }
+  return { loggedInUser, posts, feed, getFeed, publicUsers }
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -65,15 +63,6 @@ export const action: ActionFunction = async ({ request }) => {
   return newPost
 }
 
-// export const unstable_shouldReload: ShouldReloadFunction =
-//   ({
-//     submission,
-//   }) => {
-//     // console.log('submission: ', submission)
-//     // return !!submission && submission.action !== "/home";
-//     return true
-//   }
-
 type LoaderData = {
   feed: Post[],
   loggedInUser: User
@@ -83,7 +72,7 @@ export default function HomePage() {
   const { feed, loggedInUser } = useLoaderData<LoaderData>()
 
   return (
-    <Layout>
+    <>
       <div className="px-5 my-2 flex">
         <h1 className="flex font-bold text-xl">
           Home
@@ -110,7 +99,7 @@ export default function HomePage() {
         ))
       }
 
-    </Layout>
+    </>
   )
 }
 
