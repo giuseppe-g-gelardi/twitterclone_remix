@@ -79,23 +79,11 @@ type Comments = {
   commentUser: User
 }
 
-// type CreatedAt = {
-//   item: {
-//     createdAt: string | number | Date
-//   }
-// }
-
-// type CommentLikes = { 
-//   item: { 
-//     likes: string[] 
-//   }
-// }
-
 export default function SinglePostPage() {
   const { post, commentData, postUser } = useLoaderData<LoaderData>()
 
   return (
-    <div className="flex flex-col md:min-w-[598px] md:max-w-[598px]">
+    <div className="flex flex-col sm:min-w-[598px] sm:max-w-[598px]">
       <BackButton
         text='Post'
       />
