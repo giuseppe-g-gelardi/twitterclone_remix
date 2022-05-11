@@ -85,20 +85,17 @@ type Comments = {
 //   }
 // }
 
+// type CommentLikes = { 
+//   item: { 
+//     likes: string[] 
+//   }
+// }
+
 export default function SinglePostPage() {
   const { post, commentData, postUser } = useLoaderData<LoaderData>()
 
-  // function sortByNew(data: CommentData): CommentData {
-  //   return data
-  //     .sort((a: CreatedAt, b: CreatedAt) =>
-  //       new Date(b.item.createdAt).valueOf()
-  //       - new Date(a.item.createdAt).valueOf())
-  // }
-  // sortByNew(commentData)
-
-
   return (
-    <div className="flex flex-col min-w-[598px] max-w-[598px]">
+    <div className="flex flex-col md:min-w-[598px] md:max-w-[598px]">
       <BackButton
         text='Post'
       />
@@ -113,7 +110,6 @@ export default function SinglePostPage() {
       <div className="mt-2.5">
         <PostBox />
         {commentData
-        // .sort((a: any, b: any) => new Date(b.item.createdAt).valueOf() - new Date(a.item.createdAt).valueOf())
           .map((comment: Comments) => (
             <Feed
               key={comment._id}

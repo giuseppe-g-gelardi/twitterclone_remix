@@ -78,6 +78,7 @@ export default function HomePage() {
       <PostBox />
 
       {feed
+      // implement different sorting methods ;)
         .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
         .map((postFeed: any) => (
           <Feed

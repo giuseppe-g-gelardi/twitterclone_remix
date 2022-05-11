@@ -59,7 +59,7 @@ type LoaderData = {
 }
 
 export default function App() {
-  
+
   return (
     <html lang="en" className='bg-white dark:bg-black text-black dark:text-white'>
       <head>
@@ -88,9 +88,7 @@ function Layout({ children }: Props) {
         <Sidebar />
       </nav>
 
-{/* find out why border-x goes to the top of the screen @ home */}
-{/* but not on other pages */}
-      <div className=""> 
+      <div className="">
         <div className="col-span-3 border-0 sm:border-x-2 md:col-span-2 border-gray-500 w-full min-w-full max-w-[598px] xm:mr-auto">
           {children}
         </div>

@@ -4,9 +4,9 @@ import { Form, useLoaderData } from "@remix-run/react";
 import type { User } from "./api/models/user.models";
 
 import { getUser } from "./api/session.server";
-import { 
-  clearNotifications, 
-  findPublicUsers 
+import {
+  clearNotifications,
+  findPublicUsers
 } from "./api/user.server";
 
 import BackButton from "./components/BackButton";
@@ -60,10 +60,11 @@ export default function NotificationsPage() {
 
   return (
     <>
-<div className="flex flex-col min-w-[598px] max-w-[598px]">
+      <div className="flex flex-col min-w-[598px] max-w-[598px]">
 
-      <BackButton 
-        text='Notifications'
+
+        <BackButton
+          text='Notifications'
         />
 
         <Form replace method='put'>
@@ -71,12 +72,12 @@ export default function NotificationsPage() {
             type='hidden'
             name='clearNotifications'
             value={loggedInUser._id}
-            />
+          />
           <button
             type='submit'
             name='_action'
             value='clearNotifications'
-            >
+          >
             Clear
           </button>
         </Form>
@@ -101,7 +102,7 @@ export default function NotificationsPage() {
             </ul>
           ))}
         </div>
-                </div>
+      </div>
     </>
   )
 }

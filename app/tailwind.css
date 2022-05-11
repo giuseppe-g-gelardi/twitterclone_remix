@@ -1390,6 +1390,14 @@ Ensure the default browser behavior of the `hidden` attribute.
     display: block;
   }
 
+  .sm\:min-w-\[598px\] {
+    min-width: 598px;
+  }
+
+  .sm\:max-w-\[598px\] {
+    max-width: 598px;
+  }
+
   .sm\:border-x-2 {
     border-left-width: 2px;
     border-right-width: 2px;
@@ -1409,6 +1417,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   .xm\:min-w-\[288px\] {
     min-width: 288px;
   }
+
+  .xm\:min-w-\[598px\] {
+    min-width: 598px;
+  }
+
+  .xm\:max-w-\[598px\] {
+    max-width: 598px;
+  }
 }
 
 @media (min-width: 1300px) {
@@ -1426,6 +1442,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:min-w-\[250px\] {
     min-width: 250px;
+  }
+
+  .md\:min-w-\[598px\] {
+    min-width: 598px;
+  }
+
+  .md\:max-w-\[598px\] {
+    max-width: 598px;
   }
 
   .md\:px-3 {
