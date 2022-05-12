@@ -42,7 +42,6 @@ export async function likeUnlikePost(userid: string | undefined, postid: string 
   return liked
 }
 
-// http://localhost:8000/api/posts/${postid}/views
 export async function viewCount(postid: string | undefined) {
   const response = await fetch(`http://localhost:8000/api/posts/${postid}/views`, {
     method: 'PUT',

@@ -133,7 +133,7 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
           <div className="text-base mb-1">
             <button>
               <Link to={`../posts/${feed._id}`}>
-                <p>{feed.body}</p>
+                <p className='text-left'>{feed.body}</p>
               </Link>
             </button>
           </div>
