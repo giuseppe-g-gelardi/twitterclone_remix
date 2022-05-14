@@ -1,4 +1,4 @@
-import { Form, NavLink, useLoaderData } from "@remix-run/react"
+import { NavLink, useLoaderData } from "@remix-run/react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
@@ -60,12 +60,11 @@ export default function Sidebar() {
         <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <div className="m-4">
             {loggedInUser.notifications.length ?
-            <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
+              <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
           </div>
           <div className="my-auto hidden md:block">
             <SidebarOption text='Notifications' />
           </div>
-
         </div>
       </NavLink>
 
@@ -75,7 +74,7 @@ export default function Sidebar() {
             {Icons.mailIcon}
           </span>
           <div className="my-auto hidden md:block">
-          <SidebarOption text='Messages' />
+            <SidebarOption text='Messages' />
           </div>
         </div>
       </NavLink>
@@ -86,8 +85,7 @@ export default function Sidebar() {
             {Icons.feedIcon}
           </span>
           <div className="my-auto hidden md:block">
-
-          <SidebarOption text='Feed' />
+            <SidebarOption text='Feed' />
           </div>
         </div>
       </NavLink>
@@ -98,8 +96,7 @@ export default function Sidebar() {
             {Icons.sparkles}
           </span>
           <div className="my-auto hidden md:block">
-
-          <SidebarOption text='The Fray' />
+            <SidebarOption text='The Fray' />
           </div>
         </div>
       </NavLink>
@@ -110,8 +107,7 @@ export default function Sidebar() {
             {Icons.frayIcon}
           </span>
           <div className="my-auto hidden md:block">
-
-          <SidebarOption text='Following' />
+            <SidebarOption text='Following' />
           </div>
         </div>
       </NavLink>
@@ -122,8 +118,7 @@ export default function Sidebar() {
             {Icons.fingerprint}
           </span>
           <div className="my-auto hidden md:block">
-            
-          <SidebarOption text='Settings' />
+            <SidebarOption text='Settings' />
           </div>
         </div>
       </NavLink>
@@ -134,32 +129,36 @@ export default function Sidebar() {
             {Icons.userIcon}
           </span>
           <div className="my-auto hidden md:block">
-
-          <SidebarOption text='Profile' />
+            <SidebarOption text='Profile' />
           </div>
         </div>
       </NavLink>
 
-      <Form action="/logout" method="post">
+
+      <form action="/logout" method="post">
         <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.logoutIcon}
-          </span>
+
+          <button type='submit'>
+            <span className="m-4">
+              {Icons.logoutIcon}
+            </span>
+          </button>
+
           <button type="submit">
             <div className="my-auto hidden md:block">
-
-            <SidebarOption text='Logout' />
+              <SidebarOption text='Logout' />
             </div>
           </button>
+
         </div>
-      </Form>
+      </form>
 
     </div>
 
   )
 
 
-  
+
 
 
   return (

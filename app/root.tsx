@@ -10,13 +10,14 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
+import { json } from "@remix-run/node";
+
 import type {
   MetaFunction,
   LoaderFunction,
   LinksFunction,
 } from "@remix-run/node";
 
-import type { User } from "./routes/api/models/user.models";
 import { getUser } from "./routes/api/session.server";
 import { findPublicUsers } from "./routes/api/user.server";
 
@@ -34,17 +35,19 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export const unstable_shouldReload: ShouldReloadFunction = () => false;
+export const unstable_shouldReload: ShouldReloadFunction = () => true;
 
+type LoaderData = {
+  loggedInUser: Awaited<ReturnType<typeof getUser>>;
+  publicUsers: Awaited<ReturnType<typeof  findPublicUsers>>;
+};
 
-export const loader: LoaderFunction = async ({ request }: any) => {
-  const publicUsers: User[] = await findPublicUsers()
-  const sessionUser: User | null = await getUser(request)
-  const data = { sessionUser }
-  const loggedInUser = data.sessionUser
-
-  return { loggedInUser, publicUsers }
-}
+export const loader: LoaderFunction = async ({ request }) => {
+  return json<LoaderData>({
+    loggedInUser: await getUser(request),
+    publicUsers: await findPublicUsers()
+  });
+};
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: styles }]
@@ -52,10 +55,6 @@ export const links: LinksFunction = () => {
 
 type Props = {
   children: ReactNode
-}
-
-type LoaderData = {
-  loggedInUser: User
 }
 
 export default function App() {
@@ -111,7 +110,6 @@ function Layout({ children }: Props) {
       {children}
     </>
   )
-
 
   return (
     <>
