@@ -5,11 +5,28 @@ import Icons from "./Icons"
 
 export const SidebarOption = ({ _active, text }: any) => {
   return (
-    <div className="flex text-xl items-center hover:text-violet-600 hover:ease-out active:text-violet-400">
+    <div className="flex text-xl items-center ">
       <h2>{text}</h2>
     </div>
+
+    // active  = text-white font-bold
+
+    // other bs - hover:text-violet-600 hover:ease-out active:text-violet-400
+
+    // <NavLink to=''
+    //   className={({ isActive }) =>
+    //     `my-auto hidden md:block  
+    //       ${isActive
+    //       ? 'bg-zinc-800 rounded-full'
+    //       : null
+    //     } `
+    //   }
+    // >
+    //   <h2>{text}</h2>
+    // </NavLink>
   )
 }
+
 
 type LoaderData = {
   loggedInUser: User
@@ -27,15 +44,12 @@ export default function Sidebar() {
           <span className="m-4">
             {Icons.terminalIcon}
           </span>
-          <div className="my-auto hidden md:block ">
-            {/* <SidebarOption active text='Home' /> */}
-          </div>
         </div>
       </NavLink>
 
 
       <NavLink to='/home'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.homeIcon}
           </span>
@@ -46,7 +60,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/search'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.searchIcon}
           </span>
@@ -57,7 +71,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/notifications'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <div className="m-4">
             {loggedInUser.notifications.length ?
               <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
@@ -69,7 +83,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/messages'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.mailIcon}
           </span>
@@ -80,7 +94,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/feed'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.feedIcon}
           </span>
@@ -91,7 +105,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/fray'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.sparkles}
           </span>
@@ -102,7 +116,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/following'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.frayIcon}
           </span>
@@ -113,7 +127,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to='/settings'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.fingerprint}
           </span>
@@ -124,7 +138,7 @@ export default function Sidebar() {
       </NavLink>
 
       <NavLink to={`/${loggedInUser.username}`}>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
           <span className="m-4">
             {Icons.userIcon}
           </span>
@@ -136,10 +150,10 @@ export default function Sidebar() {
 
 
       <form action="/logout" method="post">
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
+        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
 
-          <button type='submit'>
-            <span className="m-4">
+          <button type='submit' className="m-4">
+            <span>
               {Icons.logoutIcon}
             </span>
           </button>
@@ -154,12 +168,7 @@ export default function Sidebar() {
       </form>
 
     </div>
-
   )
-
-
-
-
 
   return (
     <div className="bg-transparent ">
