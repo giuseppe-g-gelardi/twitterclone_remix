@@ -1,153 +1,141 @@
 import { NavLink, useLoaderData } from "@remix-run/react"
+import type { ReactNode } from "react"
 
 import type { User } from "../api/models/user.models"
 import Icons from "./Icons"
 
-export const SidebarOption = ({ _active, text }: any) => {
+export const SidebarOption = ({ text }: { text: string }) => {
   return (
     <div className="flex text-xl items-center ">
       <h2>{text}</h2>
     </div>
+  )
+}
 
-    // active  = text-white font-bold
+export const SidebarItem = ({
+  children, link
+}: {
+  children: ReactNode,
+  link: string
+}) => {
 
-    // other bs - hover:text-violet-600 hover:ease-out active:text-violet-400
+  const baseNavItem = `flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full`
 
-    // <NavLink to=''
-    //   className={({ isActive }) =>
-    //     `my-auto hidden md:block  
-    //       ${isActive
-    //       ? 'bg-zinc-800 rounded-full'
-    //       : null
-    //     } `
-    //   }
-    // >
-    //   <h2>{text}</h2>
-    // </NavLink>
+  const ActiveNavItem = ({ isActive }: { isActive: boolean }) => `${baseNavItem} 
+  ${isActive ? 'text-white font-extrabold' : null}`
+
+  return (
+    <NavLink to={link} className={ActiveNavItem}>
+      {children}
+    </NavLink>
+  )
+}
+
+export const ActiveSMItem = () => {
+  return (
+    <>
+      <h1>test</h1>
+    </>
   )
 }
 
 
-type LoaderData = {
-  loggedInUser: User
-}
+type RootLoaderData = { loggedInUser: User }
 
 export default function Sidebar() {
-  const { loggedInUser } = useLoaderData<LoaderData>()
+  const { loggedInUser } = useLoaderData<RootLoaderData>()
 
   const menu = (
 
     <div>
 
-      <NavLink to='/home'>
-        <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
-          <span className="m-4">
-            {Icons.terminalIcon}
-          </span>
+      <div className="flex py-1 md:min-w-[250px] max-h-[58px]">
+        <span className="m-4">
+          {Icons.terminalIcon}
+        </span>
+      </div>
+
+      <SidebarItem link='/home'>
+        <span className="m-4">
+          {Icons.homeIcon}
+        </span>
+        <div className="my-auto hidden md:block ">
+          <SidebarOption text='Home' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-
-      <NavLink to='/home'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.homeIcon}
-          </span>
-          <div className="my-auto hidden md:block ">
-            <SidebarOption active text='Home' />
-          </div>
+      <SidebarItem link='/search'>
+        <span className="m-4">
+          {Icons.searchIcon}
+        </span>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text='Search' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-      <NavLink to='/search'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.searchIcon}
-          </span>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='Search' />
-          </div>
+      <SidebarItem link='/notifications'>
+        <div className="m-4">
+          {loggedInUser.notifications.length ?
+            <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
         </div>
-      </NavLink>
-
-      <NavLink to='/notifications'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <div className="m-4">
-            {loggedInUser.notifications.length ?
-              <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
-          </div>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='Notifications' />
-          </div>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text='Notifications' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-      <NavLink to='/messages'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.mailIcon}
-          </span>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='Messages' />
-          </div>
+      <SidebarItem link='/messages'>
+        <span className="m-4">
+          {Icons.mailIcon}
+        </span>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text='Messages' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-      <NavLink to='/feed'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.feedIcon}
-          </span>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='Feed' />
-          </div>
+      <SidebarItem link='/feed'>
+        <span className="m-4">
+          {Icons.feedIcon}
+        </span>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text='Feed' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-      <NavLink to='/fray'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.sparkles}
-          </span>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='The Fray' />
-          </div>
+      <SidebarItem link='/fray'>
+        <span className="m-4">
+          {Icons.sparkles}
+        </span>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text='The Fray' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-      <NavLink to='/following'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.frayIcon}
-          </span>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='Following' />
-          </div>
+      <SidebarItem link='/network'>
+        <span className="m-4">
+          {Icons.frayIcon}
+        </span>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text='My Network' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-      <NavLink to='/settings'>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.fingerprint}
-          </span>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='Settings' />
-          </div>
+      <SidebarItem link='/settings'>
+        <span className="m-4">
+          {Icons.fingerprint}
+        </span>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text='Settings' />
         </div>
-      </NavLink>
+      </SidebarItem>
 
-      <NavLink to={`/${loggedInUser.username}`}>
-        <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
-          <span className="m-4">
-            {Icons.userIcon}
-          </span>
-          <div className="my-auto hidden md:block">
-            <SidebarOption text='Profile' />
-          </div>
+      <SidebarItem link={`/${loggedInUser.username}`}>
+        <span className="m-4">
+          {Icons.userIcon}
+        </span>
+        <div className="my-auto hidden md:block">
+          <SidebarOption text={loggedInUser.username} />
         </div>
-      </NavLink>
-
+      </SidebarItem>
 
       <form action="/logout" method="post">
         <div className="flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full">
