@@ -171,7 +171,7 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
           <div className="">
             <h3 className="flex text-base mb-1">
               <p>
-                <Link to={`/${user.username}`}>
+                <Link to={`/${user.username}`} className='hidden sm:inline'>
                   <span className='font-bold hover:underline'>
                     {user.firstname}{' '}{user.lastname}
                   </span>
