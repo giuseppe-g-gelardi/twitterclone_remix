@@ -516,6 +516,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   float: right;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .m-4 {
   margin: 1rem;
 }
@@ -663,6 +667,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 3rem;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .h-5 {
   height: 1.25rem;
 }
@@ -681,10 +689,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-52 {
   height: 13rem;
-}
-
-.h-auto {
-  height: auto;
 }
 
 .h-36 {
@@ -719,16 +723,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 3rem;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .w-6 {
   width: 1.5rem;
 }
 
 .w-7 {
   width: 1.75rem;
-}
-
-.w-auto {
-  width: auto;
 }
 
 .w-36 {
@@ -783,8 +787,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   place-content: center;
 }
 
-.place-content-start {
-  place-content: start;
+.place-items-center {
+  place-items: center;
 }
 
 .items-start {
@@ -827,12 +831,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .overflow-x-hidden {
   overflow-x: hidden;
-}
-
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .text-ellipsis {
@@ -1279,6 +1277,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-slate-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-violet-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(139 92 246 / var(--tw-bg-opacity));
@@ -1391,28 +1394,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 850px) {
-  .sm\:visible {
-    visibility: visible;
-  }
-
   .sm\:invisible {
     visibility: hidden;
   }
 
-  .sm\:ml-0 {
-    margin-left: 0px;
-  }
-
   .sm\:block {
     display: block;
-  }
-
-  .sm\:flex {
-    display: flex;
-  }
-
-  .sm\:hidden {
-    display: none;
   }
 
   .sm\:min-w-\[598px\] {
@@ -1421,14 +1408,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:max-w-\[598px\] {
     max-width: 598px;
-  }
-
-  .sm\:flex-1 {
-    flex: 1 1 0%;
-  }
-
-  .sm\:flex-col {
-    flex-direction: column;
   }
 
   .sm\:border-x-2 {
@@ -1447,10 +1426,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-right: auto;
   }
 
-  .xm\:flex {
-    display: flex;
-  }
-
   .xm\:min-w-\[288px\] {
     min-width: 288px;
   }
@@ -1463,10 +1438,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:block {
     display: block;
-  }
-
-  .md\:flex {
-    display: flex;
   }
 
   .md\:min-w-\[348px\] {

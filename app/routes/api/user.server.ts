@@ -82,21 +82,6 @@ export async function followAndUnfollowUsers(usersPage: string | undefined, newF
   return follow
 }
 
-// // TODO: set up action
-// // TODO: replace this with the new clearNotificationsById
-// // since this only works for one user. no idea why. 
-// export async function clearNotifications(username: string) {
-//   const response = await fetch(`http://localhost:8000/${username}/notifications/clear`, {
-//     method: 'PUT',
-//     headers: {
-//       'Content-type': 'application/json'
-//     }
-//   })
-//   const cleared = response.json()
-
-//   return cleared
-// } 
-
 export async function clearNotifications(userid: any) {
   const response = await fetch(`http://localhost:8000/api/users/notifications/${userid}/clear`, {
     method: 'PUT',

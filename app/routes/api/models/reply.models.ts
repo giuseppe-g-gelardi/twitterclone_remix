@@ -1,13 +1,11 @@
 import type { User } from "./user.models";
 
-export interface Comment {
+export interface Reply {
   _id: string,
   user: User,
-  username?: string,
+  username: User,
   body: string,
-  likes?: [],
-  parent?: Comment,
-  replies?: Comment[]
+  likes?: string[],
   createdAt?: string,
   updatedAt?: string
 }
