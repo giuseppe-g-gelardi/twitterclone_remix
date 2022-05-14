@@ -19,23 +19,15 @@ export const SidebarItem = ({
   link: string
 }) => {
 
-  const baseNavItem = `flex text-gray-300 py-1 md:min-w-[250px] max-h-[58px] hover:bg-zinc-800 hover:rounded-full`
+  const baseNavItem = `flex dark:text-gray-300 text-gray-700 py-1 md:min-w-[250px] max-h-[58px] dark:hover:bg-zinc-800 hover:bg-zinc-200 hover:rounded-full`
 
   const ActiveNavItem = ({ isActive }: { isActive: boolean }) => `${baseNavItem} 
-  ${isActive ? 'text-white font-extrabold' : null}`
+  ${isActive ? 'dark:bg-zinc-800 bg-zinc-200 rounded-full font-extrabold' : null}`
 
   return (
     <NavLink to={link} className={ActiveNavItem}>
       {children}
     </NavLink>
-  )
-}
-
-export const ActiveSMItem = () => {
-  return (
-    <>
-      <h1>test</h1>
-    </>
   )
 }
 
