@@ -68,7 +68,7 @@ export default function Sidebar() {
       <SidebarItem link='/notifications'>
         <div className="m-4">
           {loggedInUser.notifications.length ?
-            <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
+            <span className="text-rose-600 dark:text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
         </div>
         <div className="my-auto hidden md:block">
           <SidebarOption text='Notifications' />
