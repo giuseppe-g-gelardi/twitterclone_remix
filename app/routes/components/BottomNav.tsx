@@ -4,9 +4,6 @@ import type { User } from '../api/models/user.models'
 
 import Icons from './Icons'
 
-
-
-
 export const SidebarItem = ({
   children, link
 }: {
@@ -26,17 +23,10 @@ export const SidebarItem = ({
   )
 }
 
-
-
-
-
-
-
 type RootLoaderData = { loggedInUser: User }
 
 export default function BottomNav() {
   const { loggedInUser } = useLoaderData<RootLoaderData>()
-
 
   const bottomBar = (
     <div className="px-7 dark:bg-neutral-900 bg-neutral-300 shadow-lg w-full min-w-full max-w-[598px] rounded-sm">
@@ -87,7 +77,7 @@ export default function BottomNav() {
               <span className="block text-xs pb-2">
                 <SidebarItem link='/notifications'>
                   {loggedInUser.notifications.length ?
-                    <span className="text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
+                    <span className="text-rose-600 dark:text-rose-400">{Icons.bellFilled}</span> : <span>{Icons.bellIcon}</span>}
                 </SidebarItem>
               </span>
               <span className="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
