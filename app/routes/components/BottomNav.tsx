@@ -17,7 +17,7 @@ export const SidebarItem = ({
   const baseNavItem = `flex dark:text-gray-300 text-gray-700 p-1`
 
   const ActiveNavItem = ({ isActive }: { isActive: boolean }) => `${baseNavItem} 
-  ${isActive ? 'bg-gray-500 rounded-full' : null}`
+  ${isActive ? 'bg-gray-500 text-white rounded-full' : null}`
 
   return (
     <NavLink to={link} className={ActiveNavItem}>
@@ -39,7 +39,7 @@ export default function BottomNav() {
 
 
   const bottomBar = (
-    <div className="px-7 bg-neutral-900 shadow-lg w-full min-w-full max-w-[598px] rounded-sm">
+    <div className="px-7 dark:bg-neutral-900 bg-neutral-300 shadow-lg w-full min-w-full max-w-[598px] rounded-sm">
       <div className="flex">
         <div className="flex-1 group">
           <div className="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
