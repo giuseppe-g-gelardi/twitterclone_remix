@@ -1,8 +1,7 @@
 import { Form, useLoaderData } from "@remix-run/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { User } from '../api/models/user.models'
-// import ImageUpload from "../test/cloud.$username";
 
 type LoaderData = {
   loggedInUser: User
@@ -17,6 +16,11 @@ export default function Modal(props: ModalProps) {
   const { buttonText, header } = props
   const { loggedInUser } = useLoaderData<LoaderData>()
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (showModal) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = 'scroll'
+  }, [showModal])
 
   return (
     <>

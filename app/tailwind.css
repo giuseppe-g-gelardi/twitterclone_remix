@@ -663,6 +663,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+.\!hidden {
+  display: none !important;
+}
+
 .h-screen {
   height: 100vh;
 }
@@ -1305,10 +1309,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ease-linear {
   transition-timing-function: linear;
-}
-
-.hover\:cursor-pointer:hover {
-  cursor: pointer;
 }
 
 .hover\:rounded-full:hover {
