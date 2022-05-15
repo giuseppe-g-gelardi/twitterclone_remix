@@ -1,9 +1,10 @@
 import type { ActionFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 
-import { login, createUserSession } from "./api/session.server"
-import LoginForm from "./components/LoginForm"
 import type { User } from "./api/models/user.models"
+import { login, createUserSession } from "./api/session.server"
+
+import LoginForm from "./components/LoginForm"
 
 function validateEmail(email: any) {
   if (typeof email !== 'string' || email.length < 3) {
@@ -50,8 +51,8 @@ export const action: ActionFunction = async ({ request }) => {
 export default function LoginPage() {
 
   return (
-    <div>
+    <>
       <LoginForm />
-    </div>
+    </>
   )
 }

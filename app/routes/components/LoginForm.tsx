@@ -1,10 +1,14 @@
-import { Form, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+
+import Icons from "./Icons";
 
 export default function LoginForm() {
   const actionData = useActionData()
+  const [searchParams] = useSearchParams()
 
   return (
-    <div className="flex items-center space-y-4 py-16 font-semibold text-gray-500 flex-col">
+    <div className="flex items-center space-y-4 py-auto font-semibold text-gray-500 flex-col">
+      {Icons.terminalIconLG}
       <h1 className="text-slate-500 text-2xl">
         Sign in to continue
       </h1>
@@ -31,14 +35,14 @@ export default function LoginForm() {
             </div>
           )}
         </div>
-        
+
         <input
           className="w-full p-2 rounded-md border border-gray-700"
           type='password'
           name='password'
           placeholder='Password'
           id='password'
-          // defaultValue={actionData?.fieldErrors?.password}
+        // defaultValue={actionData?.fieldErrors?.password}
         />
         <div className="mb-5">
           {actionData?.fieldErrors?.password ? (
@@ -55,12 +59,24 @@ export default function LoginForm() {
             </div>
           )}
         </div>
-        <button 
+        <button
           className="w-full p-2 bg-violet-400 rounded-full font-bold text-gray-900 border border-gray-700 "
           type='submit' value='login'>
           Login
         </button>
       </Form>
+      <div className="text-center text-sm text-gray-500">
+        Don't have an account?{" "}
+        <Link
+          className="text-blue-500 underline"
+          to={{
+            pathname: "/register",
+            search: searchParams.toString(),
+          }}
+        >
+          Sign up
+        </Link>
+      </div>
     </div>
   )
 }

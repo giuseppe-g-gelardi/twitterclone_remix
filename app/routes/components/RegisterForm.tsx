@@ -1,10 +1,15 @@
-import { Form, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+
+import Icons from "./Icons";
 
 export default function RegisterForm() {
   const actionData = useActionData()
+  const [searchParams] = useSearchParams()
 
   return (
-    <div className="flex items-center space-y-4 py-16 font-semibold text-gray-500 flex-col">
+    <div className="flex items-center space-y-4 py-auto font-semibold text-gray-500 flex-col">
+      {Icons.terminalIconLG}
+
       <h1 className="text-slate-500 text-2xl">
         Register a new Account
       </h1>
@@ -68,6 +73,20 @@ export default function RegisterForm() {
           type='submit' value='login'>
           Login
         </button>
+        <div className="flex items-center justify-center">
+          <div className="text-center text-sm text-gray-500">
+            Already have an account?{" "}
+            <Link
+              className="text-blue-500 underline"
+              to={{
+                pathname: "/login",
+                search: searchParams.toString(),
+              }}
+            >
+              Log in
+            </Link>
+          </div>
+        </div>
       </Form>
     </div>
   )
