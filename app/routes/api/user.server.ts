@@ -44,7 +44,7 @@ export async function uploadProfileImage(username: any, image: any) {
 }
 
 export async function uploadProfileBanner(username: any, image: any) {
-  const response = await fetch(`http://localhost:8000/api/users/${username}/update`, {
+  const response = await fetch(`http://localhost:8000/api/users/${username}/updatebanner`, {
     method: 'PUT',
     body: JSON.stringify({ image }),
     headers: {

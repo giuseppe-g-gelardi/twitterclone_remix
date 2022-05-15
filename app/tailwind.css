@@ -468,6 +468,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .fixed {
   position: fixed;
 }
@@ -643,6 +647,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .inline {
   display: inline;
 }
@@ -785,6 +793,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grow {
   flex-grow: 1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .flex-col {
@@ -1293,6 +1305,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ease-linear {
   transition-timing-function: linear;
+}
+
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
 }
 
 .hover\:rounded-full:hover {

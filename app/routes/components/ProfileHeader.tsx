@@ -23,11 +23,12 @@ export default function ProfileHeader() {
       <div className="shrink-0 w-full min-h-full relative">
 
         <div className="flex w-full h-52 relative bg-gray-500">
+
           {user.profileBanner ? (
             <img
-              className="flex w-full h-auto overflow-hidden relative"
               src={user.profileBanner}
               alt=''
+              className="flex w-full h-auto overflow-hidden relative"
             />
           ) : (
             <img
@@ -36,18 +37,18 @@ export default function ProfileHeader() {
               alt=""
             />
           )}
+
         </div>
 
         <div className="flex z-10 -mt-16">
+
           <img
             src={user.profilePicture}
             alt=''
             className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
           />
 
-          <div
-            className="ml-auto"
-          >
+          <div className="ml-auto">
             {loggedInUser?._id === user._id ? (
 
               <div
@@ -106,19 +107,19 @@ export default function ProfileHeader() {
         <h2 className="font-normal text-base text-gray-500">
           @{user.username}
         </h2>
-        <p className="font-normal mt-2.5">
+        <p className="font-normal mt-2.5 ">
           {user.bio ? user.bio : 'This is my bio lulz'}
         </p>
 
         <div className="my-2.5 flex">
-          <span className="flex items-center text-base">
+          <span className="flex items-center text-base text-gray-500">
             <span className=''>
               {Icons.location}
             </span>
             {user.location ? user.location : 'the interwebs'}{' '}
           </span>
 
-          <span className="flex items-center text-base">
+          <span className="flex items-center text-base text-gray-500">
             <span className="ml-2">
               {Icons.calendar}
             </span>
@@ -127,7 +128,7 @@ export default function ProfileHeader() {
         </div>
 
         <div className="">
-          <span className="">
+          <span className="text-gray-500">
             <strong>{user.posts?.length}{' '}Posts,</strong>
             <strong>{' '}{user.following?.length}{' '}Following,</strong>
             <strong>{' '}{user.followers?.length}{' '}

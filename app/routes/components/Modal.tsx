@@ -50,11 +50,39 @@ export default function Modal(props: ModalProps) {
                 <button
                   onClick={() => console.log('update profile banner')}
                 >
-                  <img
-                    className="flex w-full h-auto overflow-hidden relative"
-                    src={loggedInUser.profileBanner}
-                    alt='https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg'
-                  />
+
+                  {loggedInUser.profileBanner ? (
+
+                    <img
+                      className="flex w-full h-auto overflow-hidden relative "
+                      src={loggedInUser.profileBanner}
+                      alt=''
+                    />
+                  ) : (
+                    <img
+                      className="flex w-full h-auto overflow-hidden relative object-none object-right"
+                      src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
+                      alt=""
+                    />
+                  )}
+
+
+
+
+                  {/* {user.profileBanner ? (
+            <img
+              className="flex w-full h-auto overflow-hidden relative"
+              src={user.profileBanner}
+              alt=''
+            />
+          ) : (
+            <img
+              className="flex w-full h-auto overflow-hidden relative object-none object-right"
+              src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
+              alt=""
+            />
+          )} */}
+
                 </button>
               </div>
               <div className="flex z-10 -mt-16">
