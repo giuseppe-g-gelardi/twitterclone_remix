@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import type { User } from '../api/models/user.models'
 
+
 type LoaderData = {
   loggedInUser: User
 }
@@ -49,46 +50,52 @@ export default function Modal(props: ModalProps) {
                   </span>
                 </button>
               </div>
+
+
+
+
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+
+
+
+
               {/* profile banner and pfp */}
               <div className="flex w-full h-52 relative bg-gray-500">
                 <button
                   onClick={() => console.log('update profile banner')}
                 >
-
                   {loggedInUser.profileBanner ? (
-
                     <img
-                      className="flex w-full h-auto overflow-hidden relative "
+                    className="flex w-full h-auto overflow-hidden relative "
                       src={loggedInUser.profileBanner}
                       alt=''
                     />
-                  ) : (
-                    <img
+                    ) : (
+                      <img
                       className="flex w-full h-auto overflow-hidden relative object-none object-right"
                       src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
                       alt=""
-                    />
-                  )}
-
-
-
-
-                  {/* {user.profileBanner ? (
-            <img
-              className="flex w-full h-auto overflow-hidden relative"
-              src={user.profileBanner}
-              alt=''
-            />
-          ) : (
-            <img
-              className="flex w-full h-auto overflow-hidden relative object-none object-right"
-              src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
-              alt=""
-            />
-          )} */}
+                      />
+                      )}
+                      <div>
+                        {/* upload banner */}
+                      </div>
 
                 </button>
               </div>
+
+
+{/*  */}
+{/*  */}
+
+
               <div className="flex z-10 -mt-16">
                 <button
                   onClick={() => console.log('update profile image')}
@@ -98,11 +105,25 @@ export default function Modal(props: ModalProps) {
                     alt=''
                     className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
                   />
-
-                  {/* <ImageUpload /> */}
-
+                  <div className="bg-zinc-400">
+                    {/* upload PFP */}
+                  </div>
                 </button>
               </div>
+
+
+
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+{/*  */}
+
+
+
+
               {/* profile banner and pfp */}
 
               {/*body*/}
@@ -170,3 +191,19 @@ export default function Modal(props: ModalProps) {
     </>
   );
 }
+
+
+
+          //         {/* {user.profileBanner ? (
+          //   <img
+          //     className="flex w-full h-auto overflow-hidden relative"
+          //     src={user.profileBanner}
+          //     alt=''
+          //   />
+          // ) : (
+          //   <img
+          //     className="flex w-full h-auto overflow-hidden relative object-none object-right"
+          //     src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
+          //     alt=""
+          //   />
+          // )} */}
