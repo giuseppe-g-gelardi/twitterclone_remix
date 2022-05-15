@@ -1,6 +1,6 @@
 module.exports = {
   content: ['./app/**/*.{ts,tsx,js,jsx}'],
-  darkMode: 'class', // class='light' or media='dark'
+  darkMode: 'media', // class='light' or media='dark'
   theme: {
     screens: {
       sm: '850px',

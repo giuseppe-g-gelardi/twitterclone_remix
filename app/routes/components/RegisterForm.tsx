@@ -15,7 +15,7 @@ export default function RegisterForm() {
       </h1>
       <Form replace method='post' className="flex flex-col">
         <input
-          className="w-full p-2 rounded-md border border-gray-700 focus:border-blue-700"
+          className="w-full p-2 rounded-md border border-violet-300 focus:border-purple-700 bg-transparent"
           type='text' name='username' placeholder='Username' id='username' />
         <div className="mb-5">
           {actionData?.fieldErrors?.username ? (
@@ -33,7 +33,7 @@ export default function RegisterForm() {
           )}
         </div>
         <input
-          className="w-full p-2 rounded-md border border-gray-700 focus:border-blue-700"
+          className="w-full p-2 rounded-md border border-violet-300 focus:border-purple-700 bg-transparent"
           type='email' name='email' placeholder='Email' id='email' />
         <div className="mb-5">
           {actionData?.fieldErrors?.email ? (
@@ -51,7 +51,7 @@ export default function RegisterForm() {
           )}
         </div>
         <input
-          className="w-full p-2 rounded-md border border-gray-700"
+          className="w-full p-2 rounded-md border border-violet-300 focus:border-purple-700 bg-transparent"
           type='password' name='password' placeholder='Password' />
         <div className="mb-5">
           {actionData?.fieldErrors?.password ? (

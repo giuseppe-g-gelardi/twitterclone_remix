@@ -14,7 +14,7 @@ export default function LoginForm() {
       </h1>
       <Form replace method='post' className="flex flex-col">
         <input
-          className="w-full p-2 rounded-md border border-gray-700 focus:border-blue-700"
+          className="w-full p-2 rounded-md border border-violet-300 focus:border-purple-700 bg-transparent"
           type='text'
           name='email'
           id='email'
@@ -37,7 +37,7 @@ export default function LoginForm() {
         </div>
 
         <input
-          className="w-full p-2 rounded-md border border-gray-700"
+          className="w-full p-2 rounded-md border border-violet-300 focus:border-purple-700 bg-transparent"
           type='password'
           name='password'
           placeholder='Password'
