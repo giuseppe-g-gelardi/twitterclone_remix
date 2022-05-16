@@ -1,7 +1,7 @@
 import { Form, useLoaderData, useTransition } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
-import type { User } from "../api/models/user.models";
+import type { User } from "../routes/api/models/user.models";
 
 import Icons from "./Icons";
 

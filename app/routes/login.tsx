@@ -4,7 +4,7 @@ import { json } from "@remix-run/node"
 import type { User } from "./api/models/user.models"
 import { login, createUserSession } from "./api/session.server"
 
-import LoginForm from "./components/LoginForm"
+import LoginForm from "../components/LoginForm"
 
 function validateEmail(email: any) {
   if (typeof email !== 'string' || email.length < 3) {

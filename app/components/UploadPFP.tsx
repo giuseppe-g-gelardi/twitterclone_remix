@@ -5,7 +5,7 @@ import { json, unstable_parseMultipartFormData } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
 import { uploadImage } from "~/routes/api/utils.server"
-import { uploadProfileImage } from "../api/user.server";
+import { uploadProfileImage } from "../routes/api/user.server";
 import Icons from "./Icons";
 
 type ActionData = {

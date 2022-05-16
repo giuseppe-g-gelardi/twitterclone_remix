@@ -6,7 +6,7 @@ import { Form, useActionData } from "@remix-run/react";
 
 import { uploadImage } from "~/routes/api/utils.server"
 import { uploadProfileImage } from "../api/user.server";
-import Icons from "../components/Icons";
+import Icons from "../../components/Icons";
 
 type ActionData = {
   errorMsg?: string;
@@ -71,6 +71,8 @@ const onSelectFile = (e: any) => {
     setFile(e.target.files[0])
 }
 
+const resetImage = () => setFile(null)
+
 
   return (
     <>
@@ -79,8 +81,10 @@ const onSelectFile = (e: any) => {
         encType="multipart/form-data"
         className="flex flex-col"
       >    
-        <label htmlFor="img-field" className="custom-file-upload inline-block p-[6px 12px] cursor-pointer">
-          <i className="bg-zinz-600 rounded-full">{Icons.cameraIcon}</i>
+        <label 
+          htmlFor="img-field" 
+          className="inline-block p-[6px 12px] cursor-pointer h-8 w-8 m-auto rounded-full bg-zinc-500">
+          <i className="">{Icons.cameraIcon}</i>
         </label>
         <input 
           // onChange={(e) => setFile(e.target.value)}
@@ -95,19 +99,29 @@ const onSelectFile = (e: any) => {
 
         { file && (
           <>
-
           <img 
             src={preview}
             alt=''
           />
+
+          <div className="flex">
+
         <button
           type="submit"
-          className="bg-slate-400 mt-5"
+          className="bg-slate-400 m-5"
           name='_action'
           value='pfp'
           >
           upload pfp
         </button>
+        <button
+          className="bg-rose-400 m-5"
+          onClick={() => resetImage()}
+          >
+          clear image
+        </button>
+          </div>
+
           </>
 
         )}

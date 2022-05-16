@@ -6,7 +6,7 @@ import { Form, useActionData } from "@remix-run/react";
 
 import { uploadImage } from "~/routes/api/utils.server"
 import { uploadProfileBanner } from "../api/user.server";
-import Icons from "../components/Icons";
+import Icons from "../../components/Icons";
 
 type ActionData = {
   errorMsg?: string;

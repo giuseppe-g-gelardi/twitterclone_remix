@@ -21,10 +21,10 @@ import type {
 import { getUser } from "./routes/api/session.server";
 import { findPublicUsers } from "./routes/api/user.server";
 
-import BottomNav from "./routes/components/BottomNav";
-import SearchBar from "./routes/components/SearchBar";
-import Sidebar from "./routes/components/Sidebar";
-import SuggestedUsers from "./routes/components/SuggestedUsers";
+import BottomNav from "./components/BottomNav";
+import SearchBar from "./components/SearchBar";
+import Sidebar from "./components/Sidebar";
+import SuggestedUsers from "./components/SuggestedUsers";
 
 import styles from './tailwind.css'
 // import { ThemeProvider } from "./routes/context/themeContext";

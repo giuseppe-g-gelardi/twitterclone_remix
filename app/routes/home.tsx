@@ -13,9 +13,9 @@ import {
 import { getUser } from "./api/session.server";
 import { findPublicUsers } from "./api/user.server";
 
-import PostBox from "./components/PostBox";
-import Feed from "./components/Feed";
-import Header from "./components/Header";
+import PostBox from "../components/PostBox";
+import Feed from "../components/Feed";
+import Header from "../components/Header";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()

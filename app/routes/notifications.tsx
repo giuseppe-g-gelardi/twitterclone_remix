@@ -9,8 +9,8 @@ import {
   findPublicUsers
 } from "./api/user.server";
 
-import BackButton from "./components/BackButton";
-import Notifications from "./components/Notifications";
+import BackButton from "../components/BackButton";
+import Notifications from "../components/Notifications";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()

@@ -4,7 +4,7 @@ import { json } from "@remix-run/node"
 import type { User } from "./api/models/user.models"
 import { createUserSession, register } from "./api/session.server"
 
-import RegisterForm from "./components/RegisterForm"
+import RegisterForm from "../components/RegisterForm"
 
 function validateUsername(username: any) {
   if (typeof username !== 'string' || username.length < 3) {

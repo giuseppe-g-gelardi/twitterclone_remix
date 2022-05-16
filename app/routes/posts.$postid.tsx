@@ -10,9 +10,9 @@ import { getUser } from "./api/session.server"
 import { fetchComments, likeUnlikeComment, postNewComment } from "./api/comments.server"
 import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
 
-import Feed from "./components/Feed"
-import PostBox from "./components/PostBox"
-import BackButton from "./components/BackButton"
+import Feed from "../components/Feed"
+import PostBox from "../components/PostBox"
+import BackButton from "../components/BackButton"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()

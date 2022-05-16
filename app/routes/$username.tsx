@@ -13,9 +13,9 @@ import {
 import { getUserPosts, likeUnlikePost } from "./api/posts.server";
 import { getUser } from "./api/session.server";
 
-import ProfileHeader from "./components/ProfileHeader";
-import Feed from "./components/Feed";
-import BackButton from "./components/BackButton";
+import ProfileHeader from "../components/ProfileHeader";
+import Feed from "../components/Feed";
+import BackButton from "../components/BackButton";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()

@@ -1,7 +1,7 @@
 import { Form, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
-import type { User } from '../api/models/user.models'
+import type { User } from '../routes/api/models/user.models'
 
 
 type LoaderData = {
