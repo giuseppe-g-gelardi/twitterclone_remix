@@ -76,6 +76,7 @@ export default function ImageUpload() {
   };
 
   // TODO: reset/cancel crop 
+  // TODO: find out why this only works for certain files 
   // const cancelCrop = () => ?? ?? 
 
   return (
@@ -161,7 +162,7 @@ export default function ImageUpload() {
           </>
         )}
 
-        {croppedAreaPixels ? (
+        {croppedAreaPixels && (
           <>
             <img
               src={croppedImage}
@@ -176,7 +177,7 @@ export default function ImageUpload() {
               upload banner
             </button>
           </>
-        ) : null}
+        )}
 
       </Form>
       {data?.errorMsg && <h2>{data.errorMsg}</h2>}
