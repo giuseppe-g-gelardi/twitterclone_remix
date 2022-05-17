@@ -56,10 +56,12 @@ export default function ImageUpload() {
         return
     }
 
-    const objectUrl = URL.createObjectURL(file)
-    setPreview(objectUrl)
+    // const objectUrl = URL.createObjectURL(file)
+    // console.log(file)
+    // setPreview(objectUrl)
+    setPreview(file)
 
-    return () => URL.revokeObjectURL(objectUrl)
+    return () => URL.revokeObjectURL(file)
 }, [file])
 
 const onSelectFile = (e: any) => {
@@ -67,8 +69,9 @@ const onSelectFile = (e: any) => {
         setFile(undefined)
         return
     }
-
-    setFile(e.target.files[0])
+    
+    // setFile(e.target.files[0])
+    setFile(URL.createObjectURL(e.target.files[0]))
 }
 
 const resetImage = () => setFile(null)
@@ -87,7 +90,6 @@ const resetImage = () => setFile(null)
           <i className="">{Icons.cameraIcon}</i>
         </label>
         <input 
-          // onChange={(e) => setFile(e.target.value)}
           multiple={false}
           id="img-field" 
           type="file" 
