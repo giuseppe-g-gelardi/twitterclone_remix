@@ -67,17 +67,15 @@ export default function ImageUpload() {
 
   const cancelImage = () => setFile(null)
 
-  const onCropComplete = (croppedArea: any, croppedAreaPixels: any) => {
-    console.log(croppedArea)
+
+  const onCropComplete = (_croppedArea: any, croppedAreaPixels: any) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
   const onCrop = async () => {
-    await getCroppedImg(file, croppedAreaPixels);
     setCroppedImage(await getCroppedImg(file, croppedAreaPixels))
     setFile(null)
   };
-
 
   return (
     <>
@@ -106,7 +104,6 @@ export default function ImageUpload() {
           multiple={false}
           id="img-field"
           type="hidden"
-          // onChange={onSelectFile}
           value={croppedImage}
           name="profile_img"
           accept="image/*"
