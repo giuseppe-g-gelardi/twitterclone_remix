@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import type { ActionFunction, UploadHandler } from "@remix-run/node";
 import { json, unstable_parseMultipartFormData } from "@remix-run/node";
@@ -6,7 +6,11 @@ import { Form, useActionData } from "@remix-run/react";
 
 import { uploadImage } from "~/routes/api/utils.server"
 import { uploadProfileImage } from "../api/user.server";
+
 import Icons from "../../components/Icons";
+import getCroppedImg from "~/components/getCroppedImg";
+
+import Cropper from 'react-easy-crop'
 
 type ActionData = {
   errorMsg?: string;
@@ -47,86 +51,137 @@ export const action: ActionFunction = async ({ request, params }) => {
 export default function ImageUpload() {
   const data = useActionData<ActionData>();
   const [file, setFile] = useState<any>()
-  const [preview, setPreview] = useState<any>()
 
+  const [zoom, setZoom] = useState<any>(1)
+  const [crop, setCrop] = useState<any>({ x: 0, y: 0 })
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null)
+  const [croppedImage, setCroppedImage] = useState<any>(null)
 
-  useEffect(() => {
-    if (!file) {
-        setPreview(undefined)
-        return
-    }
-
-    // const objectUrl = URL.createObjectURL(file)
-    // console.log(file)
-    // setPreview(objectUrl)
-    setPreview(file)
-
-    return () => URL.revokeObjectURL(file)
-}, [file])
-
-const onSelectFile = (e: any) => {
+  const onSelectFile = (e: any) => {
     if (!e.target.files || e.target.files.length === 0) {
-        setFile(undefined)
-        return
+      setFile(undefined)
+      return
     }
-    
-    // setFile(e.target.files[0])
     setFile(URL.createObjectURL(e.target.files[0]))
-}
+  }
 
-const resetImage = () => setFile(null)
+  const cancelImage = () => setFile(null)
+
+  const onCropComplete = (croppedArea: any, croppedAreaPixels: any) => {
+    console.log(croppedArea)
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+
+  const onCrop = async () => {
+    await getCroppedImg(file, croppedAreaPixels);
+    // console.log(file)
+    // console.log(croppedAreaPixels)
+    // console.log(await getCroppedImg(file, croppedAreaPixels))
+    setCroppedImage(await getCroppedImg(file, croppedAreaPixels))
+    setFile(null)
+  };
 
 
   return (
     <>
+      <label
+        htmlFor="img-field"
+        className="inline-block p-[6px 12px] cursor-pointer h-8 w-8 m-auto rounded-full bg-zinc-500">
+        <i className="">{Icons.cameraIcon}</i>
+      </label>
+      {/* this input gets the image */}
+      <input
+        multiple={false}
+        id="img-field"
+        type="file"
+        onChange={onSelectFile}
+        name="profile_img"
+        accept="image/*"
+        className="text-transparent p-5 invisible"
+      />
       <Form
         method="post"
         encType="multipart/form-data"
         className="flex flex-col"
-      >    
-        <label 
-          htmlFor="img-field" 
-          className="inline-block p-[6px 12px] cursor-pointer h-8 w-8 m-auto rounded-full bg-zinc-500">
-          <i className="">{Icons.cameraIcon}</i>
-        </label>
-        <input 
+      >
+        {/* this input takes the cropped image and submits it */}
+        <input
           multiple={false}
-          id="img-field" 
-          type="file" 
-          onChange={onSelectFile}
-          name="profile_img" 
+          id="img-field"
+          type="hidden"
+          // onChange={onSelectFile}
+          value={croppedImage}
+          name="profile_img"
           accept="image/*"
           className="text-transparent p-5 invisible"
         />
 
-        { file && (
+        {file && (
           <>
-          <img 
-            src={preview}
-            alt=''
-          />
+            <div className="fixed bg-black top-0 left-0 right-0 bottom-0 z-10 opacity-50"></div>
+            <div className="fixed top-0 left-0 right-0 bottom-20 z-20">
+              <Cropper
+                image={file}
+                aspect={1}
+                zoom={zoom}
+                onZoomChange={setZoom}
+                crop={crop}
+                onCropChange={setCrop}
+                onCropComplete={onCropComplete}
+              />
+            </div>
 
-          <div className="flex">
-
-        <button
-          type="submit"
-          className="bg-slate-400 m-5"
-          name='_action'
-          value='pfp'
-          >
-          upload pfp
-        </button>
-        <button
-          className="bg-rose-400 m-5"
-          onClick={() => resetImage()}
-          >
-          clear image
-        </button>
-          </div>
-
+            <div className="fixed bottom-0 w-full h-[100px] z-20 mb-10">
+              <div className="place-content-center">
+                <input
+                  type="range"
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  value={zoom}
+                  onInput={(e: any) => {
+                    setZoom(e.target.value);
+                  }}
+                  className="w-1/2"
+                ></input>
+              </div>
+              <div className="place-content-center mt-12 mb-10">
+                <button
+                  type='button'
+                  className="bg-rose-400 m-5"
+                  onClick={() => cancelImage()}
+                >
+                  clear image
+                </button>
+                <button
+                  type='button'
+                  className="bg-purple-800 m-5"
+                  onClick={onCrop}
+                >
+                  Crop
+                </button>
+              </div>
+            </div>
           </>
-
         )}
+
+
+        {croppedAreaPixels ? (
+          <>
+        <img
+          src={croppedImage}
+          alt=''
+          />
+          <button
+            type="submit"
+            className="bg-slate-400 m-5"
+            name='_action'
+            value='pfp'
+            >
+            upload pfp
+          </button>
+            </>
+        ) : null}
 
       </Form>
       {data?.errorMsg && <h2>{data.errorMsg}</h2>}
@@ -150,4 +205,28 @@ const resetImage = () => setFile(null)
           
         //   // style={{ display: 'none' }}
         // /> */}
-        // {/* <input id="file-upload" type="file" className="hidden" /> */}
+        {/* // <input id="file-upload" type="file" className="hidden" />
+
+
+
+          //   {/* <img 
+          //     src={preview}
+          //     alt=''
+          //   />
+          //   <div className="flex">
+          //     <button
+          //       type="submit"
+          //       className="bg-slate-400 m-5"
+          //       name='_action'
+          //       value='pfp'
+          //       >
+          //       upload pfp
+          //     </button>
+          //     <button
+          //       className="bg-rose-400 m-5"
+          //       onClick={() => cancelImage()}
+          //       >
+          //       clear image
+          //     </button>
+          //   </div> */}
+           {/* </> */}
