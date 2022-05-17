@@ -75,6 +75,9 @@ export default function ImageUpload() {
     setFile(null)
   };
 
+  // TODO: reset/cancel crop 
+  // const cancelCrop = () => ?? ?? 
+
   return (
     <>
       <label
