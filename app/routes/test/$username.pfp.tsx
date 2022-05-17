@@ -74,9 +74,6 @@ export default function ImageUpload() {
 
   const onCrop = async () => {
     await getCroppedImg(file, croppedAreaPixels);
-    // console.log(file)
-    // console.log(croppedAreaPixels)
-    // console.log(await getCroppedImg(file, croppedAreaPixels))
     setCroppedImage(await getCroppedImg(file, croppedAreaPixels))
     setFile(null)
   };
@@ -123,6 +120,8 @@ export default function ImageUpload() {
               <Cropper
                 image={file}
                 aspect={1}
+                cropShape='round'
+                showGrid={false}
                 zoom={zoom}
                 onZoomChange={setZoom}
                 crop={crop}
@@ -137,7 +136,7 @@ export default function ImageUpload() {
                   type="range"
                   min={1}
                   max={3}
-                  step={0.1}
+                  step={0.05}
                   value={zoom}
                   onInput={(e: any) => {
                     setZoom(e.target.value);
@@ -165,22 +164,21 @@ export default function ImageUpload() {
           </>
         )}
 
-
         {croppedAreaPixels ? (
           <>
-        <img
-          src={croppedImage}
-          alt=''
-          />
-          <button
-            type="submit"
-            className="bg-slate-400 m-5"
-            name='_action'
-            value='pfp'
+            <img
+              src={croppedImage}
+              alt=''
+            />
+            <button
+              type="submit"
+              className="bg-slate-400 m-5"
+              name='_action'
+              value='pfp'
             >
-            upload pfp
-          </button>
-            </>
+              upload pfp
+            </button>
+          </>
         ) : null}
 
       </Form>
@@ -195,38 +193,3 @@ export default function ImageUpload() {
   );
 }
 
-        // {/* 
-        // <input 
-        //   id="img-field" 
-        //   type="file" 
-        //   name="profile_img" 
-        //   accept="image/*"
-        //   className="text-transparent"
-          
-        //   // style={{ display: 'none' }}
-        // /> */}
-        {/* // <input id="file-upload" type="file" className="hidden" />
-
-
-
-          //   {/* <img 
-          //     src={preview}
-          //     alt=''
-          //   />
-          //   <div className="flex">
-          //     <button
-          //       type="submit"
-          //       className="bg-slate-400 m-5"
-          //       name='_action'
-          //       value='pfp'
-          //       >
-          //       upload pfp
-          //     </button>
-          //     <button
-          //       className="bg-rose-400 m-5"
-          //       onClick={() => cancelImage()}
-          //       >
-          //       clear image
-          //     </button>
-          //   </div> */}
-           {/* </> */}
