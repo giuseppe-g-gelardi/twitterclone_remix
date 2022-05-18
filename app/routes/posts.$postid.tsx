@@ -10,8 +10,8 @@ import { getUser } from "./api/session.server"
 import { fetchComments, likeUnlikeComment, postNewComment } from "./api/comments.server"
 import { findByUsername, findPublicUsers, findUserById } from "./api/user.server"
 
-import Feed from "../components/Feed"
-import PostBox from "../components/PostBox"
+import Feed from "~/components/Feed"
+import PostBox from "~/components/PostBox"
 import BackButton from "../components/BackButton"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
@@ -89,6 +89,7 @@ export default function SinglePostPage() {
       />
       <div className="border-b-2">
         <Feed
+          key={commentData._id}
           feed={post}
           user={postUser}
           inputName='like'
