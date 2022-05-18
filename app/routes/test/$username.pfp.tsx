@@ -8,7 +8,7 @@ import { uploadImage } from "~/routes/api/utils.server"
 import { uploadProfileImage } from "../api/user.server";
 
 import Icons from "../../components/Icons";
-import getCroppedImg from "~/components/getCroppedImg";
+import getCroppedImg from "~/components/utils/getCroppedImg";
 
 import Cropper from 'react-easy-crop'
 
