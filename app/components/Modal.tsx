@@ -2,6 +2,7 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
 import type { User } from '../routes/api/models/user.models'
+import UploadBannerImage from "./UploadBannerImage";
 
 
 type LoaderData = {
@@ -16,7 +17,12 @@ type ModalProps = {
 export default function Modal(props: ModalProps) {
   const { buttonText, header } = props
   const { loggedInUser } = useLoaderData<LoaderData>()
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(true);
+  // ! make sure showModal gets set to false when done!
+  // ! make sure showModal gets set to false when done!
+  // ! make sure showModal gets set to false when done!
+  // ! make sure showModal gets set to false when done!
+  // ! make sure showModal gets set to false when done!
 
   useEffect(() => {
     if (showModal) document.body.style.overflow = 'hidden'
@@ -54,46 +60,46 @@ export default function Modal(props: ModalProps) {
 
 
 
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
 
 
 
 
               {/* profile banner and pfp */}
-              <div className="flex w-full h-52 relative bg-gray-500">
-                <button
-                  onClick={() => console.log('update profile banner')}
-                >
+              <div className="flex flex-col w-full h-52 relative bg-gray-500">
+                <div className="flex flex-col">
+
                   {loggedInUser.profileBanner ? (
                     <img
-                    className="flex w-full h-auto overflow-hidden relative "
+                      className="flex w-full h-auto overflow-hidden relative "
                       src={loggedInUser.profileBanner}
                       alt=''
                     />
-                    ) : (
-                      <img
+                  ) : (
+                    <img
                       className="flex w-full h-auto overflow-hidden relative object-none object-right"
                       src="https://www.grunge.com/img/gallery/bizarre-things-weve-sent-to-outer-space/intro-1617974432.jpg"
                       alt=""
-                      />
-                      )}
-                      <div>
-                        {/* upload banner */}
-                      </div>
-
-                </button>
+                    />
+                  )}
+                  {/* TODO: position this somewhere that makes sense!!!! */}
+                <div className="z-10 bg-black inline object-cover absolute">
+                  <UploadBannerImage />
+                </div>
+                </div>
+              
               </div>
 
 
-{/*  */}
-{/*  */}
+              {/*  */}
+              {/*  */}
 
 
               <div className="flex z-10 -mt-16">
@@ -111,20 +117,13 @@ export default function Modal(props: ModalProps) {
                 </button>
               </div>
 
-
-
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-{/*  */}
-
-
-
-
-              {/* profile banner and pfp */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
 
               {/*body*/}
               <Form replace method='put'>

@@ -1,4 +1,7 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { 
+  ActionFunction, 
+  LoaderFunction,
+} from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import type { User } from "./api/models/user.models";
@@ -8,7 +11,8 @@ import {
   findByUsername,
   findPublicUsers,
   followAndUnfollowUsers,
-  updateUserProfile
+  updateUserProfile,
+  uploadProfileBanner
 } from "./api/user.server";
 import { getUserPosts, likeUnlikePost } from "./api/posts.server";
 import { getUser } from "./api/session.server";
@@ -36,7 +40,9 @@ export const action: ActionFunction = async ({ request, params }) => {
   const { _action, ...values } = Object.fromEntries(form)
   const postid = form.get('like') as string
   const followname = form.get('follow') as string
+  const imgSrc = form.get("banner_img")
 
+  if (_action === 'pbi') return uploadProfileBanner(params.username, imgSrc?.toString())
   if (_action === 'follow') return followAndUnfollowUsers(params.username, followname)
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
   if (_action === 'like') return likeUnlikePost(user?._id, postid)

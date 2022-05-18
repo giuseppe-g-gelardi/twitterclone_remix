@@ -34,9 +34,9 @@ export async function uploadProfileImage(username: any, image: any) {
   const response = await fetch(`http://localhost:8000/api/users/${username}/update`, {
     method: 'PUT',
     body: JSON.stringify({ image }),
-    headers: {
-      'Content-type': 'application/json'
-    }
+    // headers: {
+    //   'Content-type': 'application/json'
+    // }
   })
   const profilePicture = await response.json()
 

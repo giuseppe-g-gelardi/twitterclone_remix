@@ -49,15 +49,15 @@ export default async function getCroppedImg(imageSrc: any, pixelCrop: { width: n
   );
 
   // As Base64 string
-  return canvas.toDataURL('image/jpeg');
+  // return canvas.toDataURL('image/jpeg');
 
   // As a blob
-  // return new Promise((resolve) => {
-  //   canvas.toBlob((file) => {
-  //     console.log(file);
-  //     resolve(URL.createObjectURL(file));
-  //   }, "image/jpeg");
-  // });
+  return new Promise((resolve) => {
+    canvas.toBlob((file: Blob | MediaSource) => {
+      console.log(file);
+      resolve(URL.createObjectURL(file));
+    }, "image/jpeg");
+  });
 
   // return new Promise((resolve) => {
   //   canvas.toBlob((file) => {

@@ -5,9 +5,9 @@ import { json, unstable_parseMultipartFormData } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
 import { uploadImage } from "~/routes/api/utils.server"
-import { uploadProfileBanner } from "../api/user.server";
+import { uploadProfileBanner } from "~/routes/api/user.server";
 
-import Icons from "../../components/Icons";
+import Icons from "./Icons";
 import getCroppedImg from '~/components/utils/getCroppedImg'
 
 import Cropper from 'react-easy-crop'
@@ -16,34 +16,22 @@ type ActionData = {
   errorMsg?: string;
   imgSrc?: string;
   imgDesc?: string;
+
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
   const uploadHandler: UploadHandler = async ({ name, stream }) => {
-    if (name !== "banner_img") {
-      stream.resume();
-      return;
-    }
+    if (name !== "banner_img") { stream.resume(); return; }
     const uploadedImage: any = await uploadImage(stream);
 
     return uploadedImage.secure_url;
   };
 
-  const formData = await unstable_parseMultipartFormData(
-    request,
-    uploadHandler
-  );
+  const formData = await unstable_parseMultipartFormData(request, uploadHandler);
   const imgSrc = formData.get("banner_img");
   const imgDesc = formData.get("desc");
-  if (!imgSrc) {
-    return json({
-      error: "something wrong",
-    });
-  }
-  return json({
-    imgSrc,
-    imgDesc,
-  },
+  if (!imgSrc) { return json({ error: "something wrong", }); }
+  return json({ imgSrc, imgDesc },
     await uploadProfileBanner(params.username, imgSrc.toString())
   )  
 };
@@ -84,8 +72,8 @@ export default function UploadBannerImage() {
     <>
       <label
         htmlFor="img-field"
-        className="inline-block p-[6px 12px] cursor-pointer">
-        <i className="bg-zinz-600 rounded-full">{Icons.cameraIcon}</i>
+        className="p-[6px 12px] cursor-pointer">
+        <i>{Icons.cameraIcon}</i>
       </label>
       {/* this input gets the image */}
       <input
@@ -173,7 +161,7 @@ export default function UploadBannerImage() {
               type="submit"
               className="bg-slate-400 m-5"
               name='_action'
-              value='pfp'
+              value='pbi'
             >
               upload banner
             </button>
