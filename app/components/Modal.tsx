@@ -2,7 +2,6 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
 import type { User } from '../routes/api/models/user.models'
-import UploadBannerImage from "./UploadBannerImage";
 
 
 type LoaderData = {
@@ -17,7 +16,7 @@ type ModalProps = {
 export default function Modal(props: ModalProps) {
   const { buttonText, header } = props
   const { loggedInUser } = useLoaderData<LoaderData>()
-  const [showModal, setShowModal] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState<boolean>(false);
   // ! make sure showModal gets set to false when done!
   // ! make sure showModal gets set to false when done!
   // ! make sure showModal gets set to false when done!
@@ -91,7 +90,7 @@ export default function Modal(props: ModalProps) {
                   )}
                   {/* TODO: position this somewhere that makes sense!!!! */}
                 <div className="z-10 bg-black inline object-cover absolute">
-                  <UploadBannerImage />
+                  {/* upload banner image */}
                 </div>
                 </div>
               
