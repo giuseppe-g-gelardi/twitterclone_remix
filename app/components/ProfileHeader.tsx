@@ -3,7 +3,6 @@ import { Form, useLoaderData } from "@remix-run/react"
 import type { User } from "../routes/api/models/user.models"
 import Icons from "./Icons"
 import Modal from "./Modal"
-import Popup from "./Popup"
 
 type LoaderData = {
   user: User,
@@ -61,10 +60,6 @@ export default function ProfileHeader() {
                   header='Edit Profile'
                 />
 
-                {/* <Popup 
-                  header='header'
-                  buttonText='Edit Profile'
-                /> */}
 
               </div>
             ) : (
