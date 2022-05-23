@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { User } from '../routes/api/models/user.models'
 import Icons from "./Icons";
 import UploadProfileBanner from "./UploadProfileBanner";
+import UploadProfileImage from "./UploadProfileImage";
 
 
 type LoaderData = {
@@ -216,7 +217,9 @@ export default function Modal(props: ModalProps) {
                         </div>
                       </button>
                     </div>
-                    <h1>upload profile image section</h1>
+                    <>
+                      <UploadProfileImage />
+                    </>
                   </div>
                 ) : null}
 
@@ -241,7 +244,6 @@ export default function Modal(props: ModalProps) {
                         </div>
                       </button>
                     </div>
-                    {/* <h1>upload profile banner image section</h1> */}
                     <>
                       <UploadProfileBanner />
                     </>

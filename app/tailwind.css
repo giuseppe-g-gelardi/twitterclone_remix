@@ -528,6 +528,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 10;
 }
 
+.z-0 {
+  z-index: 0;
+}
+
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -759,6 +763,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100px;
 }
 
+.h-\[px\] {
+  height: px;
+}
+
+.h-\[250px\] {
+  height: 250px;
+}
+
+.h-\[240px\] {
+  height: 240px;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -817,6 +833,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-1\/2 {
   width: 50%;
+}
+
+.w-\[315px\] {
+  width: 315px;
+}
+
+.w-\[315\[x\]\] {
+  width: 315[x];
+}
+
+.w-\[px\] {
+  width: px;
+}
+
+.w-\[250px\] {
+  width: 250px;
+}
+
+.w-\[240px\] {
+  width: 240px;
 }
 
 .min-w-full {

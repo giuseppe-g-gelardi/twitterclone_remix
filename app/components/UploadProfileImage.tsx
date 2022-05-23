@@ -43,7 +43,7 @@ type ActionData = {
 //   return json({ imgSrc }, await uploadProfileBanner(params.username, src))
 // };
 
-export default function UploadProfileBanner() {
+export default function UploadProfileImage() {
   const data = useActionData<ActionData>();
   const [file, setFile] = useState<File | null>(null)
   const [fileToCrop, setFileToCrop] = useState<string>('')
@@ -119,10 +119,12 @@ export default function UploadProfileBanner() {
               image={fileToCrop}
               crop={crop}
               zoom={zoom}
-              aspect={3 / 1}
+              aspect={1}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}
+              cropShape='round'
+              showGrid={false}
             />
           </div>
           <div className="fixed bottom-0 w-full h-[100px] z-20 mb-10">
@@ -164,13 +166,17 @@ export default function UploadProfileBanner() {
 
       {croppedAreaPixels && !data?.imgSrc ? (
         <>
+        <div className="place-content-center flex">
+          {/* make center!!@!@!@!!!! */}
             <img
               src={previewImage}
               alt=''
-            />
+              className="h-[240px] w-[240px] items-center border rounded-full"
+              />
+              </div>
           <Form method="post" encType="multipart/form-data">
             <input
-              name="banner_img"
+              name="profile_img"
               type='hidden'
               value={imageToUpload}
             />
@@ -184,7 +190,6 @@ export default function UploadProfileBanner() {
             <button
               type="submit"
               className="bg-slate-400 m-5"
-              name="_action"
             >
               upload banner
             </button>
