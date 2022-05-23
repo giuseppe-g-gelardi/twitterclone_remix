@@ -2,6 +2,8 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
 import type { User } from '../routes/api/models/user.models'
+import Icons from "./Icons";
+import UploadProfileBanner from "./UploadProfileBanner";
 
 
 type LoaderData = {
@@ -40,7 +42,7 @@ export default function Modal(props: ModalProps) {
           <div className="relative w-auto my-6 mx-auto max-w-3xl">
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-200 outline-none focus:outline-none  bg-opacity-30 backdrop-blur-lg">
 
-              
+
               {/*header*/}
               <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                 <h3 className="text-3xl font-semibold text-black">
@@ -130,14 +132,30 @@ export default function Modal(props: ModalProps) {
                         className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl px-5 mx-2"
                         onClick={() => `${setShowProfileImageUpload(true)}${setShowSettings(false)}`}
                       >
-                        show PFP
+                        <div className="flex">
+                          <p className="mr-5 flex">
+                            {Icons.cameraIcon}
+                          </p>
+                          <p className="flex">
+                            Update Profile Picture
+                          </p>
+                        </div>
                       </button>
 
                       <button
                         className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl px-5 mx-2"
                         onClick={() => `${setShowBannerImageUpload(true)}${setShowSettings(false)}`}
                       >
-                        show PBI
+                        <div className="flex">
+                          <p className="mr-5 flex">
+
+                            {Icons.photoIcon}
+                          </p>
+                          <p className="flex">
+                            Update Banner
+                          </p>
+
+                        </div>
                       </button>
                     </div>
                     <p className="my-4 text-slate-500 text-lg leading-relaxed">
@@ -180,6 +198,7 @@ export default function Modal(props: ModalProps) {
 
 
 
+
                 {showProfileImageUpload ? (
                   <div className="relative p-6 flex-auto w-[768px] h-[315px]">
                     <div className="float-right mb-5 -mt-5">
@@ -187,7 +206,14 @@ export default function Modal(props: ModalProps) {
                         className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl px-5 mx-2"
                         onClick={() => `${setShowSettings(true)}${setShowProfileImageUpload(false)}`}
                       >
-                        settings/back/idfk
+                        <div className="flex">
+                          <p className="mr-5 flex">
+                            {Icons.backButton}
+                          </p>
+                          <p className="flex">
+                            settings
+                          </p>
+                        </div>
                       </button>
                     </div>
                     <h1>upload profile image section</h1>
@@ -205,10 +231,21 @@ export default function Modal(props: ModalProps) {
                         className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl px-5 mx-2"
                         onClick={() => `${setShowSettings(true)}${setShowBannerImageUpload(false)}`}
                       >
-                        settings/back/idfk
+                        <div className="flex">
+                          <p className="mr-5 flex">
+                            {Icons.backButton}
+                          </p>
+                          <p className="flex">
+                            settings
+                          </p>
+                        </div>
                       </button>
                     </div>
-                    <h1>upload profile banner image section</h1>
+                    {/* <h1>upload profile banner image section</h1> */}
+                    <>
+                      <UploadProfileBanner />
+                    </>
+
                   </div>
                 ) : null}
 
