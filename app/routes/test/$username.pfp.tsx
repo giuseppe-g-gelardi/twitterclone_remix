@@ -1,3 +1,4 @@
+import type { SyntheticEvent } from "react";
 import { useEffect, useState } from "react";
 
 import type { ActionFunction, UploadHandler } from "@remix-run/node";
@@ -9,13 +10,14 @@ import {
 } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 
+import type { Area, Point } from 'react-easy-crop'
+import Cropper from 'react-easy-crop'
+
 import { uploadImage } from "~/routes/api/utils.server"
 import { uploadProfileImage } from "../api/user.server";
-
-// import Icons from "../../components/Icons";
 import getCroppedImg from '~/components/utils/getCroppedImg'
 
-import Cropper from 'react-easy-crop'
+// import Icons from "../../components/Icons";
 
 type ActionData = {
   errorMsg?: string;
@@ -23,17 +25,11 @@ type ActionData = {
   imgDesc?: string;
 };
 
-type Point = {
-  x: number,
-  y: number
-};
-
 export const action: ActionFunction = async ({ request, params }) => {
   const uploadHandler: UploadHandler = composeUploadHandlers(
     async ({ name, data }) => {
-      if (name !== "profile_img") {
-        return null;
-      }
+      if (name !== "profile_img") return null;
+
       const uploadedImage: any = await uploadImage(data)
       return uploadedImage.secure_url;
     },
@@ -51,24 +47,25 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function UploadBannerImage() {
   const data = useActionData<ActionData>();
-  const [file, setFile] = useState<string | null>(null)
-  const [fileToCrop, setFileToCrop] = useState<any>()
+  const [file, setFile] = useState<File | null>(null)
+  const [fileToCrop, setFileToCrop] = useState<string>('')
   const [crop, setCrop] = useState<Point>({ x: 2, y: 2 });
   const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>()
-  const [croppedImage, setCroppedImage] = useState<any>()
-  const [imageToUpload, setImageToUpload] = useState<any>()
-  const [previewImage, setPreviewImage] = useState<any>()
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>()
+  const [croppedImage, setCroppedImage] = useState<Blob | null>(null)
+  const [imageToUpload, setImageToUpload] = useState<string>()
+  const [previewImage, setPreviewImage] = useState<string>()
 
   useEffect(() => {
     if (!croppedImage) return;
-    setPreviewImage(URL.createObjectURL(croppedImage))
+    let cropped: Blob | string = URL.createObjectURL(croppedImage)
+    setPreviewImage(cropped)
 
     const convertCropped = () => {
       const reader = new FileReader()
       reader.readAsDataURL(croppedImage)
       reader.onloadend = () => {
-        setImageToUpload(reader.result)
+        setImageToUpload(reader.result as string)
       }
       reader.onerror = () => {
         console.error('error')
@@ -78,21 +75,22 @@ export default function UploadBannerImage() {
 
   }, [file, croppedImage])
 
-  const onSelectFile = async (e: any) => {
-    if (!e.target.files || e.target.files === 0) {
+  const onSelectFile = async (e: SyntheticEvent) => {
+    const target = e.target as HTMLInputElement
+    if (!target.files || target.files?.length === 0) {
       setFile(null)
       return
     }
-    setFile(e.target.files[0])
-    setFileToCrop(URL.createObjectURL(e.target.files[0]))
+    setFile(target.files[0])
+    setFileToCrop(URL.createObjectURL(target.files[0]))
   }
 
-  const onCropComplete = (_croppedArea: any, croppedAreaPixels: any) => {
+  const onCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
   const onCrop = async () => {
-    setCroppedImage(await getCroppedImg(fileToCrop, croppedAreaPixels))
+    setCroppedImage(await getCroppedImg(fileToCrop, croppedAreaPixels as Area))
     setFile(null)
   };
 
