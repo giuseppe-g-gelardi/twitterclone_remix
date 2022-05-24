@@ -1,48 +1,17 @@
 import type { SyntheticEvent } from "react";
 import { useEffect, useState } from "react";
 
-import { Form, useActionData, useMatches } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 
 import type { Area, Point } from 'react-easy-crop'
 import Cropper from 'react-easy-crop'
 
 import getCroppedImg from '~/components/utils/getCroppedImg'
-import type { ActionFunction, UploadHandler } from "@remix-run/node";
-import {
-  json,
-  unstable_parseMultipartFormData as parseMultipartFormData,
-  unstable_composeUploadHandlers as composeUploadHandlers,
-  unstable_createMemoryUploadHandler as createMemoryUploadHandler
-} from "@remix-run/node";
-import { uploadImage } from "~/routes/api/utils.server"
-import { uploadProfileBanner } from "~/routes/api/user.server";
-import Icons from '~/components/Icons'
 
 type ActionData = {
   errorMsg?: string;
   imgSrc?: string;
 };
-
-
-// export const action: ActionFunction = async ({ request, params }) => {
-//   const uploadHandler: UploadHandler = composeUploadHandlers(
-//     async ({ name, data }) => {
-//       if (name !== "banner_img") return null;
-//       const uploadedImage: any = await uploadImage(data)
-//       return uploadedImage.secure_url;
-//     },
-//     createMemoryUploadHandler()
-//   );
-
-//   const formData = await parseMultipartFormData(request, uploadHandler);
-//   console.log(formData)
-//   const imgSrc = formData.get("banner_img");
-
-//   const src = imgSrc?.toString()
-
-//   if (!imgSrc) return json({ error: "something wrong" })
-//   return json({ imgSrc }, await uploadProfileBanner(params.username, src))
-// };
 
 export default function UploadProfileBanner() {
   const data = useActionData<ActionData>();
@@ -54,8 +23,6 @@ export default function UploadProfileBanner() {
   const [croppedImage, setCroppedImage] = useState<Blob | null>(null)
   const [imageToUpload, setImageToUpload] = useState<string>()
   const [previewImage, setPreviewImage] = useState<string>()
-
-  const matches = useMatches()
 
   useEffect(() => {
     if (!croppedImage) return;
@@ -113,14 +80,6 @@ export default function UploadProfileBanner() {
   <>
   <label htmlFor="img-field"></label>
   <input id="img-field" type="file" name="banner_img" accept="image/*" onChange={onSelectFile} />
-  <button className="bg-rose-400"
-    onClick={() => console.log(
-      'matches',matches,
-      'actionData', data
-      )}
-  >
-    logger
-  </button>
   </>
 ) : null}
 
