@@ -19,8 +19,8 @@ import type {
   LinksFunction,
 } from "@remix-run/node";
 
-import { getUser } from "./routes/api/session.server";
-import { findPublicUsers } from "./routes/api/user.server";
+import { getUser } from "./api/session.server";
+import { findPublicUsers } from "./api/user.server";
 
 import BottomNav from "./components/BottomNav";
 import SearchBar from "./components/SearchBar";

@@ -12,8 +12,8 @@ import {
   unstable_createMemoryUploadHandler as createMemoryUploadHandler
 } from "@remix-run/node";
 
-import type { User } from "./api/models/user.models";
-import type { Post } from "./api/models/post.models";
+import type { User } from "../api/models/user.models";
+import type { Post } from "../api/models/post.models";
 
 import {
   findByUsername,
@@ -22,10 +22,10 @@ import {
   updateUserProfile,
   uploadProfileBanner,
   uploadProfileImage
-} from "./api/user.server";
-import { getUserPosts, likeUnlikePost } from "./api/posts.server";
-import { getUser } from "./api/session.server";
-import { uploadImage } from "./api/utils.server";
+} from "../api/user.server";
+import { getUserPosts, likeUnlikePost } from "../api/posts.server";
+import { getUser } from "../api/session.server";
+import { uploadImage } from "../api/utils.server";
 
 import ProfileHeader from "../components/ProfileHeader";
 import Feed from "../components/Feed";

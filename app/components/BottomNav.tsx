@@ -1,6 +1,6 @@
 import { NavLink, useLoaderData } from '@remix-run/react'
 import type { ReactNode } from 'react'
-import type { User } from '../routes/api/models/user.models'
+import type { User } from '../api/models/user.models'
 
 import Icons from './Icons'
 

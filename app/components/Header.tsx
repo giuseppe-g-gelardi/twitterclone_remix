@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 
-import type { User } from "../routes/api/models/user.models";
+import type { User } from "../api/models/user.models";
 
 type Props = {
   loggedInUser: User

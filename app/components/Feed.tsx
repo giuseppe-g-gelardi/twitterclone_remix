@@ -5,14 +5,14 @@ import { Form, Link } from '@remix-run/react'
 
 import moment from 'moment'
 
-import type { Comment } from '../routes/api/models/comment.models'
+import type { Comment } from '../api/models/comment.models'
 
-import type { Post } from '../routes/api/models/post.models'
-import type { Reply } from '../routes/api/models/reply.models'
-import type { User } from '../routes/api/models/user.models'
+import type { Post } from '../api/models/post.models'
+import type { Reply } from '../api/models/reply.models'
+import type { User } from '../api/models/user.models'
 
 import Icons from "./Icons"
-import { getCommentReplies } from '../routes/api/replies.server'
+import { getCommentReplies } from '../api/replies.server'
 
 type PropTypes = {
   feed: Post | Comment | Reply | any,

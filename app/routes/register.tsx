@@ -1,8 +1,8 @@
 import type { ActionFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 
-import type { User } from "./api/models/user.models"
-import { createUserSession, register } from "./api/session.server"
+import type { User } from "../api/models/user.models"
+import { createUserSession, register } from "../api/session.server"
 
 import RegisterForm from "../components/RegisterForm"
 

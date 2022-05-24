@@ -2,16 +2,16 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 
-import type { User } from "./api/models/user.models";
-import type { Post } from "./api/models/post.models";
+import type { User } from "../api/models/user.models";
+import type { Post } from "../api/models/post.models";
 
 import {
   createNewPost,
   getUserPosts,
   likeUnlikePost,
-} from "./api/posts.server";
-import { getUser } from "./api/session.server";
-import { findPublicUsers } from "./api/user.server";
+} from "../api/posts.server";
+import { getUser } from "../api/session.server";
+import { findPublicUsers } from "../api/user.server";
 
 import PostBox from "../components/PostBox";
 import Feed from "../components/Feed";

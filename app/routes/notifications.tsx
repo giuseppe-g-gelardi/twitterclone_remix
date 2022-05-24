@@ -1,13 +1,13 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 
-import type { User } from "./api/models/user.models";
+import type { User } from "../api/models/user.models";
 
-import { getUser } from "./api/session.server";
+import { getUser } from "../api/session.server";
 import {
   clearNotifications,
   findPublicUsers
-} from "./api/user.server";
+} from "../api/user.server";
 
 import BackButton from "../components/BackButton";
 import Notifications from "../components/Notifications";
