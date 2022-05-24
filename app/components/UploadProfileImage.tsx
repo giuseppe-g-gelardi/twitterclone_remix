@@ -1,47 +1,18 @@
 import type { SyntheticEvent } from "react";
 import { useEffect, useState } from "react";
 
-import { Form, useActionData } from "@remix-run/react";
+import { useActionData } from "@remix-run/react";
 
 import type { Area, Point } from 'react-easy-crop'
 import Cropper from 'react-easy-crop'
 
 import getCroppedImg from '~/components/utils/getCroppedImg'
-// import type { ActionFunction, UploadHandler } from "@remix-run/node";
-// import {
-//   json,
-//   unstable_parseMultipartFormData as parseMultipartFormData,
-//   unstable_composeUploadHandlers as composeUploadHandlers,
-//   unstable_createMemoryUploadHandler as createMemoryUploadHandler
-// } from "@remix-run/node";
-// import { uploadImage } from "~/routes/api/utils.server"
-// import { uploadProfileBanner } from "~/routes/api/user.server";
-// import Icons from "../../components/Icons";
+
 
 type ActionData = {
   errorMsg?: string;
   imgSrc?: string;
 };
-
-// export const action: ActionFunction = async ({ request, params }) => {
-//   const uploadHandler: UploadHandler = composeUploadHandlers(
-//     async ({ name, data }) => {
-//       if (name !== "banner_img") return null;
-
-//       const uploadedImage: any = await uploadImage(data)
-//       return uploadedImage.secure_url;
-//     },
-//     createMemoryUploadHandler()
-//   );
-
-//   const formData = await parseMultipartFormData(request, uploadHandler);
-//   const imgSrc = formData.get("banner_img");
-
-//   const src = imgSrc?.toString()
-
-//   if (!imgSrc) return json({ error: "something wrong" })
-//   return json({ imgSrc }, await uploadProfileBanner(params.username, src))
-// };
 
 export default function UploadProfileImage() {
   const data = useActionData<ActionData>();
@@ -101,15 +72,15 @@ export default function UploadProfileImage() {
   }
 
   return (
-    <div className="text-center"> 
-    {/* mt-56 */}
+    <div className="text-center">
+      {/* mt-56 */}
 
-{!croppedAreaPixels && !data?.imgSrc ? (
-  <>
-  <label htmlFor="img-field"></label>
-  <input id="img-field" type="file" name="banner_img" accept="image/*" onChange={onSelectFile} />
-  </>
-) : null}
+      {!croppedAreaPixels && !data?.imgSrc ? (
+        <>
+          <label htmlFor="img-field"></label>
+          <input id="img-field" type="file" name="banner_img" accept="image/*" onChange={onSelectFile} />
+        </>
+      ) : null}
 
       {file && (
         <>
@@ -144,21 +115,21 @@ export default function UploadProfileImage() {
             <div className="place-content-center mt-12 mb-10">
               <div className="inline-flex rounded-md shadow-md" role='group'>
 
-              <button
-                type='button'
-                className="bg-rose-400 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-l-3xl w-auto h-auto p-2.5"
-                onClick={() => cancel()}
+                <button
+                  type='button'
+                  className="bg-rose-400 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-l-3xl w-auto h-auto p-2.5"
+                  onClick={() => cancel()}
                 >
-                clear image
-              </button>
-              <button
-                type='button'
-                className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-r-3xl w-auto h-auto p-2.5" 
-                onClick={onCrop}
+                  clear image
+                </button>
+                <button
+                  type='button'
+                  className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-r-3xl w-auto h-auto p-2.5"
+                  onClick={onCrop}
                 >
-                Crop
-              </button>
-                </div>
+                  Crop
+                </button>
+              </div>
             </div>
           </div>
         </>
@@ -166,36 +137,36 @@ export default function UploadProfileImage() {
 
       {croppedAreaPixels && !data?.imgSrc ? (
         <>
-        <div className="place-content-center flex">
-          {/* make center!!@!@!@!!!! */}
+          <div className="place-content-center flex">
+            {/* make center!!@!@!@!!!! */}
             <img
               src={previewImage}
               alt=''
               className="h-[240px] w-[240px] items-center border rounded-full"
-              />
-              </div>
-          <Form method="post" encType="multipart/form-data">
+            />
+          </div>
+          <form method="post" encType="multipart/form-data">
             <input
               name="profile_img"
               type='hidden'
               value={imageToUpload}
             />
             <button
-                type='button'
-                className="bg-rose-400 m-5"
-                onClick={() => cancel()}
-              >
-                cancel crop
-              </button>
+              type='button'
+              className="bg-rose-400 m-5"
+              onClick={() => cancel()}
+            >
+              cancel crop
+            </button>
             <button
               type="submit"
               className="bg-slate-400 m-5"
               name="_action"
               value="profile_img"
             >
-              upload banner
+              upload image
             </button>
-              </Form>
+          </form>
         </>
       ) : null}
 
@@ -209,39 +180,3 @@ export default function UploadProfileImage() {
     </div>
   );
 }
-
-
-// {/* <button
-// className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl"
-// onClick={() => setShowModal(true)}
-// >
-// {buttonText}
-// </button> */}
-
-      // {/* <label
-      //   htmlFor="img-field"
-      //   className="inline-block p-[6px 12px] cursor-pointer">
-      //   <i className="bg-zinz-600 rounded-full">{Icons.cameraIcon}</i>
-      // </label>
-      // {/* this input gets the image */}
-
-      // <input 
-      //   multiple={false}
-      //   id="img-field" 
-      //   type="file" 
-      //   name="banner_img" 
-      //   accept="image/*" 
-      //   onChange={onSelectFile} 
-      //   className="text-transparent p-5 invisible"
-      // /> */}
-
-      
-      // {/* <input
-      //   multiple={false}
-      //   id="img-field"
-      //   type="file"
-      //   onChange={onSelectFile}
-      //   name="banner_img"
-      //   accept="image/*"
-      //   className="text-transparent p-5 invisible"
-      // /> */}

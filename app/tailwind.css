@@ -1081,11 +1081,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(99 102 241 / var(--tw-bg-opacity));
 }
 
-.bg-purple-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 33 168 / var(--tw-bg-opacity));
-}
-
 .bg-opacity-30 {
   --tw-bg-opacity: 0.3;
 }
@@ -1345,10 +1340,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .opacity-90 {
   opacity: 0.9;
-}
-
-.opacity-50 {
-  opacity: 0.5;
 }
 
 .shadow-lg {

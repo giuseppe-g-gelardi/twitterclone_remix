@@ -1,18 +1,19 @@
+import { useLoaderData } from "@remix-run/react";
+
 import type {
   ActionFunction,
   LoaderFunction,
   UploadHandler
 } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-
-import type { User } from "./api/models/user.models";
-import type { Post } from "./api/models/post.models";
 
 import {
   unstable_parseMultipartFormData as parseMultipartFormData,
   unstable_composeUploadHandlers as composeUploadHandlers,
   unstable_createMemoryUploadHandler as createMemoryUploadHandler
 } from "@remix-run/node";
+
+import type { User } from "./api/models/user.models";
+import type { Post } from "./api/models/post.models";
 
 import {
   findByUsername,
@@ -24,12 +25,12 @@ import {
 } from "./api/user.server";
 import { getUserPosts, likeUnlikePost } from "./api/posts.server";
 import { getUser } from "./api/session.server";
+import { uploadImage } from "./api/utils.server";
 
 import ProfileHeader from "../components/ProfileHeader";
 import Feed from "../components/Feed";
 import BackButton from "../components/BackButton";
 
-import { uploadImage } from "./api/utils.server";
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -63,33 +64,26 @@ export const action: ActionFunction = async ({ request, params }) => {
   );
   const profileReq = request.clone()
 
+  const bannerData = await parseMultipartFormData(req, uploadBannerHandler);
+  const bannerSrc = bannerData.get("banner_img");
+
+  const profileData = await parseMultipartFormData(profileReq, uploadProfileHandler)
+  const profileSrc = profileData.get("profile_img")
+
   const form = await request.formData()
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
+
   const { _action, ...values } = Object.fromEntries(form)
   const postid = form.get('like') as string
   const followname = form.get('follow') as string
 
-  console.log(_action)
-  console.log('handler', uploadBannerHandler)
-
   if (_action === 'follow') return followAndUnfollowUsers(params.username, followname)
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
-
-  const bannerData = await parseMultipartFormData(req, uploadBannerHandler);
-  const bannerSrc = bannerData.get("banner_img");
-  const banner_string = bannerSrc?.toString()
-
-  const profileData = await parseMultipartFormData(profileReq, uploadProfileHandler)
-  const profileSrc = profileData.get("profile_img")
-  const profile_string = profileSrc?.toString()
-
-  console.log('banner string', banner_string)
-
-  if (_action === 'banner_img') return uploadProfileBanner(params.username, banner_string)
-  if (_action === 'profile_img') return uploadProfileImage(params.username, profile_string)
+  if (_action === 'banner_img') return uploadProfileBanner(params.username, bannerSrc?.toString())
+  if (_action === 'profile_img') return uploadProfileImage(params.username, profileSrc?.toString())
 
   if (!_action) return null
 }
@@ -121,45 +115,3 @@ export default function UserPage() {
     </>
   )
 }
-
-  // const uploadHandler: UploadHandler = composeUploadHandlers(
-  //   async ({ name, data }) => {
-  //     if (name === "profile_img" || name === "banner_img") {
-
-  //       const uploadedImage: any = await uploadImage(data)
-  //       return uploadedImage.secure_url;
-  //     }
-  //     return null;
-  //   },
-  //   createMemoryUploadHandler()
-  // );
-
-
-
-//
-//
-//
-//
-//
-//
-
-
-    // const bannerHandler: UploadHandler = composeUploadHandlers(
-  //   async ({ name, data }) => {
-  //     if (name !== "banner_img") return null;
-
-  //     const uploadedImage: any = await uploadImage(data)
-  //     return uploadedImage.secure_url;
-  //   },
-  //   createMemoryUploadHandler()
-  // );
-
-  // const profileHandler: UploadHandler = composeUploadHandlers(
-  //   async ({ name, data }) => {
-  //     if (name !== "profile_img") return null;
-
-  //     const uploadedImage: any = await uploadImage(data)
-  //     return uploadedImage.secure_url;
-  //   },
-  //   createMemoryUploadHandler()
-  // );
