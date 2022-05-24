@@ -91,9 +91,6 @@ export default function Modal(props: ModalProps) {
                       alt=""
                     />
                   )}
-                  <div className="z-10 bg-black inline object-cover absolute">
-                    {/* upload banner image */}
-                  </div>
                 </div>
               </div>
               {/* profile banner */}
@@ -112,9 +109,6 @@ export default function Modal(props: ModalProps) {
                     alt=''
                     className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
                   />
-                  <div className="bg-zinc-400">
-                    {/* upload PFP */}
-                  </div>
                 </button>
               </div>
               {/* profile picture */}

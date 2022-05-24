@@ -190,6 +190,8 @@ export default function UploadProfileImage() {
             <button
               type="submit"
               className="bg-slate-400 m-5"
+              name="_action"
+              value="profile_img"
             >
               upload banner
             </button>

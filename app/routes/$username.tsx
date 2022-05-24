@@ -44,33 +44,18 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
-  const bannerHandler: UploadHandler = composeUploadHandlers(
+  const uploadHandler: UploadHandler = composeUploadHandlers(
     async ({ name, data }) => {
-      if (name !== "banner_img") return null;
+      if (name === "profile_img" || name === "banner_img") {
 
-      const uploadedImage: any = await uploadImage(data)
-      return uploadedImage.secure_url;
+        const uploadedImage: any = await uploadImage(data)
+        return uploadedImage.secure_url;
+      }
+      return null;
     },
     createMemoryUploadHandler()
   );
-
-  const profileHandler: UploadHandler = composeUploadHandlers(
-    async ({ name, data }) => {
-      if (name !== "profile_img") return null;
-
-      const uploadedImage: any = await uploadImage(data)
-      return uploadedImage.secure_url;
-    },
-    createMemoryUploadHandler()
-  );
-
-  const bannerData = await parseMultipartFormData(request, bannerHandler);
-  const bannerSrc = bannerData.get("banner_img");
-  const banner_string = bannerSrc?.toString()
-
-  const profileData = await parseMultipartFormData(request, profileHandler)
-  const profileSrc = profileData.get("profile_img");
-  const profile_string = profileSrc?.toString()
+  const req = request.clone()
 
   const form = await request.formData()
   const user: User | null = await getUser(request)
@@ -80,12 +65,30 @@ export const action: ActionFunction = async ({ request, params }) => {
   const postid = form.get('like') as string
   const followname = form.get('follow') as string
 
+  console.log(_action)
+  console.log('handler', uploadHandler)
 
-  if (_action === 'profile_img') return json({ bannerSrc }, await uploadProfileBanner(params.username, banner_string))
-  if (_action === 'banner_img') return json({ bannerSrc }, await uploadProfileImage(params.username, profile_string))
+
   if (_action === 'follow') return followAndUnfollowUsers(params.username, followname)
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
+
+  const bannerData = await parseMultipartFormData(req, uploadHandler);
+  const bannerSrc = bannerData.get("banner_img");
+  const banner_string = bannerSrc?.toString()
+
+  console.log('banner string', banner_string)
+
+  if (_action === 'banner_img') return uploadProfileBanner(params.username, banner_string)
+
+  //   const profileData = await parseMultipartFormData(req, uploadHandler)
+  //   const profileSrc = profileData.get("profile_img")
+  //   const profile_string = profileSrc?.toString()
+  // if (_action === 'profile_img') return uploadProfileImage(params.username, profile_string)
+
+
+  // if (_action === 'profile_img') return json({ bannerSrc }, await uploadProfileBanner(params.username, banner_string))
+  // if (_action === 'banner_img') return json({ bannerSrc }, await uploadProfileImage(params.username, profile_string))
 
   if (!_action) return null
 }
@@ -126,6 +129,36 @@ export default function UserPage() {
   //       return uploadedImage.secure_url;
   //     }
   //     return null;
+  //   },
+  //   createMemoryUploadHandler()
+  // );
+
+
+
+//
+//
+//
+//
+//
+//
+
+
+    // const bannerHandler: UploadHandler = composeUploadHandlers(
+  //   async ({ name, data }) => {
+  //     if (name !== "banner_img") return null;
+
+  //     const uploadedImage: any = await uploadImage(data)
+  //     return uploadedImage.secure_url;
+  //   },
+  //   createMemoryUploadHandler()
+  // );
+
+  // const profileHandler: UploadHandler = composeUploadHandlers(
+  //   async ({ name, data }) => {
+  //     if (name !== "profile_img") return null;
+
+  //     const uploadedImage: any = await uploadImage(data)
+  //     return uploadedImage.secure_url;
   //   },
   //   createMemoryUploadHandler()
   // );

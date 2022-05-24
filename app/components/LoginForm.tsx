@@ -61,7 +61,10 @@ export default function LoginForm() {
         </div>
         <button
           className="w-full p-2 bg-violet-400 rounded-full font-bold text-gray-900 border border-gray-700 "
-          type='submit' value='login'>
+          type='submit' 
+          value='login'
+          name='_action'
+        >
           Login
         </button>
       </Form>
