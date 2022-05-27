@@ -1,6 +1,3 @@
-import type { SetStateAction } from 'react'
-import { useState, useEffect } from 'react'
-
 import { Form, Link } from '@remix-run/react'
 
 import moment from 'moment'
@@ -12,57 +9,18 @@ import type { Reply } from '../api/models/reply.models'
 import type { User } from '../api/models/user.models'
 
 import Icons from "./Icons"
-import { getCommentReplies } from '../api/replies.server'
 
 type PropTypes = {
   feed: Post | Comment | Reply | any,
   user: User,
   inputName: string,
   buttonValue: string,
+  // replies: any
 }
 
 export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) {
   const createdAt = feed.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
-  // const [replies, setReplies] = useState<Reply[]>([])
-  // const [showReplies, setShowReplies] = useState<SetStateAction<boolean>>(false)
-
-  // !
-  // useEffect(() => {
-  //   async function getReplies(commentid: string) {
-  //     const response = await fetch(`http://localhost:8000/api/replies/${commentid}/replies`)
-  //     const replies = response.json()
-    
-  //     return replies
-  //   }
-  //   getReplies(feed._id).then(res =>{
-  //     if (res.replies.length > 0) { setReplies(res.replies) }
-  //   })
-
-  // }, [feed._id])
-
-  // useEffect(() => {
-  //   console.log(replies)
-  // })
-  // !
-
-  // async function getReplyFeed(repliesArray: any) {
-  //   // // console.log(repliesArray.item.replies)
-  //   try {
-  //     let replyFeed = []
-  //     for (let replies of repliesArray) {
-        
-  //       const replyItem = await getReplies(replies.item._id)
-  //       const replyUser = await findUserById(replies.item.user)
-  //       replyFeed.push({ replyItem, replyUser })
-  //     }
-  //     return replyFeed
-  //   } catch (error: any) {
-  //     throw new Error(error)
-  //   }
-  // }
-  // const replyData = await getReplyFeed(commentData)
-
 
 
   const likeIcons = (
@@ -158,7 +116,7 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
           <div className='w-auto h-auto m-auto mt-2.5 place-items-center'>
             <button 
               className='hover:bg-slate-500 rounded-full'
-              onClick={() => console.log(feed.replies)}
+              onClick={() => console.log('replies lol')}
             >
               
               {Icons.chevronDown}

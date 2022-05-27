@@ -1,4 +1,5 @@
 import type { User } from "./user.models";
+import type { Reply } from "./reply.models";
 
 export interface Comment {
   _id: string,
@@ -6,8 +7,7 @@ export interface Comment {
   username?: string,
   body: string,
   likes?: [],
-  parent?: Comment,
-  replies?: Comment[]
+  replies?: Reply[]
   createdAt?: string,
   updatedAt?: string
 }

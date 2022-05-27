@@ -38,8 +38,34 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
   }
   const commentData = await getCommentsFeed(post.comments)
 
+  // async function getRepliesFeed(comments: any) {
+  //   try {
+  //     let replyFeed = []
+  //     for (let comment of comments) {
+  //       if (comment.item.replies.length > 0) {
+  //         let item = await getCommentReplies(comment.item._id)
+  //         let replies = item.replies
+
+  //         let replyUsers = []
+  //         for (let reply of replies) {
+  //           let replyUser = await findUserById(reply.user)
+  //           replyUsers.push(replyUser)
+  //         }
+          
+  //         replyFeed.push({replies, replyUsers})
+  //       }
+  //     }
+  //     return replyFeed
+
+  //   } catch (error: any) {
+  //     throw new Error(error)
+  //   }
+  // }
+  // const replyData = await getRepliesFeed(commentData)
+
   return { post, loggedInUser, commentData, publicUsers, postUser }
 }
+
 
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData()
@@ -62,9 +88,10 @@ export const action: ActionFunction = async ({ request, params }) => {
 }
 
 type LoaderData = {
-  post: Post,
+  post: Post
   commentData: CommentData
   postUser: User
+  replyData: any
 }
 
 type CommentData = {
@@ -94,6 +121,7 @@ export default function SinglePostPage() {
           user={postUser}
           inputName='like'
           buttonValue='like'
+          // replies={replyData}
         />
       </div>
       <div className="mt-2.5">
@@ -106,6 +134,7 @@ export default function SinglePostPage() {
               user={comment.commentUser}
               inputName='commentLike'
               buttonValue='commentLike'
+              // replies={replyData}
             />
           ))}
       </div>
