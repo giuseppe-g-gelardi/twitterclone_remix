@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { useCatch, useLoaderData } from "@remix-run/react";
 
 import type {
   ActionFunction,
@@ -114,4 +114,42 @@ export default function UserPage() {
         ))}
     </>
   )
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  if (caught.status === 404) {
+    return (
+      <div className="mb-3">
+        <div className="text-3xl mb-2">Details</div>
+        <div className="p-4 rounded shadow-lg border bg-orange-200 border-orange-600">
+          <div className="text-gray-700 font-bold text-xl mb-2">
+            {caught.statusText}
+          </div>
+          <p>
+            {caught.status} {caught.statusText}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  throw new Error('Unkown error');
+}
+
+export function ErrorBoundary() {
+  // export function ErrorBoundary({ error }: any) {
+  return (
+    <div className="mb-3">
+      <div className="text-3xl mb-2">Details</div>
+      <div className="p-4 rounded shadow-lg border bg-rose-200 border-rose-600">
+        <div className="text-gray-700 font-bold text-xl mb-2">
+          Uh oh... Sorry something went wrong!
+        </div>
+        {/* <p>{error?.message}</p> */}
+        <p>That page doesnt seem to exist</p>
+      </div>
+    </div>
+  );
 }

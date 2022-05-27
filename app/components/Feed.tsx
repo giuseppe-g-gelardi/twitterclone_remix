@@ -5,7 +5,6 @@ import { Form, Link } from '@remix-run/react'
 import moment from 'moment'
 
 import type { Comment } from '../api/models/comment.models'
-
 import type { Post } from '../api/models/post.models'
 import type { Reply } from '../api/models/reply.models'
 import type { User } from '../api/models/user.models'
