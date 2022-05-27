@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Form, Link } from '@remix-run/react'
 
 import moment from 'moment'
@@ -15,13 +17,12 @@ type PropTypes = {
   user: User,
   inputName: string,
   buttonValue: string,
-  // replies: any
 }
 
 export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) {
   const createdAt = feed.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
-
+  const [showReplies, setShowReplies] = useState(false)
 
   const likeIcons = (
     <div className="flex">
@@ -114,11 +115,10 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
         </div>
         {feed.replies?.length > 0 && (
           <div className='w-auto h-auto m-auto mt-2.5 place-items-center'>
-            <button 
+            <button
               className='hover:bg-slate-500 rounded-full'
               onClick={() => console.log('replies lol')}
             >
-              
               {Icons.chevronDown}
             </button>
           </div>
@@ -177,8 +177,46 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
             {shareIcon}
           </div>
         </div>
+        <div>
+          <>
+            {feed?.replies?.length > 0 ? (
+              <>
+                {!showReplies && (
+                  <button onClick={async () => `${setShowReplies(true)}`}>
+                    <p className='text-violet-700 dark:text-violet-300 '>
+                      show {feed.replies.length} replies
+                    </p>
+                  </button>
+                )}
+                {showReplies && (
+                  <button onClick={() => setShowReplies(false)}>
+                    <p className='text-rose-700 dark:text-rose-300'>
+                      hide {feed.replies.length} replies
+                      {/* should include hide button or no? hmm */}
+                    </p>
+                  </button>
+                )}
+              </>
+            ) : (
+              null
+            )}
+            <div>
+
+            </div>
+          </>
+        </div>
       </div>
     </div>
   )
 }
 
+
+// {
+//   feed?.replies?.length > 0 ? (
+//     <button onClick={() => console.log(feed.replies.length)}>
+//       reply logger lol
+//     </button>
+//   ) : (
+//     null
+//   )
+// }
