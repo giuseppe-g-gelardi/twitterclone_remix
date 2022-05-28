@@ -11,14 +11,16 @@ import type { User } from '../api/models/user.models'
 
 import Icons from "./Icons"
 
+
 type PropTypes = {
   feed: Post | Comment | Reply | any,
   user: User,
   inputName: string,
   buttonValue: string,
+  replies: any
 }
 
-export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) {
+export default function Feed({ feed, user, inputName, buttonValue, replies }: PropTypes) {
   const createdAt = feed.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
   const [showReplies, setShowReplies] = useState(false)
@@ -188,12 +190,23 @@ export default function Feed({ feed, user, inputName, buttonValue }: PropTypes) 
                   </button>
                 )}
                 {showReplies && (
+                    <>
                   <button onClick={() => setShowReplies(false)}>
                     <p className='text-rose-700 dark:text-rose-300'>
                       hide {feed.replies.length} replies
                       {/* should include hide button or no? hmm */}
                     </p>
                   </button>
+                  <div>
+                      <button onClick={() => console.log(replies)}>
+                        feed logger lol
+                      </button>
+                      {replies.map((reply: any) => (
+                        <li key={reply._id}>{reply.body}</li>
+                      ))}
+                  </div>
+                  </>
+
                 )}
               </>
             ) : (

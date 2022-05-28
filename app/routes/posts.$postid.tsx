@@ -1,4 +1,3 @@
-import type { Key } from "react"
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import { useCatch, useLoaderData } from "@remix-run/react"
 
@@ -13,6 +12,7 @@ import { findByUsername, findPublicUsers, findUserById } from "../api/user.serve
 import Feed from "~/components/Feed"
 import PostBox from "~/components/PostBox"
 import BackButton from "../components/BackButton"
+import { getCommentReplies } from "~/api/replies.server"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -28,7 +28,9 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
       for (let comment of commentsArray) {
         let item = await fetchComments(comment)
         const commentUser = await findUserById(item.user)
-        postFeed.push({ item, commentUser })
+        let replyItems = await getCommentReplies(item._id)
+        let replies = replyItems.replies
+        postFeed.push({ item, commentUser, replies })
       }
       return postFeed
 
@@ -73,13 +75,14 @@ type CommentData = {
   [x: string]: any
   item: any,
   commentUser: User
+  replies: any
 }
 
-type Comments = {
-  _id: Key | null | undefined;
-  item: Post;
-  commentUser: User
-}
+// type Comments = {
+//   _id: Key | null | undefined;
+//   item: Post;
+//   commentUser: User
+// }
 
 export default function SinglePostPage() {
   const { post, commentData, postUser } = useLoaderData<LoaderData>()
@@ -94,18 +97,23 @@ export default function SinglePostPage() {
           key={commentData._id}
           feed={post}
           user={postUser}
+          replies={null}
           inputName='like'
           buttonValue='like'
         />
+        <button onClick={() => console.log(commentData._id)}>
+          commentData logger
+        </button>
       </div>
       <div className="mt-2.5">
         <PostBox />
         {commentData
-          .map((comment: Comments) => (
+          .map((comment: any) => (
             <Feed
               key={comment._id}
               feed={comment.item}
               user={comment.commentUser}
+              replies={comment.replies}
               inputName='commentLike'
               buttonValue='commentLike'
             />
