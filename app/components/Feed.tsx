@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import type { Key } from 'react'
 
 import { Form, Link } from '@remix-run/react'
 
@@ -17,13 +18,23 @@ type PropTypes = {
   user: User,
   inputName: string,
   buttonValue: string,
-  replies: any
+  replies: any,
+  commentData: any
 }
 
-export default function Feed({ feed, user, inputName, buttonValue, replies }: PropTypes) {
-  const createdAt = feed.createdAt as unknown as Date
+export default function Feed({ feed, user, inputName, buttonValue, replies, commentData }: PropTypes) {
+  const createdAt = feed?.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
   const [showReplies, setShowReplies] = useState(false)
+
+  useEffect(() => {
+    // console.log('replies in feed useEffect', replies)
+    "use effect"
+  })
+
+  // TODO: make a dedicated replyFeed component,
+  // fetching, traversing, and distributing the data set up correctly,
+  // constant reuse of this component is causing issues.
 
   const likeIcons = (
     <div className="flex">
@@ -190,21 +201,39 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                   </button>
                 )}
                 {showReplies && (
-                    <>
-                  <button onClick={() => setShowReplies(false)}>
-                    <p className='text-rose-700 dark:text-rose-300'>
-                      hide {feed.replies.length} replies
-                      {/* should include hide button or no? hmm */}
-                    </p>
-                  </button>
-                  <div>
+                  <>
+                    <button onClick={() => setShowReplies(false)}>
+                      <p className='text-rose-700 dark:text-rose-300'>
+                        hide {feed.replies.length} replies
+                        {/* should include hide button or no? hmm */}
+                      </p>
+                    </button>
+                    <div>
                       <button onClick={() => console.log(replies)}>
                         feed logger lol
                       </button>
-                      {replies.map((reply: any) => (
-                        <li key={reply._id}>{reply.body}</li>
+
+
+                      {replies.map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
+                        <Feed 
+                          key={reply._id}
+                          feed={reply.reply}
+                          user={reply.other}
+                          replies={null}
+                          inputName=''
+                          buttonValue=''
+                          commentData={null}
+                        />
                       ))}
-                  </div>
+
+
+                      {/* {replies.map((reply: any) => (
+                        <>
+                          <li key={reply._id}>{JSON.stringify(reply.replyItem)}</li>
+                          <li key={user._id}>{JSON.stringify(reply.replyUser)}</li>
+                        </>
+                      ))} */}
+                    </div>
                   </>
 
                 )}

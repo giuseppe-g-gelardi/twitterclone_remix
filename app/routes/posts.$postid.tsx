@@ -12,7 +12,7 @@ import { findByUsername, findPublicUsers, findUserById } from "../api/user.serve
 import Feed from "~/components/Feed"
 import PostBox from "~/components/PostBox"
 import BackButton from "../components/BackButton"
-import { getCommentReplies } from "~/api/replies.server"
+import { getReplies } from "~/api/replies.server"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -27,10 +27,19 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
       let postFeed = []
       for (let comment of commentsArray) {
         let item = await fetchComments(comment)
-        const commentUser = await findUserById(item.user)
-        let replyItems = await getCommentReplies(item._id)
-        let replies = replyItems.replies
-        postFeed.push({ item, commentUser, replies })
+        let commentUser = await findUserById(item.user)
+        let replies = item.replies
+
+        let replyItems: { replyItem: any, replyUser: User }[] = []
+
+        replies.forEach(async (reply: string | null) => {
+          let replyItem = await getReplies(reply)
+          // let replyUser = await findUserById(replyItem.user)
+          // replyItems.push({replyItem, replyUser})
+          replyItems.push(replyItem)
+        })
+
+        postFeed.push({ item, commentUser, replyItems })
       }
       return postFeed
 
@@ -42,7 +51,6 @@ export const loader: LoaderFunction = async ({ params, request }: any) => {
 
   return { post, loggedInUser, commentData, publicUsers, postUser }
 }
-
 
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData()
@@ -100,8 +108,9 @@ export default function SinglePostPage() {
           replies={null}
           inputName='like'
           buttonValue='like'
+          commentData={commentData}
         />
-        <button onClick={() => console.log(commentData._id)}>
+        <button onClick={() => console.log(commentData)}>
           commentData logger
         </button>
       </div>
@@ -113,9 +122,10 @@ export default function SinglePostPage() {
               key={comment._id}
               feed={comment.item}
               user={comment.commentUser}
-              replies={comment.replies}
+              replies={comment.replyItems}
               inputName='commentLike'
               buttonValue='commentLike'
+              commentData={commentData}
             />
           ))}
       </div>
@@ -146,7 +156,6 @@ export function CatchBoundary() {
 }
 
 export function ErrorBoundary() {
-  // export function ErrorBoundary({ error }: any) {
   return (
     <div className="mb-3">
       <div className="text-3xl mb-2">Details</div>
@@ -154,7 +163,6 @@ export function ErrorBoundary() {
         <div className="text-gray-700 font-bold text-xl mb-2">
           Uh oh... Sorry something went wrong!
         </div>
-        {/* <p>{error?.message}</p> */}
       </div>
     </div>
   );

@@ -87,7 +87,8 @@ export default function HomePage() {
             user={postFeed.user}
             inputName='like'
             buttonValue='like'
-            // replies={null}
+            replies={null}
+            commentData={null}
           />
         ))
       }
