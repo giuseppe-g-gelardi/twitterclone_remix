@@ -19,10 +19,10 @@ type PropTypes = {
   inputName: string,
   buttonValue: string,
   replies: any,
-  commentData: any
+  _commentData: any
 }
 
-export default function Feed({ feed, user, inputName, buttonValue, replies, commentData }: PropTypes) {
+export default function Feed({ feed, user, inputName, buttonValue, replies, _commentData }: PropTypes) {
   const createdAt = feed?.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
   const [showReplies, setShowReplies] = useState(false)
@@ -205,34 +205,22 @@ export default function Feed({ feed, user, inputName, buttonValue, replies, comm
                     <button onClick={() => setShowReplies(false)}>
                       <p className='text-rose-700 dark:text-rose-300'>
                         hide {feed.replies.length} replies
-                        {/* should include hide button or no? hmm */}
                       </p>
                     </button>
                     <div>
-                      <button onClick={() => console.log(replies)}>
+                      {/* <button onClick={() => console.log(replies)}>
                         feed logger lol
-                      </button>
+                      </button> */}
 
 
                       {replies.map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
-                        <Feed 
+                        <RepliesFeed
                           key={reply._id}
-                          feed={reply.reply}
+                          replies={reply.reply}
                           user={reply.other}
-                          replies={null}
-                          inputName=''
-                          buttonValue=''
-                          commentData={null}
                         />
+
                       ))}
-
-
-                      {/* {replies.map((reply: any) => (
-                        <>
-                          <li key={reply._id}>{JSON.stringify(reply.replyItem)}</li>
-                          <li key={user._id}>{JSON.stringify(reply.replyUser)}</li>
-                        </>
-                      ))} */}
                     </div>
                   </>
 
@@ -241,9 +229,6 @@ export default function Feed({ feed, user, inputName, buttonValue, replies, comm
             ) : (
               null
             )}
-            <div>
-
-            </div>
           </>
         </div>
       </div>
@@ -251,13 +236,11 @@ export default function Feed({ feed, user, inputName, buttonValue, replies, comm
   )
 }
 
+function RepliesFeed({ replies, user }: any) {
 
-// {
-//   feed?.replies?.length > 0 ? (
-//     <button onClick={() => console.log(feed.replies.length)}>
-//       reply logger lol
-//     </button>
-//   ) : (
-//     null
-//   )
-// }
+  return (
+    <>
+      <p>{user?.username} says: {replies?.body}</p>
+    </>
+  )
+}

@@ -99,15 +99,11 @@ export default function Modal(props: ModalProps) {
 
               {/* profile picture */}
               <div className="flex z-10 -mt-16">
-                <button
-                  onClick={() => console.log('update profile image')}
-                >
                   <img
                     src={loggedInUser.profilePicture}
                     alt=''
                     className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
                   />
-                </button>
               </div>
               {/* profile picture */}
 
