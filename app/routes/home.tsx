@@ -88,7 +88,6 @@ export default function HomePage() {
             inputName='like'
             buttonValue='like'
             replies={null}
-            commentData={null}
           />
         ))
       }
