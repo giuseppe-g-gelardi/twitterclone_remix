@@ -21,3 +21,20 @@ export async function getReplies(replyid: string | null) {
 
   return replies
 }
+
+export async function newReply({ commentid, user, body }: any) {
+  const response = await fetch(`http://localhost:8000/api/replies/${commentid}/new`, {
+    method: 'PUT',
+    body: JSON.stringify({ user, body }),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  const newReply = response.json()
+
+  return newReply
+}
+
+export async function likeUnlikeReply(id: string) {
+  return id
+}

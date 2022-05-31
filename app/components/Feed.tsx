@@ -204,13 +204,15 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                     </button>
                     <div>
 
-                      {replies.map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
-                        <RepliesFeed
-                          key={Math.random().toString(16).slice(2)}
-                          replies={reply.reply}
-                          user={reply.other}
-                        />
-                      ))}
+                      {replies
+                        .map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
+                          <RepliesFeed
+                            key={Math.random().toString(16).slice(2)}
+                            replies={reply.reply}
+                            user={reply.other}
+                            feedid={feed._id}
+                          />
+                        ))}
                     </div>
                   </>
 
@@ -226,14 +228,17 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
   )
 }
 
-function RepliesFeed({ replies, user }: any) {
+function RepliesFeed({ replies, user, feedid }: any) {
 
   return (
     <>
+      <p>{feedid}</p>
       <p>{user?.username} says: {replies?.body}</p>
+      <p>{replies?.createdAt}</p>
       <ReplyModal
         buttonText='Reply'
         header='Submit new Reply'
+        feedid={feedid}
       />
     </>
   )

@@ -12,7 +12,7 @@ import { findByUsername, findPublicUsers, findUserById } from "../api/user.serve
 import Feed from "~/components/Feed"
 import PostBox from "~/components/PostBox"
 import BackButton from "../components/BackButton"
-import { getReplies } from "~/api/replies.server"
+import { getReplies, newReply } from "~/api/replies.server"
 
 export const loader: LoaderFunction = async ({ params, request }: any) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -59,14 +59,15 @@ export const action: ActionFunction = async ({ request, params }) => {
   const data = { user }
   const loggedInUser = data.user
   const post = await getSinglePost(params.postid)
-  const { _action } = Object.fromEntries(form)
-
+  const { _action, ...values } = Object.fromEntries(form)
   const postid = form.get('like') as string
-  if (_action === 'like') return likeUnlikePost(user?._id, postid)
-
   const commentid = form.get('commentLike') as string
-  if (_action === 'commentLike') return likeUnlikeComment(loggedInUser?._id, commentid)
 
+  if (_action === 'like') return likeUnlikePost(user?._id, postid)
+  if (_action === 'commentLike') return likeUnlikeComment(loggedInUser?._id, commentid)
+  if (_action === 'reply') return newReply({user: loggedInUser?._id, body: values.body, commentid: values.commentid})
+
+  // TODO: set up specific action for new comment
   const newComment = await postNewComment(post._id, loggedInUser?.username, body)
 
   return newComment

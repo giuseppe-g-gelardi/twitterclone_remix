@@ -11,10 +11,11 @@ type LoaderData = {
 type ModalProps = {
   buttonText: string,
   header: string,
+  feedid: string
 }
 
 export default function ReplyModal(props: ModalProps) {
-  const { buttonText, header } = props
+  const { buttonText, header, feedid } = props
   const { loggedInUser } = useLoaderData<LoaderData>()
   const [showModal, setShowModal] = useState<boolean>(false);
   const transition = useTransition()
@@ -62,7 +63,7 @@ export default function ReplyModal(props: ModalProps) {
               {/*header*/}
 
               {/*body*/}
-              <Form ref={formRef} replace method="post">
+              <Form ref={formRef} replace method="put">
                 <div className="flex px-5">
                   <img
                     className="inline object-cover w-12 h-12 rounded-full border-2"
@@ -74,6 +75,11 @@ export default function ReplyModal(props: ModalProps) {
                     name="body"
                     className="flex text-gray-500 rounded-xl w-full mx-2 border-0 focus:outline-none bg-transparent"
                     placeholder="What's happening?"
+                  />
+                  <input
+                    type='hidden'
+                    name='commentid'
+                    value={feedid}
                   />
                 </div>
                 <div className="flex ml-20">
@@ -99,8 +105,6 @@ export default function ReplyModal(props: ModalProps) {
 
               </Form>
               {/*body*/}
-
-
             </div>
           </div>
         </div>
