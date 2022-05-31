@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import type { Key } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Form, Link } from '@remix-run/react'
 
@@ -11,7 +11,7 @@ import type { Reply } from '../api/models/reply.models'
 import type { User } from '../api/models/user.models'
 
 import Icons from "./Icons"
-
+import ReplyModal from './ReplyModal'
 
 type PropTypes = {
   feed: Post | Comment | Reply | any,
@@ -19,10 +19,9 @@ type PropTypes = {
   inputName: string,
   buttonValue: string,
   replies: any,
-  _commentData: any
 }
 
-export default function Feed({ feed, user, inputName, buttonValue, replies, _commentData }: PropTypes) {
+export default function Feed({ feed, user, inputName, buttonValue, replies }: PropTypes) {
   const createdAt = feed?.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
   const [showReplies, setShowReplies] = useState(false)
@@ -31,10 +30,6 @@ export default function Feed({ feed, user, inputName, buttonValue, replies, _com
     // console.log('replies in feed useEffect', replies)
     "use effect"
   })
-
-  // TODO: make a dedicated replyFeed component,
-  // fetching, traversing, and distributing the data set up correctly,
-  // constant reuse of this component is causing issues.
 
   const likeIcons = (
     <div className="flex">
@@ -208,10 +203,6 @@ export default function Feed({ feed, user, inputName, buttonValue, replies, _com
                       </p>
                     </button>
                     <div>
-                      {/* <button onClick={() => console.log(replies)}>
-                        feed logger lol
-                      </button> */}
-
 
                       {replies.map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
                         <RepliesFeed
@@ -241,6 +232,11 @@ function RepliesFeed({ replies, user }: any) {
   return (
     <>
       <p>{user?.username} says: {replies?.body}</p>
+      <ReplyModal
+        buttonText='Reply'
+        header='Submit new Reply'
+      />
     </>
   )
 }
+

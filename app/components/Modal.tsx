@@ -184,10 +184,6 @@ export default function Modal(props: ModalProps) {
                     {/*footer*/}
                   </div>) : null}
 
-
-
-
-
                 {showProfileImageUpload ? (
                   <div className="relative p-6 flex-auto w-[768px] h-[315px]">
                     <div className="float-right mb-5 -mt-5">
@@ -238,10 +234,6 @@ export default function Modal(props: ModalProps) {
 
                   </div>
                 ) : null}
-
-
-
-
 
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
