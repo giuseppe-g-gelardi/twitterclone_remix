@@ -108,11 +108,7 @@ export default function SinglePostPage() {
           replies={null}
           inputName='like'
           buttonValue='like'
-          commentData={commentData}
         />
-        <button onClick={() => console.log(commentData)}>
-          commentData logger
-        </button>
       </div>
       <div className="mt-2.5">
         <PostBox />
@@ -125,7 +121,6 @@ export default function SinglePostPage() {
               replies={comment.replyItems}
               inputName='commentLike'
               buttonValue='commentLike'
-              commentData={commentData}
             />
           ))}
       </div>

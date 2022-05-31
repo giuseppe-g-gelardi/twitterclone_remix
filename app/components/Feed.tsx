@@ -206,11 +206,10 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
 
                       {replies.map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
                         <RepliesFeed
-                          key={reply._id}
+                          key={Math.random().toString(16).slice(2)}
                           replies={reply.reply}
                           user={reply.other}
                         />
-
                       ))}
                     </div>
                   </>
