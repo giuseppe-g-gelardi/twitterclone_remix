@@ -9,7 +9,8 @@ import type { User } from "./models/user.models"
 
 // ! all user auth (login, register) is located in session.server.ts
 
-export async function findByUsername({ username }: { username: string | undefined}): Promise<User> {
+// export async function findByUsername({ username }: { username: string | undefined}): Promise<User> {
+  export async function findByUsername(username: string): Promise<User> {
   const response = await fetch(`http://localhost:8000/api/users/${username}`)
   const user = response.json()
 

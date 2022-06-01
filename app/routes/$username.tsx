@@ -31,9 +31,9 @@ import ProfileHeader from "../components/ProfileHeader";
 import Feed from "../components/Feed";
 import BackButton from "../components/BackButton";
 
-export const loader: LoaderFunction = async ({ params, request }: any) => {
+export const loader: LoaderFunction = async ({ params, request }) => {
   const publicUsers: User[] = await findPublicUsers()
-  const user: User = await findByUsername(params)
+  const user: User = await findByUsername(params.username!)
   const posts: Post[] = await getUserPosts(user.username)
   const sessionUser: User | null = await getUser(request)
   const data = { sessionUser }
