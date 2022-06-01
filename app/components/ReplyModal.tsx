@@ -9,7 +9,7 @@ type LoaderData = {
 }
 
 type ModalProps = {
-  buttonText: string,
+  buttonText: any
   header: string,
   feedid: string
 }
@@ -36,7 +36,7 @@ export default function ReplyModal(props: ModalProps) {
   return (
     <>
       <button
-        className="bg-violet-500 font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl"
+        className="font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl"
         onClick={() => setShowModal(true)}
       >
         {buttonText}
@@ -102,7 +102,6 @@ export default function ReplyModal(props: ModalProps) {
                     {isAdding ? 'Posting...' : 'Post'}
                   </button>
                 </div>
-
               </Form>
               {/*body*/}
             </div>

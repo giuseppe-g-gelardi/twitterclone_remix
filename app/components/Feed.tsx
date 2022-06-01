@@ -1,5 +1,5 @@
 import type { Key } from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Form, Link } from '@remix-run/react'
 
@@ -11,7 +11,9 @@ import type { Reply } from '../api/models/reply.models'
 import type { User } from '../api/models/user.models'
 
 import Icons from "./Icons"
-import ReplyModal from './ReplyModal'
+import RepliesFeed from './RepliesFeed'
+
+
 
 type PropTypes = {
   feed: Post | Comment | Reply | any,
@@ -25,11 +27,6 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
   const createdAt = feed?.createdAt as unknown as Date
   const timestamp = moment(createdAt).fromNow()
   const [showReplies, setShowReplies] = useState(false)
-
-  useEffect(() => {
-    // console.log('replies in feed useEffect', replies)
-    "use effect"
-  })
 
   const likeIcons = (
     <div className="flex">
@@ -205,6 +202,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                     <div>
 
                       {replies
+                        // .sort((a: any, b: any) => new Date(b.reply.createdAt).valueOf() - new Date(a.reply.createdAt).valueOf())
                         .map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
                           <RepliesFeed
                             key={Math.random().toString(16).slice(2)}
@@ -228,19 +226,5 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
   )
 }
 
-function RepliesFeed({ replies, user, feedid }: any) {
 
-  return (
-    <>
-      <p>{feedid}</p>
-      <p>{user?.username} says: {replies?.body}</p>
-      <p>{replies?.createdAt}</p>
-      <ReplyModal
-        buttonText='Reply'
-        header='Submit new Reply'
-        feedid={feedid}
-      />
-    </>
-  )
-}
 
