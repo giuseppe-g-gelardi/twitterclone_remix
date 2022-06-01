@@ -63,13 +63,12 @@ export const action: ActionFunction = async ({ request, params }) => {
   const postid = form.get('like') as string
   const commentid = form.get('commentLike') as string
   const replyid = form.get('replyLike') as string
+  
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
   if (_action === 'commentLike') return likeUnlikeComment(loggedInUser?._id, commentid)
   if (_action === 'reply') return newReply({user: loggedInUser?._id, body: values.body, commentid: values.commentid})
   if (_action === 'replyLike') return likeUnlikeReply(replyid, loggedInUser?._id)
   
-  console.log('action',_action, 'values',values, 'replyid', replyid)
-
   // TODO: set up specific action for new comment
   const newComment = await postNewComment(post._id, loggedInUser?.username, body)
 
