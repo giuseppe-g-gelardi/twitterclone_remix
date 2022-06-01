@@ -835,20 +835,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: 598px;
 }
 
-.min-w-\[515px\] {
-  min-width: 515px;
-}
-
 .max-w-\[598px\] {
   max-width: 598px;
 }
 
 .max-w-3xl {
   max-width: 48rem;
-}
-
-.max-w-\[515px\] {
-  max-width: 515px;
 }
 
 .flex-1 {

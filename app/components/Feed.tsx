@@ -71,13 +71,13 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
 
   const chatIcons = (
     <div className="flex">
-        <div className="hover:bg-slate-400 rounded-full">
-          {feed?.comments?.length || feed?.replies?.length ? (
-            Icons.chatFilled
-          ) : (
-            Icons.chatOutline
-          )}
-        </div>
+      <div className="hover:bg-slate-400 rounded-full">
+        {feed?.comments?.length || feed?.replies?.length ? (
+          Icons.chatFilled
+        ) : (
+          Icons.chatOutline
+        )}
+      </div>
       {feed.comments && (
         <div>
           {feed?.comments?.length ? feed?.comments?.length : '0'}
@@ -166,13 +166,13 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
         </div>
         <div className="flex justify-between mt-2 ">
           <div>
-            {feed.replies && (
+            {feed.replies ? (
               <ReplyModal
                 buttonText={chatIcons}
                 header='Submit new Reply'
                 feedid={feed._id}
               />
-            )}
+            ) : chatIcons}
           </div>
           <div>
             {repostIcon}

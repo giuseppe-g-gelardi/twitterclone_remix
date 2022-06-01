@@ -36,7 +36,7 @@ export default function ReplyModal(props: ModalProps) {
   return (
     <>
       <button
-        className="font-extrabold text-white active:bg-violet-600 shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 border-0 rounded-3xl"
+        className=" hover:bg-slate-400 rounded-full"
         onClick={() => setShowModal(true)}
       >
         {buttonText}

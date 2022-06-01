@@ -137,6 +137,11 @@ export default function RepliesFeed({ replies, user, feedid }: any) {
                   header='Submit new Reply'
                   feedid={feedid}
                 />
+                <button
+                  onClick={() => console.log(replies)}
+                >
+                  id logger lol
+                </button>
               </div>
               <div>{repostIcon}</div>
               <div>{likeIcons}</div>
