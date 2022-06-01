@@ -12,6 +12,7 @@ import type { User } from '../api/models/user.models'
 
 import Icons from "./Icons"
 import RepliesFeed from './RepliesFeed'
+import ReplyModal from './ReplyModal'
 
 type PropTypes = {
   feed: Post | Comment | Reply | any,
@@ -70,15 +71,13 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
 
   const chatIcons = (
     <div className="flex">
-      <button onClick={() => console.log('chat button pressed', feed)} >
         <div className="hover:bg-slate-400 rounded-full">
-          {feed?.comments?.length ? (
+          {feed?.comments?.length || feed?.replies?.length ? (
             Icons.chatFilled
           ) : (
             Icons.chatOutline
           )}
         </div>
-      </button>
       {feed.comments && (
         <div>
           {feed?.comments?.length ? feed?.comments?.length : '0'}
@@ -167,7 +166,13 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
         </div>
         <div className="flex justify-between mt-2 ">
           <div>
-            {chatIcons}
+            {feed.replies && (
+              <ReplyModal
+                buttonText={chatIcons}
+                header='Submit new Reply'
+                feedid={feed._id}
+              />
+            )}
           </div>
           <div>
             {repostIcon}

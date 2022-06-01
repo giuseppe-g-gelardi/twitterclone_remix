@@ -51,7 +51,6 @@ export default function RepliesFeed({ replies, user, feedid }: any) {
 
   const chatIcons = (
     <div className="flex">
-      {/* <button onClick={() => console.log('chat button pressed', replies)} > */}
         <div className="hover:bg-slate-400 rounded-full">
           {replies?.comments?.length ? (
             Icons.chatFilled
@@ -59,7 +58,6 @@ export default function RepliesFeed({ replies, user, feedid }: any) {
             Icons.chatOutline
           )}
         </div>
-      {/* </button> */}
       {replies?.comments && (
         <div>
           {replies?.comments?.length ? replies?.comments?.length : '0'}
