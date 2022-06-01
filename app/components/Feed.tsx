@@ -13,8 +13,6 @@ import type { User } from '../api/models/user.models'
 import Icons from "./Icons"
 import RepliesFeed from './RepliesFeed'
 
-
-
 type PropTypes = {
   feed: Post | Comment | Reply | any,
   user: User,

@@ -10,16 +10,16 @@ export default function RepliesFeed({ replies, user, feedid }: any) {
   const likeIcons = (
     <div className="flex">
       <Form replace method='put'>
-        {/* <input
+        <input
           type='hidden'
-          value={replies._id}
-          name={inputName}
+          value={replies?._id}
+          name='replyLike'
         /> 
         <button
           type="submit"
           name='_action'
-          value={buttonValue}
-        > */}
+          value='replyLike'
+        >
         <div className="hover:bg-slate-400 rounded-full">
           {replies?.likes?.length ? (
             Icons.heartFilled
@@ -27,7 +27,7 @@ export default function RepliesFeed({ replies, user, feedid }: any) {
             Icons.heartOutline
           )}
         </div>
-        {/* </button> */}
+        </button>
       </Form>
       <div>
         {replies?.likes?.length ? replies?.likes.length : '0'}

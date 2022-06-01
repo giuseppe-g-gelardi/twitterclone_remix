@@ -35,6 +35,15 @@ export async function newReply({ commentid, user, body }: any) {
   return newReply
 }
 
-export async function likeUnlikeReply(id: string) {
-  return id
+export async function likeUnlikeReply(replyid: string, userid: string | undefined) {
+  const response = await fetch(`http://localhost:8000/api/replies/${replyid}/likes`, {
+    method: 'PUT',
+    body: JSON.stringify({userid}),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+  const newLike = response.json()
+
+  return newLike
 }
