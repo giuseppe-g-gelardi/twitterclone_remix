@@ -147,7 +147,6 @@ export function CatchBoundary() {
       </div>
     );
   }
-
   throw new Error('Unkown error');
 }
 

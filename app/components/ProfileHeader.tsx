@@ -21,9 +21,7 @@ export default function ProfileHeader() {
   return (
     <div className="flex flex-col max-h-full">
       <div className="shrink-0 w-full min-h-full relative">
-
         <div className="flex w-full h-52 relative bg-gray-500">
-
           {user.profileBanner ? (
             <img
               src={user.profileBanner}
@@ -37,30 +35,23 @@ export default function ProfileHeader() {
               alt=""
             />
           )}
-
         </div>
 
         <div className="flex z-10 -mt-16">
-
           <img
             src={user.profilePicture}
             alt=''
             className="z-10 inline object-cover w-36 h-36 mr-2 rounded-full border-2 ml-4"
           />
-
           <div className="ml-auto">
             {loggedInUser?._id === user._id ? (
-
               <div
                 className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-30 h-10 mr-5 mt-20 p-2"
               >
-
                 <Modal
                   buttonText='Edit Profile'
                   header='Edit Profile'
                 />
-
-
               </div>
             ) : (
               <Form replace method='put'>
@@ -69,7 +60,6 @@ export default function ProfileHeader() {
                   value={loggedInUser?.username}
                   name='follow'
                 />
-
                 {isFollowing ? (
                   <button
                     type='submit'

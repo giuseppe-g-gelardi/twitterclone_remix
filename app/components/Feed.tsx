@@ -216,7 +216,6 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                         ))}
                     </div>
                   </>
-
                 )}
               </>
             ) : (

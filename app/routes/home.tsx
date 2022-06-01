@@ -49,12 +49,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
-  const body = form.get('body')
+
   const user = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
   const username = loggedInUser?.username
+  
   const { _action } = Object.fromEntries(form)
+  const body = form.get('body')
   const postid = form.get('like') as string
 
   if (_action === 'like') return likeUnlikePost(user?._id, postid)

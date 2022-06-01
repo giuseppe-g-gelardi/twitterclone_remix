@@ -1,7 +1,7 @@
 import type { SyntheticEvent } from "react";
 import { useEffect, useState } from "react";
 
-import { useActionData,  } from "@remix-run/react";
+import { Form, useActionData,  } from "@remix-run/react";
 
 import type { Area, Point } from 'react-easy-crop'
 import Cropper from 'react-easy-crop'
@@ -140,7 +140,7 @@ export default function UploadProfileBanner() {
               src={previewImage}
               alt=''
             />
-          <form method="post" encType="multipart/form-data">
+          <Form replace method="post" encType="multipart/form-data">
             <input
               name="banner_img"
               type='hidden'
@@ -161,7 +161,7 @@ export default function UploadProfileBanner() {
             >
               upload banner
             </button>
-              </form>
+              </Form>
         </>
       ) : null}
 

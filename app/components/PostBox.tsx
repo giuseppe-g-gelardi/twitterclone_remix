@@ -9,7 +9,7 @@ type LoaderData = {
   loggedInUser: User
 }
 
-export default function PostBox({ postValue }: any) {
+export default function PostBox({ postValue }: { postValue: string }) {
   const { loggedInUser } = useLoaderData<LoaderData>()
   const transition = useTransition()
   const isAdding = transition.state === 'submitting' && transition.submission.formData.get('body')
@@ -21,10 +21,6 @@ export default function PostBox({ postValue }: any) {
       formRef.current?.reset()
     }
   }, [isAdding])
-
-  useEffect(() => {
-    console.log(postValue)
-  }, [postValue])
 
   return (
     <div className="">

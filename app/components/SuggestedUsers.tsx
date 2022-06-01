@@ -31,6 +31,7 @@ export default function SuggestedUsers() {
   }
 
   useEffect(() => {
+    // polling not working, probably an issue in root
     getThreeRandomPublicUsers(publicUsers, 3)
     if (!isCancelled) {
       setInterval(getThreeRandomPublicUsers, 1000, publicUsers, 3)
@@ -50,7 +51,8 @@ export default function SuggestedUsers() {
         {suggested?.map(user =>
           <UserCard
             key={user._id}
-            user={user} setDropdown={(_value: SetStateAction<boolean | undefined>): void => {
+            user={user} 
+            setDropdown={(_value: SetStateAction<boolean | undefined>): void => {
               throw new Error("Function not implemented.")
             }}
           />

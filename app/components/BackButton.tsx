@@ -1,6 +1,6 @@
 import Icons from './Icons'
 
-export default function BackButton({ text }: any) {
+export default function BackButton({ text }: { text: string }) {
   return (
     <div className="px-5 my-2 z-20 flex sticky top-0 dark:bg-black bg-white">
       <button
