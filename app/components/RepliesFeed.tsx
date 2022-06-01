@@ -87,8 +87,6 @@ export default function RepliesFeed({ replies, user, feedid }: any) {
   )
 
   return (
-    <>
-      <>
         <div className="flex items-start border-t-2 border-b-violet-200">
           <div className='flex flex-col'>
             <div>
@@ -148,7 +146,5 @@ export default function RepliesFeed({ replies, user, feedid }: any) {
             </div>
           </div>
         </div>
-      </>
-    </>
   )
 }

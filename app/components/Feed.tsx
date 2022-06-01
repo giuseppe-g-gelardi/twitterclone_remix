@@ -200,7 +200,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                     <div>
 
                       {replies
-                        // .sort((a: any, b: any) => new Date(b.reply.createdAt).valueOf() - new Date(a.reply.createdAt).valueOf())
+                        .sort((a: any, b: any) => new Date(b?.reply?.createdAt).valueOf() - new Date(a?.reply?.createdAt).valueOf())
                         .map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
                           <RepliesFeed
                             key={Math.random().toString(16).slice(2)}

@@ -109,7 +109,8 @@ export default function UserPage() {
             feed={post}
             user={user}
             inputName='like'
-            buttonValue='like'
+            buttonValue='like' 
+            replies={undefined}          
           />
         ))}
     </>

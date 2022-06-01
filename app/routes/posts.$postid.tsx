@@ -13,16 +13,18 @@ import Feed from "~/components/Feed"
 import PostBox from "~/components/PostBox"
 import BackButton from "../components/BackButton"
 import { getReplies, likeUnlikeReply, newReply } from "~/api/replies.server"
+import type { Comment } from "~/api/models/comment.models"
 
-export const loader: LoaderFunction = async ({ params, request }: any) => {
+export const loader: LoaderFunction = async ({ params, request }) => {
+  const { postid } = params
   const publicUsers: User[] = await findPublicUsers()
-  const post = await getSinglePost(params.postid)
+  const post = await getSinglePost(postid) 
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
   const postUser = await findByUsername({ username: post?.username })
 
-  async function getCommentsFeed(commentsArray: any) {
+  async function getCommentsFeed(commentsArray: Comment[]) {
     try {
       let postFeed = []
       for (let comment of commentsArray) {
