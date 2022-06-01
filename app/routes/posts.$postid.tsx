@@ -62,16 +62,12 @@ export const action: ActionFunction = async ({ request, params }) => {
   const postid = form.get('like') as string
   const commentid = form.get('commentLike') as string
   const replyid = form.get('replyLike') as string
-  
+
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
   if (_action === 'commentLike') return likeUnlikeComment(loggedInUser?._id, commentid)
   if (_action === 'reply') return newReply({user: loggedInUser?._id, body: values.body, commentid: values.commentid})
   if (_action === 'replyLike') return likeUnlikeReply(replyid, loggedInUser?._id)
-  
-  // TODO: set up specific action for new comment
-  const newComment = await postNewComment(post._id, loggedInUser?.username, body)
-
-  return newComment
+  if (_action === 'comment') return postNewComment(post._id, loggedInUser?.username, body)
 }
 
 type LoaderData = {
@@ -114,7 +110,9 @@ export default function SinglePostPage() {
         />
       </div>
       <div className="mt-2.5">
-        <PostBox />
+        <PostBox 
+          postValue='comment'
+        />
         {commentData
           .map((comment: Comments) => (
             <Feed

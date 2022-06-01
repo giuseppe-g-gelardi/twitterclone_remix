@@ -9,7 +9,7 @@ type LoaderData = {
   loggedInUser: User
 }
 
-export default function PostBox() {
+export default function PostBox({ postValue }: any) {
   const { loggedInUser } = useLoaderData<LoaderData>()
   const transition = useTransition()
   const isAdding = transition.state === 'submitting' && transition.submission.formData.get('body')
@@ -21,6 +21,10 @@ export default function PostBox() {
       formRef.current?.reset()
     }
   }, [isAdding])
+
+  useEffect(() => {
+    console.log(postValue)
+  }, [postValue])
 
   return (
     <div className="">
@@ -52,7 +56,7 @@ export default function PostBox() {
           <button
             type='submit'
             name='_action'
-            value='post'
+            value={postValue}
             className="bg-violet-500 border-0 text-white font-extrabold rounded-3xl w-20 h-10 ml-auto mr-2 mb-2"
           >
             {isAdding ? 'Posting...' : 'Post'}

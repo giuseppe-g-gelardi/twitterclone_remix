@@ -58,10 +58,7 @@ export const action: ActionFunction = async ({ request }) => {
   const postid = form.get('like') as string
 
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
-
-  const newPost: Post = await createNewPost(username, body)
-
-  return newPost
+  if (_action === 'post') return createNewPost(username, body)
 }
 
 type LoaderData = {
@@ -75,7 +72,9 @@ export default function HomePage() {
   return (
     <>
       <Header loggedInUser={loggedInUser} />
-      <PostBox />
+      <PostBox 
+        postValue='post'
+      />
 
       {feed
       // implement different sorting methods ;)

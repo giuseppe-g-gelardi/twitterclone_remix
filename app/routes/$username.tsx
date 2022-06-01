@@ -84,8 +84,6 @@ export const action: ActionFunction = async ({ request, params }) => {
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
   if (_action === 'banner_img') return uploadProfileBanner(params.username, bannerSrc?.toString())
   if (_action === 'profile_img') return uploadProfileImage(params.username, profileSrc?.toString())
-
-  if (!_action) return null
 }
 
 type LoaderData = {
