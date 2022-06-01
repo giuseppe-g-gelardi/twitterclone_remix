@@ -6,25 +6,25 @@ import { createUserSession, register } from "../api/session.server"
 
 import RegisterForm from "../components/RegisterForm"
 
-function validateUsername(username: any) {
+function validateUsername(username: string | any[]) {
   if (typeof username !== 'string' || username.length < 3) {
     return 'Invalid username. '
   }
 }
 
-function validateEmail(email: any) {
+function validateEmail(email: string | any[]) {
   if (typeof email !== 'string' || email.length < 3) {
     return 'Invalid Email'
   }
 }
 
-function validatePassword(password: any) {
+function validatePassword(password: string | any[]) {
   if (typeof password !== 'string' || password.length < 6) {
     return 'Password must be at least 6 characters'
   }
 }
 
-function badRequest(data: any) {
+function badRequest(data: { fieldErrors: { username: string | undefined; email: string | undefined; password: string | undefined }; fields: { username: string; email: string; password: string } }) {
   return json(data, { status: 400 })
 }
 

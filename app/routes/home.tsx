@@ -29,15 +29,15 @@ export const loader: LoaderFunction = async ({ request }) => {
   async function getFeed(users: string[] | undefined, userPosts: Post[]) {
     try {
 
-      const userFeed: any[] = []
+      const userFeed = []
       for (const element of users!) {
         const item = await getUserPosts(element)
         userFeed.push(...item)
       }
 
       return userFeed.concat(userPosts)
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw new Error(error as string | undefined)
     }
   }
   const feed = await getFeed(following, posts)
@@ -79,8 +79,8 @@ export default function HomePage() {
 
       {feed
       // implement different sorting methods ;)
-        .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-        .map((postFeed: any) => (
+        .sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+        .map((postFeed) => (
           <Feed
             key={postFeed._id}
             feed={postFeed}
@@ -91,7 +91,6 @@ export default function HomePage() {
           />
         ))
       }
-
     </>
   )
 }

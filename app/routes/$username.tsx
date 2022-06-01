@@ -47,7 +47,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   const uploadBannerHandler: UploadHandler = composeUploadHandlers(
     async ({ name, data }) => {
       if (name !== "banner_img") return null;
-      const uploadedImage: any = await uploadImage(data)
+      const uploadedImage = await uploadImage(data)
       return uploadedImage.secure_url;
     },
     createMemoryUploadHandler()
@@ -57,7 +57,7 @@ export const action: ActionFunction = async ({ request, params }) => {
   const uploadProfileHandler: UploadHandler = composeUploadHandlers(
     async ({ name, data }) => {
       if (name !== "profile_img") return null;
-      const uploadedImage: any = await uploadImage(data)
+      const uploadedImage = await uploadImage(data)
       return uploadedImage.secure_url;
     },
     createMemoryUploadHandler()
@@ -102,8 +102,8 @@ export default function UserPage() {
 
       <ProfileHeader />
       {posts
-        .sort((a: any, b: any) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-        .map((post: any) => (
+        .sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+        .map((post) => (
           <Feed
             key={post._id}
             feed={post}

@@ -6,19 +6,19 @@ import { login, createUserSession } from "../api/session.server"
 
 import LoginForm from "../components/LoginForm"
 
-function validateEmail(email: any) {
+function validateEmail(email: string | any[]) {
   if (typeof email !== 'string' || email.length < 3) {
     return 'Invalid Email'
   }
 }
 
-function validatePassword(password: any) {
+function validatePassword(password: string | any[]) {
   if (typeof password !== 'string' || password.length < 6) {
     return 'Password must be at least 6 characters'
   }
 }
 
-function badRequest(data: any) {
+function badRequest(data: { fieldErrors: { email: string | undefined; password: string | undefined } | { email: string }; fields: { email: string; password: string } }) {
   return json(data, { status: 400 })
 }
 

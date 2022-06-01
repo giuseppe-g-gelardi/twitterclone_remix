@@ -14,6 +14,7 @@ import PostBox from "~/components/PostBox"
 import BackButton from "../components/BackButton"
 import { getReplies, likeUnlikeReply, newReply } from "~/api/replies.server"
 import type { Comment } from "~/api/models/comment.models"
+import type { Key } from "react"
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const { postid } = params
@@ -31,16 +32,12 @@ export const loader: LoaderFunction = async ({ params, request }) => {
         let item = await fetchComments(comment)
         let commentUser = await findUserById(item.user)
         let replies = item.replies
-
-        let replyItems: { replyItem: any, replyUser: User }[] = []
+        let replyItems: { replyItem: string[], replyUser: User }[] = []
 
         replies.forEach(async (reply: string | null) => {
           let replyItem = await getReplies(reply)
-          // let replyUser = await findUserById(replyItem.user)
-          // replyItems.push({replyItem, replyUser})
           replyItems.push(replyItem)
         })
-
         postFeed.push({ item, commentUser, replyItems })
       }
       return postFeed
@@ -91,11 +88,12 @@ type CommentData = {
   replies: any
 }
 
-// type Comments = {
-//   _id: Key | null | undefined;
-//   item: Post;
-//   commentUser: User
-// }
+type Comments = { 
+  _id: Key | null | undefined; 
+  item: any; 
+  commentUser: User; 
+  replyItems: any 
+}
 
 export default function SinglePostPage() {
   const { post, commentData, postUser } = useLoaderData<LoaderData>()
@@ -118,7 +116,7 @@ export default function SinglePostPage() {
       <div className="mt-2.5">
         <PostBox />
         {commentData
-          .map((comment: any) => (
+          .map((comment: Comments) => (
             <Feed
               key={comment._id}
               feed={comment.item}
