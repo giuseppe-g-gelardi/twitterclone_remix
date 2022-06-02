@@ -93,5 +93,27 @@ export async function logout(request: Request): Promise<Response> {
   })
 } 
 
+export function validateUsername(username: string | any[]) {
+  if (typeof username !== 'string' || username.length < 3) {
+    return 'Invalid username. '
+  }
+}
 
+export function validateEmail(email: string | any[]) {
+  if (typeof email !== 'string' || email.length < 3) {
+    return 'Invalid Email'
+  }
+}
+
+export function validatePassword(password: string | any[]) {
+  if (typeof password !== 'string' || password.length < 6) {
+    return 'Password must be at least 6 characters'
+  }
+}
+
+export function confirmValidPassword(password: any, confirmPassword: any) {
+  if (password !== confirmPassword) {
+    return 'Passwords must match'
+  }
+}
 
