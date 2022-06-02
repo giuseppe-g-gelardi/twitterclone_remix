@@ -73,10 +73,30 @@ export default function RegisterForm() {
             </div>
           )}
         </div>
+
+        <input
+          className="w-full p-2 rounded-md border border-violet-300 focus:border-purple-700 bg-transparent"
+          type='password' name='confirmPassword' placeholder='Confirm Password' />
+        <div className="mb-5">
+          {actionData?.fieldErrors?.confirmPassword ? (
+            <p
+              className='text-red-700'
+              role='alert'
+              id='password-error'
+            >
+              {actionData?.fieldErrors?.confirmPassword}
+            </p>
+          ) : (
+            <div className="mb-5">
+
+            </div>
+          )}
+        </div>
+        
         <button
           className="w-full p-2 bg-violet-400 rounded-full font-bold text-gray-900 border border-gray-700 "
           type='submit' value='login'>
-          Login
+          Register
         </button>
         <div className="flex items-center justify-center">
           <div className="text-center text-sm text-gray-500">

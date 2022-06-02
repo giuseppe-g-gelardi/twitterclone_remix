@@ -24,7 +24,23 @@ function validatePassword(password: string | any[]) {
   }
 }
 
-function badRequest(data: { fieldErrors: { username: string | undefined; email: string | undefined; password: string | undefined }; fields: { username: string; email: string; password: string } }) {
+function confirmValidPassword(password: any, confirmPassword: any) {
+  if (password !== confirmPassword) {
+    return 'Passwords must match'
+  }
+}
+
+function badRequest(data: { 
+  fieldErrors: { 
+    username: string | undefined; 
+    email: string | undefined; 
+    password: string | undefined, 
+    confirmPassword: string | undefined }; 
+  fields: { 
+    username: string; email: string; 
+    password: string, 
+    confirmPassword: string 
+  } }) {
   return json(data, { status: 400 })
 }
 
@@ -33,17 +49,25 @@ export const action: ActionFunction = async ({ request }) => {
   const username = form.get('username') as string
   const email = form.get('email') as string
   const password = form.get('password') as string
+  const confirmPassword = form.get('confirmPassword') as string
   
   const fields: { 
-    username: string, email: string, password: string 
+    username: string, 
+    email: string, 
+    password: string, 
+    confirmPassword: string
   } = {
-    username, email, password,
+    username, 
+    email, 
+    password, 
+    confirmPassword
   }
 
   const fieldErrors = {
     username: validateUsername(username),
     email: validateEmail(email),
-    password: validatePassword(password)
+    password: validatePassword(password),
+    confirmPassword: confirmValidPassword(password, confirmPassword)
   }
 
   if (Object.values(fieldErrors).some(Boolean)) {
