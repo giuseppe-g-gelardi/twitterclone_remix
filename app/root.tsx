@@ -92,7 +92,7 @@ function Layout({ children }: Props) {
         <div className="col-span-3 border-0 sm:border-x-2 md:col-span-2 border-gray-500 w-full min-w-full max-w-[598px] xm:mr-auto">
           {children}
         </div>
-        <div className="col-span-3 border-0 border-gray-500 w-full fixed bottom-0 sm:invisible sm:block md:col-span-2 max-w-[598px]">
+        <div className="col-span-3 border-0 border-gray-500 w-full fixed bottom-0 sm:invisible sm:block md:col-span-2 max-w-[598px] left-0 right-0 items-center text-center">
           <BottomNav />
         </div>
       </div>

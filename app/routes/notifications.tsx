@@ -58,7 +58,7 @@ export default function NotificationsPage() {
 
   return (
     <>
-      <div className="flex flex-col min-w-[598px] max-w-[598px]">
+      <div className="flex flex-col sm:min-w-[598px] sm:max-w-[598px]">
         <BackButton
           text='Notifications'
         />
@@ -82,7 +82,7 @@ export default function NotificationsPage() {
           logger
         </button>
 
-        <div className="">
+        <div>
           {notifications.map((notification: NotificationType) => (
             <ul key={Math.random()}>
               <Notifications
