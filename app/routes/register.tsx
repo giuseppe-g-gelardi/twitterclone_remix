@@ -8,8 +8,8 @@ import {
 } from "@remix-run/react"
 
 import type { User } from "../api/models/user.models"
-import { 
-  createUserSession, 
+import {
+  createUserSession,
   register,
   validateUsername,
   validateEmail,
@@ -19,20 +19,13 @@ import {
 
 import Icons from "~/components/Icons"
 
-function badRequest(data: {
+type ActionData = {
   fieldErrors: {
-    username: string | undefined;
-    email: string | undefined;
-    password: string | undefined,
-    confirmPassword: string | undefined
-  };
-  fields: {
-    username: string; email: string;
-    password: string,
-    confirmPassword: string
+    username?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
   }
-}) {
-  return json(data, { status: 400 })
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -41,6 +34,23 @@ export const action: ActionFunction = async ({ request }) => {
   const email = form.get('email') as string
   const password = form.get('password') as string
   const confirmPassword = form.get('confirmPassword') as string
+
+  function badRequest(data: {
+    fieldErrors: {
+      username: string | undefined;
+      email: string | undefined;
+      password: string | undefined,
+      confirmPassword: string | undefined
+    };
+    fields: {
+      username: string; 
+      email: string;
+      password: string,
+      confirmPassword: string
+    }
+  }) {
+    return json(data, { status: 400 })
+  }
 
   const fields: {
     username: string,
@@ -70,7 +80,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function RegisterPage() {
-  const actionData = useActionData()
+  const actionData = useActionData<ActionData>()
   const [searchParams] = useSearchParams()
 
   return (
