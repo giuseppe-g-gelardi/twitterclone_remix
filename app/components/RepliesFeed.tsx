@@ -5,7 +5,7 @@ import moment from "moment";
 
 export default function RepliesFeed({ replies, user, feedid }: any) {
   const createdAt = replies?.createdAt as unknown as Date
-  const timestamp = moment(createdAt).fromNow()
+  const timestamp = moment(new Date(createdAt)).fromNow()
 
   const likeIcons = (
     <div className="flex">

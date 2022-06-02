@@ -101,14 +101,16 @@ export default function UserPage() {
       {posts
         .sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
         .map((post) => (
-          <Feed
-            key={post._id}
-            feed={post}
-            user={user}
-            inputName='like'
-            buttonValue='like' 
-            replies={undefined}          
-          />
+          <div key={post._id}>
+            <Feed
+              key={post._id}
+              feed={post}
+              user={user}
+              inputName='like'
+              buttonValue='like'
+              replies={undefined}
+            />
+          </div>
         ))}
     </div>
   )

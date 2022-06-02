@@ -24,8 +24,9 @@ type PropTypes = {
 
 export default function Feed({ feed, user, inputName, buttonValue, replies }: PropTypes) {
   const createdAt = feed?.createdAt as unknown as Date
-  const timestamp = moment(createdAt).fromNow()
+  const timestamp = moment(new Date(createdAt)).fromNow()
   const [showReplies, setShowReplies] = useState(false)
+
 
   const likeIcons = (
     <div className="flex">
@@ -207,12 +208,14 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                       {replies
                         .sort((a: any, b: any) => new Date(b?.reply?.createdAt).valueOf() - new Date(a?.reply?.createdAt).valueOf())
                         .map((reply: { _id: Key | null | undefined; reply: any; other: User }) => (
-                          <RepliesFeed
-                            key={Math.random().toString(16).slice(2)}
-                            replies={reply.reply}
-                            user={reply.other}
-                            feedid={feed._id}
-                          />
+                          <div key={Math.random().toString(16).slice(2)}>
+                            <RepliesFeed
+                              key={Math.random().toString(16).slice(2)}
+                              replies={reply.reply}
+                              user={reply.other}
+                              feedid={feed._id}
+                            />
+                          </div>
                         ))}
                     </div>
                   </>

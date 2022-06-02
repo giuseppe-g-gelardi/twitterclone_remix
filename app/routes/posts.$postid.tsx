@@ -20,7 +20,7 @@ import BackButton from "../components/BackButton"
 export const loader: LoaderFunction = async ({ params, request }) => {
   const { postid } = params
   const publicUsers: User[] = await findPublicUsers()
-  const post = await getSinglePost(postid) 
+  const post = await getSinglePost(postid)
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
@@ -66,7 +66,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
   if (_action === 'commentLike') return likeUnlikeComment(loggedInUser?._id, commentid)
-  if (_action === 'reply') return newReply({user: loggedInUser?._id, body: values.body, commentid: values.commentid})
+  if (_action === 'reply') return newReply({ user: loggedInUser?._id, body: values.body, commentid: values.commentid })
   if (_action === 'replyLike') return likeUnlikeReply(replyid, loggedInUser?._id)
   if (_action === 'comment') return postNewComment(post._id, loggedInUser?.username, body)
 }
@@ -85,11 +85,11 @@ type CommentData = {
   replies: any
 }
 
-type Comments = { 
-  _id: Key | null | undefined; 
-  item: any; 
-  commentUser: User; 
-  replyItems: any 
+type Comments = {
+  _id: Key | null | undefined;
+  item: any;
+  commentUser: User;
+  replyItems: any
 }
 
 export default function SinglePostPage() {
@@ -111,19 +111,21 @@ export default function SinglePostPage() {
         />
       </div>
       <div className="mt-2.5">
-        <PostBox 
+        <PostBox
           postValue='comment'
         />
         {commentData
           .map((comment: Comments) => (
-            <Feed
-              key={comment._id}
-              feed={comment.item}
-              user={comment.commentUser}
-              replies={comment.replyItems}
-              inputName='commentLike'
-              buttonValue='commentLike'
-            />
+            <div key={Math.random().toString(16).slice(2)}>
+              <Feed
+                key={comment._id}
+                feed={comment.item}
+                user={comment.commentUser}
+                replies={comment.replyItems}
+                inputName='commentLike'
+                buttonValue='commentLike'
+              />
+            </div>
           ))}
       </div>
     </div>
