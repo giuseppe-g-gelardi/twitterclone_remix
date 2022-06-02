@@ -23,13 +23,13 @@ import {
   uploadProfileBanner,
   uploadProfileImage
 } from "../api/user.server";
-import { getUserPosts, likeUnlikePost } from "../api/posts.server";
 import { getUser } from "../api/session.server";
 import { uploadImage } from "../api/utils.server";
+import { getUserPosts, likeUnlikePost } from "../api/posts.server";
 
-import ProfileHeader from "../components/ProfileHeader";
 import Feed from "../components/Feed";
 import BackButton from "../components/BackButton";
+import ProfileHeader from "../components/ProfileHeader";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const publicUsers: User[] = await findPublicUsers()
@@ -94,7 +94,7 @@ export default function UserPage() {
   const { posts, user } = useLoaderData<LoaderData>()
 
   return (
-    <>
+    <div className="sm:min-w-[598px] sm:max-w-[598px]">
       <BackButton text={user.username} />
 
       <ProfileHeader />
@@ -110,7 +110,7 @@ export default function UserPage() {
             replies={undefined}          
           />
         ))}
-    </>
+    </div>
   )
 }
 

@@ -1,4 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+
 import { useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 
@@ -54,7 +55,7 @@ export const action: ActionFunction = async ({ request }) => {
   const data = { user }
   const loggedInUser = data.user
   const username = loggedInUser?.username
-  
+
   const { _action } = Object.fromEntries(form)
   const body = form.get('body')
   const postid = form.get('like') as string
@@ -74,12 +75,12 @@ export default function HomePage() {
   return (
     <>
       <Header loggedInUser={loggedInUser} />
-      <PostBox 
+      <PostBox
         postValue='post'
       />
 
       {feed
-      // implement different sorting methods ;)
+        // implement different sorting methods ;)
         .sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
         .map((postFeed) => (
           <Feed

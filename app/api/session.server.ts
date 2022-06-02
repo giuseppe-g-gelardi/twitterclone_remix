@@ -83,11 +83,6 @@ export async function getUser(request: Request): Promise<User | null> {
   }
 }
 
-// log out user and destroy session
-// TODO: find out why its redirection but not updating root.tsx
-// might need to force a refresh because
-// it destroys the session and redirects but
-// the button still says to log out once "logged out" until a refresh
 export async function logout(request: Request): Promise<Response> {
   const session = await storage.getSession(request.headers.get('Cookie'))
 

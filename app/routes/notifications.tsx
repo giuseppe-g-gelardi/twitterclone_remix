@@ -54,15 +54,11 @@ type NotificationType = {
 
 export default function NotificationsPage() {
   const { loggedInUser } = useLoaderData()
-
   const notifications = loggedInUser.notifications;
-
 
   return (
     <>
       <div className="flex flex-col min-w-[598px] max-w-[598px]">
-
-
         <BackButton
           text='Notifications'
         />

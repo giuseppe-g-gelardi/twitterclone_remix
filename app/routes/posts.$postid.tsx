@@ -1,20 +1,21 @@
+import type { Key } from "react"
+
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 import { useCatch, useLoaderData } from "@remix-run/react"
 
 import type { User } from "../api/models/user.models"
 import type { Post } from "../api/models/post.models"
+import type { Comment } from "~/api/models/comment.models"
 
-import { getSinglePost, likeUnlikePost } from "../api/posts.server"
 import { getUser } from "../api/session.server"
-import { fetchComments, likeUnlikeComment, postNewComment } from "../api/comments.server"
+import { getSinglePost, likeUnlikePost } from "../api/posts.server"
+import { getReplies, likeUnlikeReply, newReply } from "~/api/replies.server"
 import { findByUsername, findPublicUsers, findUserById } from "../api/user.server"
+import { fetchComments, likeUnlikeComment, postNewComment } from "../api/comments.server"
 
 import Feed from "~/components/Feed"
 import PostBox from "~/components/PostBox"
 import BackButton from "../components/BackButton"
-import { getReplies, likeUnlikeReply, newReply } from "~/api/replies.server"
-import type { Comment } from "~/api/models/comment.models"
-import type { Key } from "react"
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const { postid } = params
@@ -23,7 +24,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const user: User | null = await getUser(request)
   const data = { user }
   const loggedInUser = data.user
-  const postUser = await findByUsername({ username: post?.username })
+  const postUser = await findByUsername(post?.username!)
 
   async function getCommentsFeed(commentsArray: Comment[]) {
     try {
