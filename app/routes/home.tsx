@@ -57,7 +57,7 @@ export const action: ActionFunction = async ({ request }) => {
   const username = loggedInUser?.username
 
   const { _action } = Object.fromEntries(form)
-  const body = form.get('body')
+  const body = form.get('body') as string
   const postid = form.get('like') as string
 
   if (_action === 'like') return likeUnlikePost(user?._id, postid)

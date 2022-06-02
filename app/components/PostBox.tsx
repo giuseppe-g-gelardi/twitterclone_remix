@@ -39,13 +39,13 @@ export default function PostBox({ postValue }: { postValue: string }) {
           />
         </div>
         <div className="flex ml-20">
-          <button className="mx-2" onClick={() => console.log('post image')}>
+          <button type="button" className="mx-2" onClick={() => console.log('post image')}>
             {Icons.insertImg}
           </button>
-          <button className="mx-2" onClick={() => console.log('post gif')}>
+          <button type="button" className="mx-2" onClick={() => console.log('post gif')}>
             {Icons.insertGif}
           </button>
-          <button className="mx-2" onClick={() => console.log('insert emoji')}>
+          <button type="button" className="mx-2" onClick={() => console.log('insert emoji')}>
             {Icons.insertEmoji}
           </button>
 
