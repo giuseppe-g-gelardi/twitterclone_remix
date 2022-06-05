@@ -1,7 +1,7 @@
 import type { SyntheticEvent } from "react";
 import { useEffect, useState } from "react";
 
-import { useActionData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 
 import type { Area, Point } from 'react-easy-crop'
 import Cropper from 'react-easy-crop'
@@ -145,7 +145,7 @@ export default function UploadProfileImage() {
               className="h-[240px] w-[240px] items-center border rounded-full"
             />
           </div>
-          <form method="post" encType="multipart/form-data">
+          <Form method="post" encType="multipart/form-data">
             <input
               name="profile_img"
               type='hidden'
@@ -166,7 +166,7 @@ export default function UploadProfileImage() {
             >
               upload image
             </button>
-          </form>
+          </Form>
         </>
       ) : null}
 

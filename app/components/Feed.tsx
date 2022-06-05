@@ -33,7 +33,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
       <Form replace method='put'>
         <input
           type='hidden'
-          value={feed._id}
+          value={feed?._id}
           name={inputName}
         />
         <button
@@ -42,7 +42,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
           value={buttonValue}
         >
           <div className="hover:bg-slate-400 rounded-full">
-            {feed.likes?.length ? (
+            {feed?.likes?.length ? (
               Icons.heartFilled
             ) : (
               Icons.heartOutline
@@ -51,7 +51,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
         </button>
       </Form>
       <div>
-        {feed.likes?.length ? feed.likes.length : '0'}
+        {feed?.likes?.length ? feed?.likes?.length : '0'}
       </div>
     </div>
   )
@@ -79,12 +79,12 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
           Icons.chatOutline
         )}
       </div>
-      {feed.comments && (
+      {feed?.comments && (
         <div>
           {feed?.comments?.length ? feed?.comments?.length : '0'}
         </div>
       )}
-      {feed.replies && (
+      {feed?.replies && (
         <div>
           {feed?.replies?.length ? feed?.replies?.length : '0'}
         </div>
@@ -111,11 +111,11 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
         <div>
           <img
             className="inline object-cover w-12 h-12 mr-2 rounded-full border-2 mt-2 ml-2"
-            src={user.profilePicture}
+            src={user?.profilePicture}
             alt=""
           />
         </div>
-        {feed.replies?.length > 0 && (
+        {feed?.replies?.length > 0 && (
           <div className='w-auto h-auto m-auto mt-2.5 place-items-center'>
             <button
               className='hover:bg-slate-500 rounded-full'
@@ -131,14 +131,14 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
           <div className="">
             <h3 className="flex text-base mb-1">
               <p>
-                <Link to={`/${user.username}`} className='hidden sm:inline'>
+                <Link to={`/${user?.username}`} className='hidden sm:inline'>
                   <span className='font-bold hover:underline'>
-                    {user.firstname}{' '}{user.lastname}
+                    {user?.firstname}{' '}{user?.lastname}
                   </span>
                 </Link>
                 <Link to={`/${user.username}`}>
                   <span className='text-gray-500 hover:underline ml-1'>
-                    @{user.username}{' '}
+                    @{user?.username}{' '}
                   </span>
                 </Link>
               </p>
@@ -159,8 +159,8 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
           </div>
           <div className="text-base mb-1">
             <button>
-              <Link to={`../posts/${feed._id}`}>
-                <p className='text-left'>{feed.body}</p>
+              <Link to={`../posts/${feed?._id}`}>
+                <p className='text-left'>{feed?.body}</p>
               </Link>
             </button>
           </div>
@@ -171,7 +171,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
               <ReplyModal
                 buttonText={chatIcons}
                 header='Submit new Reply'
-                feedid={feed._id}
+                feedid={feed?._id}
               />
             ) : chatIcons}
           </div>
@@ -192,7 +192,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                 {!showReplies && (
                   <button onClick={async () => `${setShowReplies(true)}`}>
                     <p className='text-violet-700 dark:text-violet-300 '>
-                      show {feed.replies.length} replies
+                      show {feed?.replies?.length} replies
                     </p>
                   </button>
                 )}
@@ -200,7 +200,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                   <>
                     <button onClick={() => setShowReplies(false)}>
                       <p className='text-rose-700 dark:text-rose-300'>
-                        hide {feed.replies.length} replies
+                        hide {feed?.replies?.length} replies
                       </p>
                     </button>
                     <div>
@@ -211,9 +211,9 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
                           <div key={Math.random().toString(16).slice(2)}>
                             <RepliesFeed
                               key={Math.random().toString(16).slice(2)}
-                              replies={reply.reply}
-                              user={reply.other}
-                              feedid={feed._id}
+                              replies={reply?.reply}
+                              user={reply?.other}
+                              feedid={feed?._id}
                             />
                           </div>
                         ))}

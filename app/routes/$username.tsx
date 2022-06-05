@@ -43,29 +43,28 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
+
   const uploadBannerHandler: UploadHandler = composeUploadHandlers(
     async ({ name, data }) => {
-      if (name !== "banner_img") return null;
-      const uploadedImage = await uploadImage(data)
+      if (name !== "banner_img") return;
+      const uploadedImage: { secure_url: string } = await uploadImage(data)
       return uploadedImage.secure_url;
     },
     createMemoryUploadHandler()
   );
-  const req = request.clone()
+  const bannerReq = request.clone()
+  const bannerData = await parseMultipartFormData(bannerReq, uploadBannerHandler);
+  const bannerSrc = bannerData.get("banner_img");
 
   const uploadProfileHandler: UploadHandler = composeUploadHandlers(
     async ({ name, data }) => {
-      if (name !== "profile_img") return null;
-      const uploadedImage = await uploadImage(data)
+      if (name !== "profile_img") return;
+      const uploadedImage: { secure_url: string } = await uploadImage(data)
       return uploadedImage.secure_url;
     },
     createMemoryUploadHandler()
   );
   const profileReq = request.clone()
-
-  const bannerData = await parseMultipartFormData(req, uploadBannerHandler);
-  const bannerSrc = bannerData.get("banner_img");
-
   const profileData = await parseMultipartFormData(profileReq, uploadProfileHandler)
   const profileSrc = profileData.get("profile_img")
 
@@ -78,9 +77,13 @@ export const action: ActionFunction = async ({ request, params }) => {
   const postid = form.get('like') as string
   const followname = form.get('follow') as string
 
+  console.log('action: ',_action)
+  console.log('values:', values)
+
   if (_action === 'follow') return followAndUnfollowUsers(params.username, followname)
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
   if (_action === 'like') return likeUnlikePost(user?._id, postid)
+
   if (_action === 'banner_img') return uploadProfileBanner(params.username, bannerSrc?.toString())
   if (_action === 'profile_img') return uploadProfileImage(params.username, profileSrc?.toString())
 }
@@ -138,16 +141,16 @@ export function CatchBoundary() {
   throw new Error('Unkown error');
 }
 
-export function ErrorBoundary() {
-  return (
-    <div className="mb-3 min-w-[598px]">
-      <div className="text-3xl mb-2">Details</div>
-      <div className="p-4 rounded shadow-lg border bg-rose-200 border-rose-600">
-        <div className="text-gray-700 font-bold text-xl mb-2">
-          Uh oh... Sorry something went wrong!
-        </div>
-        <p>That page doesnt seem to exist</p>
-      </div>
-    </div>
-  );
-}
+// export function ErrorBoundary() {
+//   return (
+//     <div className="mb-3 min-w-[598px]">
+//       <div className="text-3xl mb-2">Details</div>
+//       <div className="p-4 rounded shadow-lg border bg-rose-200 border-rose-600">
+//         <div className="text-gray-700 font-bold text-xl mb-2">
+//           Uh oh... Sorry something went wrong!
+//         </div>
+//         <p>That page doesnt seem to exist</p>
+//       </div>
+//     </div>
+//   );
+// }

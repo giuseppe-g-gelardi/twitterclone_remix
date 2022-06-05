@@ -22,21 +22,24 @@ export const loader: LoaderFunction = async ({ request }) => {
   const publicUsers: User[] = await findPublicUsers()
   const user = await getUser(request)
   const data = { user }
-  const loggedInUser = data.user
+  const loggedInUser = data?.user
   const username = loggedInUser?.username
   const posts = await getUserPosts(username)
   const following: string[] | undefined = loggedInUser?.following
 
-  async function getFeed(users: string[] | undefined, userPosts: Post[]) {
+  async function getFeed(users: string[] | undefined, userPosts: ConcatArray<Post>) {
     try {
 
       const userFeed = []
-      for (const element of users!) {
+      
+      if (!users) return;
+      for (const element of users) {
         const item = await getUserPosts(element)
-        userFeed.push(...item)
+        // if (!item) return;
+        userFeed?.push(...item)
       }
 
-      return userFeed.concat(userPosts)
+      return userFeed?.concat(userPosts)
     } catch (error: unknown) {
       throw new Error(error as string | undefined)
     }
@@ -53,7 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const user = await getUser(request)
   const data = { user }
-  const loggedInUser = data.user
+  const loggedInUser = data?.user
   const username = loggedInUser?.username
 
   const { _action } = Object.fromEntries(form)
@@ -73,27 +76,25 @@ export default function HomePage() {
   const { feed, loggedInUser } = useLoaderData<LoaderData>()
 
   return (
-    <>
+    <div className="sm:min-w-[598px] sm:max-w-[598px]">
       <Header loggedInUser={loggedInUser} />
       <PostBox
         postValue='post'
       />
 
-      {feed
-        // implement different sorting methods ;)
-        .sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+      {feed && (feed?.sort((a, b) => new Date(b?.createdAt).valueOf() - new Date(a?.createdAt).valueOf())
         .map((postFeed) => (
           <Feed
-            key={postFeed._id}
+            key={postFeed?._id}
             feed={postFeed}
-            user={postFeed.user}
+            user={postFeed?.user}
             inputName='like'
             buttonValue='like'
             replies={null}
           />
         ))
-      }
-    </>
+      )}
+    </div>
   )
 }
 

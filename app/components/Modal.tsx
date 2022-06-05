@@ -18,7 +18,7 @@ type ModalProps = {
 export default function Modal(props: ModalProps) {
   const { buttonText, header } = props
   const { loggedInUser } = useLoaderData<LoaderData>()
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(true);
   const [showSettings, setShowSettings] = useState<boolean>(true)
   const [showProfileImageUpload, setShowProfileImageUpload] = useState<boolean>(false)
   const [showBannerImageUpload, setShowBannerImageUpload] = useState<boolean>(false)
@@ -155,7 +155,7 @@ export default function Modal(props: ModalProps) {
                         name='firstname'
                         id='firstname'
                         placeholder={loggedInUser?.firstname}
-                        defaultValue={loggedInUser?.firstname}
+                        defaultValue={loggedInUser?.firstname ? loggedInUser?.firstname : 'firstname'}
                       />
                       <input
                         className="w-full p-2 rounded-md border border-gray-700 focus:border-blue-700"
@@ -163,14 +163,14 @@ export default function Modal(props: ModalProps) {
                         name='lastname'
                         id='lastname'
                         placeholder={loggedInUser?.lastname}
-                        defaultValue={loggedInUser?.lastname}
+                        defaultValue={loggedInUser?.lastname ? loggedInUser?.lastname : 'lastname'}
                       />
                       <textarea
                         className="w-full p-2 rounded-md border border-gray-700 focus:border-blue-700"
                         name='bio'
                         id='bio'
                         placeholder={loggedInUser?.bio}
-                        defaultValue={loggedInUser?.bio}
+                        defaultValue={loggedInUser?.bio ? loggedInUser?.bio : 'bio'}
                       />
                       <input
                         className="w-full p-2 rounded-md border border-gray-700 focus:border-blue-700"
@@ -178,7 +178,7 @@ export default function Modal(props: ModalProps) {
                         name='location'
                         id='location'
                         placeholder={loggedInUser?.location}
-                        defaultValue={loggedInUser?.location}
+                        defaultValue={loggedInUser?.location ? loggedInUser?.location : 'location'}
                       />
                     </p>
                     {/*footer*/}

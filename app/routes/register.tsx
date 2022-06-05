@@ -1,5 +1,5 @@
-import type { ActionFunction } from "@remix-run/node"
-import { json } from "@remix-run/node"
+import type { ActionFunction, LoaderFunction } from "@remix-run/node"
+import { json, redirect } from "@remix-run/node"
 import {
   Form,
   Link,
@@ -14,7 +14,8 @@ import {
   validateUsername,
   validateEmail,
   validatePassword,
-  confirmValidPassword
+  confirmValidPassword,
+  getUser,
 } from "../api/session.server"
 
 import Icons from "~/components/Icons"
@@ -26,6 +27,15 @@ type ActionData = {
     password?: string;
     confirmPassword?: string;
   }
+}
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+  if (user) {
+    return redirect("/home")
+  } 
+  
+  return json({})
 }
 
 export const action: ActionFunction = async ({ request }) => {
