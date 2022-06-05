@@ -112,7 +112,7 @@ export default function Modal(props: ModalProps) {
 
 
               {/*body*/}
-              <Form replace method='put'>
+              <Form replace method='put' encType="multipart/form-data">
                 {showSettings ? (
                   <div className="relative p-6 flex-auto w-[768px] h-[315px]">
                     {/* buttons */}

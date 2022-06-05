@@ -9,7 +9,9 @@ import type {
 import {
   unstable_parseMultipartFormData as parseMultipartFormData,
   unstable_composeUploadHandlers as composeUploadHandlers,
-  unstable_createMemoryUploadHandler as createMemoryUploadHandler
+  unstable_createMemoryUploadHandler as createMemoryUploadHandler,
+  unstable_createFileUploadHandler as createFileUploadHandler
+  
 } from "@remix-run/node";
 
 import type { User } from "../api/models/user.models";
@@ -43,7 +45,6 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 }
 
 export const action: ActionFunction = async ({ request, params }) => {
-
   const uploadBannerHandler: UploadHandler = composeUploadHandlers(
     async ({ name, data }) => {
       if (name !== "banner_img") return;
@@ -73,12 +74,9 @@ export const action: ActionFunction = async ({ request, params }) => {
   const data = { user }
   const loggedInUser = data.user
 
-  const { _action, ...values } = Object.fromEntries(form)
+  const { _action, ...values } = Object.fromEntries(form) as Record<string, string>
   const postid = form.get('like') as string
   const followname = form.get('follow') as string
-
-  console.log('action: ',_action)
-  console.log('values:', values)
 
   if (_action === 'follow') return followAndUnfollowUsers(params.username, followname)
   if (_action === 'update') return updateUserProfile(loggedInUser?.username, { ...values })
