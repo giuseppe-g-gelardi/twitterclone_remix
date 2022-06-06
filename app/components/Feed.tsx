@@ -25,7 +25,7 @@ type PropTypes = {
 export default function Feed({ feed, user, inputName, buttonValue, replies }: PropTypes) {
   const createdAt = feed?.createdAt as unknown as Date
   const timestamp = moment(new Date(createdAt)).fromNow()
-  const [showReplies, setShowReplies] = useState(false)
+  const [showReplies, setShowReplies] = useState(true)
 
 
   const likeIcons = (
