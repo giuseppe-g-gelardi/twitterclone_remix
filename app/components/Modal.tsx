@@ -18,7 +18,7 @@ type ModalProps = {
 export default function Modal(props: ModalProps) {
   const { buttonText, header } = props
   const { loggedInUser } = useLoaderData<LoaderData>()
-  const [showModal, setShowModal] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(true)
   const [showProfileImageUpload, setShowProfileImageUpload] = useState<boolean>(false)
   const [showBannerImageUpload, setShowBannerImageUpload] = useState<boolean>(false)
