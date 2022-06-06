@@ -54,7 +54,7 @@ export default function ProfileHeader() {
                 />
               </div>
             ) : (
-              <Form replace method='put'>
+              <Form replace method='put' encType="multipart/form-data">
                 <input
                   type='hidden'
                   value={loggedInUser?.username}

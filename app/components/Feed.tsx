@@ -30,7 +30,7 @@ export default function Feed({ feed, user, inputName, buttonValue, replies }: Pr
 
   const likeIcons = (
     <div className="flex">
-      <Form replace method='put'>
+      <Form replace method='put' encType="multipart/form-data">
         <input
           type='hidden'
           value={feed?._id}
